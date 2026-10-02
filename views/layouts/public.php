@@ -68,8 +68,6 @@ $currentPath = $currentPath === '/' ? '/' : rtrim($currentPath, '/');
 </head>
 <body class="page page--<?= e($page ?? 'default') ?>">
 
-<a class="skip-link" href="#main">Skip to main content</a>
-
 <?= component('header', ['clinic' => $clinic, 'primaryNav' => $primaryNav, 'currentPath' => $currentPath]) ?>
 
 <main id="main" class="main">

@@ -48,8 +48,8 @@ final class Clinic
             'country_code' => 'IN',
             'pin'          => '744105',
             'timezone'     => 'Asia/Kolkata',
-            'geo_lat'      => '11.6234',
-            'geo_lng'      => '92.7265',
+            'geo_lat'      => '11.616087460214711',
+            'geo_lng'      => '92.70467519725416',
         ];
     }
 
@@ -73,12 +73,29 @@ final class Clinic
     }
 
     /**
-     * Google Maps search link for the clinic, used by the footer location icon.
+     * Google Maps place-name search string.
+     *
+     * Google resolves this to the clinic listing / pin, which is more
+     * reliable than raw coordinates across map regions.
+     */
+    public static function mapQuery(): string
+    {
+        return 'SWASTI HOMOEO CLINIC | Dr. Smriti Das, BHMS, MD (Hom) | Garacharma, on, NH 4, '
+            . 'above Bala Dental Clinic, opposite Tulasi\'s Diagnostic centre, Garacharama, '
+            . 'Sri Vijaya Puram, Andaman and Nicobar Islands 744105';
+    }
+
+    /**
+     * Google Maps link for the clinic, used by the footer location icon, the
+     * contact page button and the schema.org hasMap property.
+     *
+     * Searches by place name so Google lands on the clinic listing rather than
+     * a bare lat/lng point.
      */
     public static function mapUrl(): string
     {
         return 'https://www.google.com/maps/search/?api=1&query='
-            . rawurlencode(self::addressOneLine());
+            . rawurlencode(self::mapQuery());
     }
 
     /**

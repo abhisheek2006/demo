@@ -192,7 +192,7 @@ $isToday    = static function (string $day) use ($todayKey): bool {
                 </p>
                 <p class="panel__actions">
                     <a class="btn btn--outline btn--sm" target="_blank" rel="noopener nofollow"
-                       href="https://www.google.com/maps/search/?api=1&amp;query=<?= e(rawurlencode('Swasti Homoeo Clinic, Solar Colony, Bhathu Basti, Port Blair 744105')) ?>">
+                       href="<?= e(\App\Content\Clinic::mapUrl()) ?>">
                         <?= icon('pin', 'icon icon--xs', 15) ?> Open in Google Maps
                     </a>
                 </p>

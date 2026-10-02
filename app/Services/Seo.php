@@ -101,8 +101,7 @@ final class Seo
                 'latitude'  => $clinic['geo_lat'],
                 'longitude' => $clinic['geo_lng'],
             ],
-            'hasMap'               => 'https://www.google.com/maps/search/?api=1&query='
-                . rawurlencode($clinic['address_full']),
+            'hasMap'               => Clinic::mapUrl(),
             'openingHoursSpecification' => self::openingHours(),
             'medicalSpecialty'     => 'Homeopathic',
             'availableService'     => ServiceContent::schemaGraph(),

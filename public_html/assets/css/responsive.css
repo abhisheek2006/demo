@@ -53,7 +53,12 @@
         display: none;
     }
 
+    /* The desktop nav carries the margin-left:auto that pushes the actions
+       to the right edge. It is hidden here, so move that spacer onto the
+       actions themselves or the brand and the buttons collapse to the left
+       of the bar and the nav toggle stops being flush right. */
     .header__actions {
+        margin-left: auto;
         gap: 10px;
     }
 
