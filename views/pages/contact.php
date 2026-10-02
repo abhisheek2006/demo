@@ -5,7 +5,6 @@
  * @var array<string,mixed> $clinic
  * @var array<string,array{open:string,close:string,closed?:bool,note?:string}> $hours
  * @var array<int,string> $addressLines
- * @var array<int,string> $emergency
  */
 $dayLabels = [
     'monday'    => 'Monday',
@@ -238,8 +237,6 @@ $isToday    = static function (string $day) use ($todayKey): bool {
                     the day of your appointment, please call and tell us before travelling.
                 </p>
             </div>
-
-            <?= component('emergency-notice', ['items' => $emergency]) ?>
         </aside>
     </div>
 </section>

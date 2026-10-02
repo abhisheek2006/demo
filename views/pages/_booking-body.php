@@ -13,7 +13,6 @@
  * @var array<int,string> $ages
  * @var array<int,string> $preparation
  * @var array<int,string> $afterBooking
- * @var array<int,string> $emergency
  */
 $slug = $isFollowUp ? 'book-follow-up' : 'book-consultation';
 
@@ -161,8 +160,6 @@ $formLead  = $isFollowUp
                     </a>
                 </p>
             </div>
-
-            <?= component('emergency-notice', ['items' => $emergency]) ?>
         </aside>
     </div>
 </section>
