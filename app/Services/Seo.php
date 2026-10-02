@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use App\Content\ArticlesData;
 use App\Content\Clinic;
 use App\Content\Doctor;
 use App\Content\FaqData;
@@ -297,24 +296,13 @@ final class Seo
         $entries = [
             ['loc' => url('/'),                  'lastmod' => $today, 'changefreq' => 'weekly',  'priority' => '1.0'],
             ['loc' => url('/about-us'),          'lastmod' => $today, 'changefreq' => 'monthly', 'priority' => '0.9'],
-            ['loc' => url('/services'),          'lastmod' => $today, 'changefreq' => 'monthly', 'priority' => '0.9'],
             ['loc' => url('/faq'),               'lastmod' => $today, 'changefreq' => 'monthly', 'priority' => '0.8'],
-            ['loc' => url('/articles'),          'lastmod' => $today, 'changefreq' => 'weekly',  'priority' => '0.7'],
             ['loc' => url('/book-consultation'), 'lastmod' => $today, 'changefreq' => 'monthly', 'priority' => '0.9'],
             ['loc' => url('/book-follow-up'),    'lastmod' => $today, 'changefreq' => 'monthly', 'priority' => '0.7'],
             ['loc' => url('/contact'),           'lastmod' => $today, 'changefreq' => 'monthly', 'priority' => '0.7'],
             ['loc' => url('/privacy-policy'),    'lastmod' => $today, 'changefreq' => 'yearly',  'priority' => '0.4'],
         ];
 
-        // Every published article is a real landing page and belongs in the map.
-        foreach (ArticlesData::all() as $article) {
-            $entries[] = [
-                'loc'       => url('/articles/' . $article['slug']),
-                'lastmod'   => $today,
-                'changefreq' => 'monthly',
-                'priority'  => '0.7',
-            ];
-        }
 
         return $entries;
     }

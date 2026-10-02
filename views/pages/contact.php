@@ -81,8 +81,8 @@ $isToday    = static function (string $day) use ($todayKey): bool {
                     clinic hours.
                 </p>
 
-                <form class="form form--contact" method="post" action="/api/contact.php" novalidate
-                      data-ajax-form data-csrf-url="/api/csrf.php" data-form-name="contact">
+                <form class="form form--contact" method="post" action="<?= e(api_url('/api/contact.php')) ?>" novalidate
+                      data-ajax-form data-csrf-url="<?= e(api_url('/api/csrf.php')) ?>" data-form-name="contact">
                     <?= csrf_field() ?>
                     <?= component('form-traps') ?>
                     <p class="form__status" data-form-status role="status" aria-live="polite"></p>

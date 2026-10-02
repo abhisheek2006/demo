@@ -31,6 +31,10 @@ $currentPath = $currentPath === '/' ? '/' : rtrim($currentPath, '/');
 <meta name="theme-color" content="#0f6f68">
 <link rel="canonical" href="<?= e($seo['canonical'] ?? url('/')) ?>">
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&amp;display=swap">
+
 <meta property="og:type" content="<?= e($seo['type'] ?? 'website') ?>">
 <meta property="og:site_name" content="<?= e($seo['site_name'] ?? 'Swasti Homoeo Clinic') ?>">
 <meta property="og:locale" content="<?= e($seo['locale'] ?? 'en_IN') ?>">
@@ -57,6 +61,7 @@ $currentPath = $currentPath === '/' ? '/' : rtrim($currentPath, '/');
 <link rel="manifest" href="<?= e(url('/site.webmanifest')) ?>">
 
 <link rel="stylesheet" href="<?= e(asset('/assets/css/main.css')) ?>">
+<link rel="stylesheet" href="<?= e(asset('/assets/css/footer.css')) ?>">
 <link rel="stylesheet" href="<?= e(asset('/assets/css/responsive.css')) ?>">
 <?= !empty($jsonLd) ? json_ld($jsonLd) : '' ?>
 <?= $sections['head'] ?? '' ?>
@@ -93,8 +98,6 @@ $currentPath = $currentPath === '/' ? '/' : rtrim($currentPath, '/');
 </main>
 
 <?= component('footer', ['clinic' => $clinic, 'footerNav' => $footerNav, 'appYear' => $appYear]) ?>
-
-<?= component('floating-contact', ['clinic' => $clinic]) ?>
 
 <script src="<?= e(asset('/assets/js/navigation.js')) ?>" defer></script>
 <script src="<?= e(asset('/assets/js/main.js')) ?>" defer></script>

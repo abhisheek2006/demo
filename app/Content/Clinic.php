@@ -73,6 +73,15 @@ final class Clinic
     }
 
     /**
+     * Google Maps search link for the clinic, used by the footer location icon.
+     */
+    public static function mapUrl(): string
+    {
+        return 'https://www.google.com/maps/search/?api=1&query='
+            . rawurlencode(self::addressOneLine());
+    }
+
+    /**
      * Primary navigation used by the header and the mobile drawer.
      *
      * @return array<int,array{label:string,url:string,match:string}>
@@ -82,9 +91,7 @@ final class Clinic
         return [
             ['label' => 'Home',           'url' => '/',                  'match' => '/'],
             ['label' => 'About Us',       'url' => '/about-us',           'match' => '/about-us'],
-            ['label' => 'Services',       'url' => '/services',          'match' => '/services'],
             ['label' => 'FAQ',            'url' => '/faq',               'match' => '/faq'],
-            ['label' => 'Articles',       'url' => '/articles',          'match' => '/articles'],
             ['label' => 'Contact',        'url' => '/contact',           'match' => '/contact'],
         ];
     }
@@ -97,11 +104,9 @@ final class Clinic
     public static function footerNavigation(): array
     {
         return [
-            'Treatments' => [
-                ['label' => 'All Services',         'url' => '/services'],
-                ['label' => 'Book Consultation',    'url' => '/book-consultation'],
-                ['label' => 'Book Follow-Up',       'url' => '/book-follow-up'],
-                ['label' => 'Common Conditions',   'url' => '/services#conditions'],
+            'Appointments' => [
+                ['label' => 'Book Consultation', 'url' => '/book-consultation'],
+                ['label' => 'Book Follow-Up',    'url' => '/book-follow-up'],
             ],
             'Clinic' => [
                 ['label' => 'About the Doctor',     'url' => '/about-us#doctor'],
@@ -111,7 +116,6 @@ final class Clinic
             ],
             'Support' => [
                 ['label' => 'Frequently Asked',     'url' => '/faq'],
-                ['label' => 'Health Articles',      'url' => '/articles'],
                 ['label' => 'Privacy Policy',       'url' => '/privacy-policy'],
             ],
         ];

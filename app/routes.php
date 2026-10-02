@@ -32,10 +32,7 @@ $router = $kernel->router();
 /* -------------------------------------------------------------------------- */
 $router->get('/',          [HomeController::class, 'index']);
 $router->get('/about-us',  [PageController::class, 'about']);
-$router->get('/services',  [PageController::class, 'services']);
 $router->get('/faq',       [FaqController::class, 'index']);
-$router->get('/articles',  [PageController::class, 'articles']);
-$router->get('/articles/{slug}', [PageController::class, 'article']);
 $router->get('/contact',   [PageController::class, 'contact']);
 $router->get('/privacy-policy', [PageController::class, 'privacy']);
 

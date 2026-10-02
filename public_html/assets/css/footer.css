@@ -1,0 +1,249 @@
+/* ==========================================================================
+   SITE FOOTER — minimal premium footer
+   Scoped entirely under .site-footer so nothing else on the site is affected.
+   Colours follow the clinic's deep-green / mint palette.
+   ========================================================================== */
+
+.site-footer {
+    --sf-bg: #003f35;
+    --sf-bg-deep: #002d27;
+    --sf-accent: #18d6a0;
+    --sf-accent-2: #08b98c;
+    --sf-text: #fff;
+    --sf-muted: rgba(255, 255, 255, .7);
+
+    position: relative;
+    margin-top: 0;
+    background: var(--sf-bg);
+    color: var(--sf-text);
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* ---------------------------------------------------------- top wave ---- */
+
+.site-footer__wave {
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 132px;
+    margin-top: -1px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Two stacked elliptical layers make a smooth multi-curve transition from the
+   white section above into the dark footer. */
+.site-footer__wave::before,
+.site-footer__wave::after {
+    content: "";
+    position: absolute;
+    left: -10%;
+    width: 120%;
+    border-radius: 50%;
+}
+
+.site-footer__wave::before {
+    top: -118px;
+    height: 168px;
+    background: var(--sf-accent-2);
+    opacity: .5;
+}
+
+.site-footer__wave::after {
+    top: -92px;
+    height: 150px;
+    background: var(--sf-bg);
+}
+
+/* Third curve: a thin mint rim hugging the top of the dark body. */
+.site-footer__wave {
+    background:
+        radial-gradient(120% 100% at 50% 100%, transparent 58%, rgba(24, 214, 160, .28) 59%, transparent 61%),
+        linear-gradient(180deg, transparent 0 62%, rgba(8, 185, 140, .22) 63%, transparent 65%);
+}
+
+/* ------------------------------------------------------ leaf decoration -- */
+
+.site-footer__leaf {
+    position: absolute;
+    z-index: 0;
+    width: 190px;
+    height: 190px;
+    pointer-events: none;
+    opacity: .1;
+    background: var(--sf-accent);
+    /* Leaf silhouette built from a single ellipse + a rotated tip. */
+    border-radius: 70% 0 70% 0;
+}
+
+.site-footer__leaf::after {
+    content: "";
+    position: absolute;
+    inset: 18% 12%;
+    border-left: 2px solid rgba(0, 45, 39, .55);
+    transform: rotate(38deg);
+    transform-origin: left center;
+}
+
+.site-footer__leaf--tl { top: 96px;    left: -70px;  transform: rotate(18deg); }
+.site-footer__leaf--bl { bottom: 24px; left: 26px;   transform: rotate(-24deg) scale(.72); }
+.site-footer__leaf--br { bottom: -46px; right: -54px; transform: rotate(14deg) scale(1.12); }
+.site-footer__leaf--tr { top: 150px;   right: 40px;  transform: rotate(-38deg) scale(.55); }
+
+/* -------------------------------------------------------------- layout -- */
+
+.site-footer__main {
+    position: relative;
+    z-index: 1;
+    padding: 150px 0 34px;
+}
+
+.site-footer__container {
+    width: min(1400px, calc(100% - 80px));
+    margin: 0 auto;
+}
+
+.site-footer__brand {
+    display: flex;
+    align-items: center;
+}
+
+.site-footer__logo-link {
+    display: inline-flex;
+    line-height: 0;
+}
+
+.site-footer__logo {
+    display: block;
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+}
+
+/* ------------------------------------------------------------- socials -- */
+
+.site-footer__socials {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.footer-social {
+    display: grid;
+    place-items: center;
+    width: 60px;
+    height: 60px;
+    border: 1.5px solid var(--sf-accent);
+    border-radius: 50%;
+    color: var(--sf-accent);
+    background: transparent;
+    transition: background-color .25s ease, color .25s ease,
+                transform .25s ease, border-color .25s ease;
+}
+
+.footer-social:hover,
+.footer-social:focus-visible {
+    background: var(--sf-accent);
+    border-color: var(--sf-accent);
+    color: var(--sf-bg-deep);
+    transform: translateY(-3px);
+}
+
+.footer-social:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
+}
+
+.footer-social__icon {
+    display: block;
+    width: 24px;
+    height: 24px;
+}
+
+/* ------------------------------------------------------------- divider -- */
+
+.site-footer__divider {
+    height: 1px;
+    border: 0;
+    margin: 46px auto 0;
+    width: 92%;
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(24, 214, 160, .38),
+        transparent);
+}
+
+/* ------------------------------------------------------------- bottom --- */
+
+.site-footer__bottom {
+    margin: 0;
+    padding-top: 26px;
+    color: var(--sf-muted);
+    font-size: .92rem;
+    text-align: center;
+}
+
+/* ---------------------------------------------------------- responsive -- */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .site-footer__container { width: min(1400px, calc(100% - 48px)); }
+    .site-footer__main { padding-top: 132px; }
+    .site-footer__wave { height: 112px; }
+    .site-footer__logo { max-width: 240px; }
+    .footer-social { width: 54px; height: 54px; }
+    .site-footer__socials { gap: 14px; }
+}
+
+@media (max-width: 767px) {
+    .site-footer__container { width: calc(100% - 32px); }
+    .site-footer__main { padding-top: 118px; padding-bottom: 26px; }
+
+    .site-footer__wave { height: 92px; }
+    .site-footer__wave::before { top: -84px;  height: 120px; }
+    .site-footer__wave::after  { top: -64px;  height: 106px; }
+
+    /* Stack the logo and icons, both centred. */
+    .site-footer__brand { justify-content: center; }
+
+    .site-footer__socials {
+        justify-content: center;
+        gap: 14px;
+        margin-top: 26px;
+    }
+
+    .footer-social { width: 50px; height: 50px; }
+    .footer-social__icon { width: 21px; height: 21px; }
+
+    .site-footer__logo { max-width: 220px; }
+
+    .site-footer__divider { margin-top: 32px; width: 100%; }
+    .site-footer__bottom { padding-top: 20px; font-size: .87rem; }
+
+    .site-footer__leaf { width: 130px; height: 130px; }
+    .site-footer__leaf--tl { top: 74px;   left: -60px; }
+    .site-footer__leaf--bl { bottom: 8px; left: -18px; }
+    .site-footer__leaf--br { bottom: -40px; right: -46px; }
+    .site-footer__leaf--tr { display: none; }
+}
+
+/* Very small phones: keep all four icons on one row. */
+@media (max-width: 380px) {
+    .site-footer__socials { gap: 10px; }
+    .footer-social { width: 46px; height: 46px; }
+    .footer-social__icon { width: 19px; height: 19px; }
+    .site-footer__logo { max-width: 190px; }
+}
+
+/* ------------------------------------------------------ reduced motion -- */
+
+@media (prefers-reduced-motion: reduce) {
+    .footer-social,
+    .footer-social:hover,
+    .footer-social:focus-visible {
+        transition: none;
+        transform: none;
+    }
+}

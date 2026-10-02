@@ -95,6 +95,7 @@ Config::load($config);
 Config::set('app.env', Env::string('APP_ENV', Config::string('app.env', 'production')));
 Config::set('app.debug', Env::bool('APP_DEBUG', Config::bool('app.debug', false)));
 Config::set('app.url', rtrim(Env::string('APP_URL', Config::string('app.url', '')), '/'));
+Config::set('api.base_url', rtrim(Env::string('API_BASE_URL', Config::string('api.base_url', '')), '/'));
 Config::set('app.timezone', Env::string('APP_TIMEZONE', Config::string('app.timezone', 'Asia/Kolkata')));
 Config::set('app.locale', Env::string('APP_LOCALE', Config::string('app.locale', 'en_IN')));
 Config::set('app.key', Env::string('APP_KEY', ''));

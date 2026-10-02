@@ -1,0 +1,31 @@
+# Vercel serves public_html/ as a static site (see vercel.json).
+# Everything else — PHP source, secrets, runtime data — must stay out of the bundle.
+
+# PHP application (stays on Hostinger)
+app
+config
+database
+views
+tools
+
+# Secrets — never upload
+.env
+.env.*
+!.env.example
+
+# Runtime state
+storage
+deployment
+
+# VCS / docs / archives
+.git
+.gitignore
+.github
+README.md
+*.zip
+*.md
+
+# The PHP endpoints live on Hostinger, not Vercel.
+public_html/api
+public_html/index.php
+public_html/.htaccess

@@ -5,7 +5,6 @@ namespace App\Controllers;
 
 use App\Content\Clinic;
 use App\Content\Doctor;
-use App\Content\Services as ServiceContent;
 use App\Content\Testimonials;
 use App\Core\Config;
 use App\Core\Controller;
@@ -33,12 +32,9 @@ final class HomeController extends Controller
             'page'         => 'home',
             'clinic'       => Clinic::info(),
             'doctor'       => Doctor::profile(),
-            'stats'        => Clinic::stats(),
             'pillars'      => Clinic::pillars(),
             'process'      => Clinic::process(),
-            'services'     => array_slice(ServiceContent::all(), 0, 6),
             'testimonials' => $featured,
-            'conditionGroups' => ServiceContent::conditionGroups(),
             'faqs'         => array_slice($faqs, 0, 6),
             'jsonLd'       => Seo::graph([
                 Seo::medicalClinic(),

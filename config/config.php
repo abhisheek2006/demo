@@ -26,6 +26,18 @@ return [
         'tagline'   => 'We believe in easy, safe and quick recovery',
     ],
 
+    /*
+     * Base URL of the PHP form backend.
+     *
+     * Leave empty when the site and the API share a domain (Hostinger). Set
+     * API_BASE_URL to the PHP host, e.g. https://swastihomoeo.com, when the
+     * static pages are served from Vercel and the forms post back to the PHP
+     * backend cross-origin.
+     */
+    'api' => [
+        'base_url' => '',
+    ],
+
     'paths' => [
         // 'root' / 'public' are auto-detected at runtime by App\Core\Paths.
         'root'      => null,
@@ -61,7 +73,7 @@ return [
 
     'admin' => [
         'name'     => 'Clinic Administrator',
-        'email'    => 'info@swastihomeo.com',
+        'email'    => 'swastihomoeo24@gmail.com',
         'password_hash' => '',
         'session_name'  => 'swasti_admin',
         'max_attempts'  => 6,

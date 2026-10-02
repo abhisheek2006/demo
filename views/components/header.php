@@ -6,34 +6,8 @@
  * @var array<int,array{label:string,url:string,match:string}> $primaryNav
  * @var string $currentPath
  */
-$todayIndex = (int) date('w');
-$dayNames   = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-$today      = \App\Content\Clinic::hours()[$dayNames[$todayIndex]] ?? ['open' => '10:00', 'close' => '19:00'];
-$isOpen     = (int) date('H') * 60 + (int) date('i')
-    >= ((int) $today['open'] * 60) && (int) date('H') * 60 + (int) date('i') <= ((int) $today['close'] * 60);
 ?>
 <header class="header" data-site-header>
-    <div class="topbar">
-        <div class="container topbar__inner">
-            <p class="topbar__item topbar__item--muted">
-                <?= icon('pin', 'icon icon--xs', 15) ?>
-                <span><?= e($clinic['address'] ?? 'Solar Colony, Bhathu Basti, Port Blair') ?></span>
-            </p>
-            <ul class="topbar__list">
-                <li class="topbar__item topbar__item--muted">
-                    <span class="status-dot <?= $isOpen ? 'status-dot--open' : 'status-dot--closed' ?>" aria-hidden="true"></span>
-                    <span><?= $isOpen ? 'Open now' : 'Closed now' ?> · <?= e(minutes_to_label((string) $today['open'])) ?>–<?= e(minutes_to_label((string) $today['close'])) ?></span>
-                </li>
-                <li class="topbar__item">
-                    <a href="<?= e(tel_link()) ?>"><?= icon('phone', 'icon icon--xs', 15) ?> <?= e(format_phone()) ?></a>
-                </li>
-                <li class="topbar__item topbar__item--desktop-only">
-                    <a href="https://wa.me/<?= e(preg_replace('/\D+/', '', (string) $clinic['whatsapp'])) ?>" rel="noopener nofollow" target="_blank">WhatsApp</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-
     <div class="header__bar">
         <div class="container header__inner">
             <a class="brand" href="<?= e(url('/')) ?>" aria-label="Swasti Homoeo Clinic — home">

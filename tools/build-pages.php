@@ -22,7 +22,6 @@ declare(strict_types=1);
  * Re-run it after editing anything in app/Content or views/.
  */
 
-use App\Content\ArticlesData;
 use App\Core\Config;
 use App\Core\Paths;
 use App\Core\Request;
@@ -51,21 +50,13 @@ Paths::detect($publicDir . '/index.php', $publicDir);
 $pages = [
     ['route' => '/',                  'file' => 'index.html'],
     ['route' => '/about-us',          'file' => 'about-us.html'],
-    ['route' => '/services',          'file' => 'services.html'],
     ['route' => '/faq',               'file' => 'faq.html'],
-    ['route' => '/articles',          'file' => 'articles.html'],
     ['route' => '/book-consultation', 'file' => 'book-consultation.html'],
     ['route' => '/book-follow-up',    'file' => 'book-follow-up.html'],
     ['route' => '/contact',           'file' => 'contact.html'],
     ['route' => '/privacy-policy',    'file' => 'privacy-policy.html'],
 ];
 
-foreach (ArticlesData::all() as $article) {
-    $pages[] = [
-        'route' => '/articles/' . $article['slug'],
-        'file'  => 'articles/' . $article['slug'] . '.html',
-    ];
-}
 
 /* ------------------------------------------------------------------------- */
 /* Helpers                                                                   */

@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use App\Content\ArticlesData;
 use App\Content\Booking;
 use App\Content\Clinic;
 use App\Content\Doctor;
@@ -52,32 +51,6 @@ final class PageController extends Controller
         ]);
     }
 
-    public function services(): Response
-    {
-        $this->setSeo([
-            'title'       => 'Services — Classical Homoeopathic Treatment in Port Blair',
-            'description' => 'Consultation, follow-up review, paediatric care, skin and allergy clinic, '
-                . 'women’s health, musculoskeletal and digestive care at ' . Clinic::NAME . '.',
-            'canonical'   => url('/services'),
-        ]);
-
-        return $this->view('pages/services', [
-            'page'            => 'services',
-            'clinic'          => Clinic::info(),
-            'services'        => ServiceContent::all(),
-            'conditionGroups' => ServiceContent::conditionGroups(),
-            'scopeNote'       => ServiceContent::scopeNote(),
-            'process'         => Clinic::process(),
-            'emergency'       => Clinic::emergencyGuidance(),
-            'jsonLd'          => Seo::graph([
-                Seo::medicalClinic(),
-                Seo::breadcrumb([
-                    ['name' => 'Home', 'url' => '/'],
-                    ['name' => 'Services', 'url' => '/services'],
-                ]),
-            ]),
-        ]);
-    }
 
     public function contact(): Response
     {
@@ -122,75 +95,5 @@ final class PageController extends Controller
         ]);
     }
 
-    public function articles(): Response
-    {
-        $this->setSeo([
-            'title'       => 'Health Articles — Homoeopathy and Family Health | ' . Clinic::NAME,
-            'description' => 'Practical, plain-language health guides written by the team at '
-                . Clinic::NAME . ' for families in Port Blair and the Andaman Islands.',
-            'canonical'   => url('/articles'),
-        ]);
 
-        return $this->view('pages/articles', [
-            'page'     => 'articles',
-            'clinic'   => Clinic::info(),
-            'articles' => ArticlesData::all(),
-            'jsonLd'   => Seo::graph([
-                Seo::breadcrumb([
-                    ['name' => 'Home', 'url' => '/'],
-                    ['name' => 'Articles', 'url' => '/articles'],
-                ]),
-            ]),
-        ]);
-    }
-
-    public function article(string $slug = ''): Response
-    {
-        $article = $slug === '' ? null : ArticlesData::findBySlug($slug);
-
-        if ($article === null) {
-            $this->abort(404, 'Article not found');
-        }
-
-        /** @var array<string,mixed> $article */
-        $related = array_values(array_filter(
-            ArticlesData::all(),
-            static fn (array $a): bool => $a['slug'] !== $article['slug']
-        ));
-
-        $this->setSeo([
-            'title'         => $article['meta_title'] ?? $article['title'],
-            'description'   => $article['meta_description'] ?? $article['excerpt'],
-            'canonical'     => url('/articles/' . $article['slug']),
-            'type'          => 'article',
-            'image'         => url($article['image']),
-            'published_time'=> date('c', strtotime('2026-01-15')),
-        ]);
-
-        return $this->view('pages/article', [
-            'page'     => 'articles',
-            'clinic'   => Clinic::info(),
-            'article'  => $article,
-            'related'  => array_slice($related, 0, 3),
-            'booking'  => Booking::preparation(),
-            'jsonLd'   => Seo::graph([
-                [
-                    '@type'         => 'Article',
-                    'headline'      => $article['title'],
-                    'description'   => $article['excerpt'],
-                    'image'         => url($article['image']),
-                    'datePublished' => date('c', strtotime('2026-01-15')),
-                    'dateModified'  => date('c'),
-                    'author'        => ['@type' => 'Physician', 'name' => Doctor::profile()['name']],
-                    'publisher'     => ['@id' => url('/#clinic')],
-                    'mainEntityOfPage' => ['@type' => 'WebPage', '@id' => url('/articles/' . $article['slug'])],
-                ],
-                Seo::breadcrumb([
-                    ['name' => 'Home', 'url' => '/'],
-                    ['name' => 'Articles', 'url' => '/articles'],
-                    ['name' => $article['title'], 'url' => '/articles/' . $article['slug']],
-                ]),
-            ]),
-        ]);
-    }
 }

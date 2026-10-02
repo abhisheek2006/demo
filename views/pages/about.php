@@ -137,8 +137,8 @@
                 <span class="card__icon"><?= icon($service['icon'], 'icon', 22) ?></span>
                 <h3 class="card__title card__title--sm"><?= e($service['title']) ?></h3>
                 <p class="card__text"><?= e(truncate($service['intro'], 120)) ?></p>
-                <a class="card__link" href="<?= e(url('/services#' . $service['id'])) ?>">
-                    Details <?= icon('arrow-right', 'icon icon--xs', 15) ?>
+                <a class="card__link" href="<?= e(url('/book-consultation')) ?>">
+                    Book this appointment <?= icon('arrow-right', 'icon icon--xs', 15) ?>
                 </a>
             </article>
             <?php endforeach; ?>

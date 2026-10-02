@@ -1,6 +1,6 @@
 /* Swasti Homoeo Clinic — public behaviour.
-   Scroll reveals, hero slider, testimonial carousel, FAQ filtering and form
-   enhancements. Everything degrades gracefully without JavaScript. */
+   Scroll reveals, FAQ filtering and form enhancements. Everything degrades
+   gracefully without JavaScript. */
 
 (function () {
     'use strict';
@@ -31,192 +31,6 @@
         }
     }
 
-    /* ------------------------------------------------------------ hero slider */
-
-    Array.prototype.forEach.call(document.querySelectorAll('[data-slider]'), function (slider) {
-        var slides = Array.prototype.slice.call(slider.querySelectorAll('[data-slide]'));
-        var dots = Array.prototype.slice.call(slider.querySelectorAll('[data-slide-dot]'));
-        var kicker = slider.querySelector('[data-caption-kicker]');
-        var title = slider.querySelector('[data-caption-title]');
-        var text = slider.querySelector('[data-caption-text]');
-        var autoplay = parseInt(slider.getAttribute('data-autoplay') || '0', 10);
-        var timer = null;
-        var index = 0;
-
-        if (slides.length < 2) {
-            return;
-        }
-
-        var show = function (next) {
-            index = (next + slides.length) % slides.length;
-
-            slides.forEach(function (slide, i) {
-                var active = i === index;
-                slide.classList.toggle('is-active', active);
-                slide.setAttribute('aria-hidden', active ? 'false' : 'true');
-            });
-
-            dots.forEach(function (dot, i) {
-                var active = i === index;
-                dot.classList.toggle('is-active', active);
-                dot.setAttribute('aria-selected', active ? 'true' : 'false');
-            });
-
-            if (title && slides[index].dataset.title) {
-                title.textContent = slides[index].dataset.title;
-            }
-            if (kicker && slides[index].dataset.kicker) {
-                kicker.textContent = slides[index].dataset.kicker;
-            }
-            if (text && slides[index].dataset.text) {
-                text.textContent = slides[index].dataset.text;
-            }
-        };
-
-        var stop = function () {
-            if (timer) {
-                window.clearInterval(timer);
-                timer = null;
-            }
-        };
-
-        var start = function () {
-            if (autoplay > 0 && !reduceMotion) {
-                stop();
-                timer = window.setInterval(function () { show(index + 1); }, autoplay);
-            }
-        };
-
-        dots.forEach(function (dot) {
-            dot.addEventListener('click', function () {
-                show(parseInt(dot.getAttribute('data-slide-dot') || '0', 10));
-                start();
-            });
-        });
-
-        slider.addEventListener('mouseenter', stop);
-        slider.addEventListener('mouseleave', start);
-        slider.addEventListener('focusin', stop);
-        slider.addEventListener('focusout', start);
-
-        document.addEventListener('visibilitychange', function () {
-            if (document.hidden) {
-                stop();
-            } else {
-                start();
-            }
-        });
-
-        show(0);
-        start();
-    });
-
-    /* ------------------------------------------------------------- carousels */
-
-    Array.prototype.forEach.call(document.querySelectorAll('[data-carousel]'), function (carousel) {
-        var track = carousel.querySelector('[data-carousel-track]');
-        var slides = Array.prototype.slice.call(carousel.querySelectorAll('[data-carousel-slide]'));
-        var prev = carousel.querySelector('[data-carousel-prev]');
-        var next = carousel.querySelector('[data-carousel-next]');
-        var dotsWrap = carousel.querySelector('[data-carousel-dots]');
-
-        if (!track || slides.length === 0) {
-            return;
-        }
-
-        var page = function () {
-            var first = slides[0];
-            if (!first) {
-                return slides.length || 1;
-            }
-            var styles = window.getComputedStyle(track);
-            var gap = parseFloat(styles.columnGap || styles.gap || '0') || 0;
-            return Math.max(1, Math.floor((track.clientWidth + gap) / (first.offsetWidth + gap)));
-        };
-
-        var pageCount = function () {
-            return Math.max(1, Math.ceil(slides.length / page()));
-        };
-
-        var dots = [];
-
-        var buildDots = function () {
-            if (!dotsWrap) {
-                return;
-            }
-
-            dotsWrap.textContent = '';
-            dots = [];
-
-            for (var i = 0; i < pageCount(); i++) {
-                var dot = document.createElement('button');
-                dot.type = 'button';
-                dot.className = 'hero__dot';
-                dot.setAttribute('data-carousel-dot', String(i));
-                dot.setAttribute('aria-label', 'Go to testimonial ' + (i + 1));
-                (function (target) {
-                    dot.addEventListener('click', function () { scrollToPage(target); });
-                }(i));
-                dotsWrap.appendChild(dot);
-                dots.push(dot);
-            }
-        };
-
-        var currentPage = function () {
-            var per = page();
-            return Math.min(pageCount() - 1, Math.floor(track.scrollLeft / (slides[0].offsetWidth * per) || 0));
-        };
-
-        var paint = function () {
-            var active = currentPage();
-            dots.forEach(function (dot, i) {
-                dot.classList.toggle('is-active', i === active);
-                dot.setAttribute('aria-selected', i === active ? 'true' : 'false');
-            });
-            if (prev) {
-                prev.disabled = track.scrollLeft < 4;
-            }
-            if (next) {
-                next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
-            }
-        };
-
-        var scrollToPage = function (index) {
-            var per = page();
-            var step = (slides[0].offsetWidth + 24) * per;
-            var target = Math.max(0, index) * step;
-
-            if ('scrollBehavior' in document.documentElement.style && !reduceMotion) {
-                track.scrollTo({ left: target, behavior: 'smooth' });
-            } else {
-                track.scrollLeft = target;
-            }
-        };
-
-        buildDots();
-        paint();
-
-        if (prev) {
-            prev.addEventListener('click', function () {
-                scrollToPage(Math.max(0, currentPage() - 1));
-            });
-        }
-
-        if (next) {
-            next.addEventListener('click', function () {
-                scrollToPage(Math.min(pageCount() - 1, currentPage() + 1));
-            });
-        }
-
-        track.addEventListener('scroll', function () {
-            window.requestAnimationFrame(paint);
-        }, { passive: true });
-
-        window.addEventListener('resize', function () {
-            buildDots();
-            paint();
-        });
-    });
 
     /* ------------------------------------------------------------ FAQ search */
 
@@ -591,16 +405,6 @@
         }
     });
 
-    /* --------------------------------------------------- floating call button */
-
-    var floaters = document.querySelector('.floaters');
-
-    if (floaters) {
-        window.addEventListener('scroll', function () {
-            floaters.classList.toggle('is-compact', window.pageYOffset > 520);
-        }, { passive: true });
-    }
-
     /* ------------------------------------------------------------- analytics */
 
     function track(event, detail) {
@@ -660,4 +464,5 @@
             node.textContent = requested;
         }
     });
+
 }());

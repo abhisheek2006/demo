@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use App\Content\ArticlesData;
 use App\Core\Config;
 use App\Core\Controller;
 use App\Core\Response;
@@ -18,14 +17,6 @@ final class SeoController extends Controller
     {
         $entries = Seo::sitemapEntries();
 
-        foreach (ArticlesData::all() as $article) {
-            $entries[] = [
-                'loc'       => url('/articles/' . $article['slug']),
-                'lastmod'   => date('Y-m-d'),
-                'changefreq'=> 'monthly',
-                'priority'  => '0.6',
-            ];
-        }
 
         $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
         $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '

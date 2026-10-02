@@ -1,78 +1,89 @@
 <?php
 /**
- * Site footer.
+ * Minimal site footer.
+ *
+ * Layout: white logo on the left, circular social / action icons on the right,
+ * a thin divider and a centred copyright line.
+ *
+ * Social URLs come from .env (CLINIC_FACEBOOK / CLINIC_INSTAGRAM / CLINIC_X).
+ * Any link without a URL falls back to href="#", so nothing is invented and no
+ * icon disappears — add the URL to .env and the real link goes live.
  *
  * @var array<string,string> $clinic
  * @var array<string,array<int,array{label:string,url:string}>> $footerNav
  * @var int $appYear
  */
-$socials = array_filter([
-    'Facebook'  => (string) ($clinic['facebook'] ?? ''),
-    'Instagram' => (string) ($clinic['instagram'] ?? ''),
-    'X'         => (string) ($clinic['x'] ?? ''),
-    'YouTube'   => (string) ($clinic['youtube'] ?? ''),
-]);
+use App\Content\Clinic;
+
+$socials = [
+    [
+        'label' => 'Facebook',
+        'icon'  => 'facebook',
+        'url'   => (string) ($clinic['facebook'] ?? ''),
+    ],
+    [
+        'label' => 'Instagram',
+        'icon'  => 'instagram',
+        'url'   => (string) ($clinic['instagram'] ?? ''),
+    ],
+    [
+        'label' => 'Location',
+        'icon'  => 'pin',
+        'url'   => Clinic::mapUrl(),
+        'external' => true,
+    ],
+    [
+        'label' => 'X',
+        'icon'  => 'x',
+        'url'   => (string) ($clinic['x'] ?? ''),
+        'external' => true,
+    ],
+];
 ?>
-<footer class="footer">
-    <div class="footer__top">
-        <div class="container footer__grid">
-            <div class="footer__brand">
-                <a class="brand brand--footer" href="<?= e(url('/')) ?>">
-                    <img class="brand__logo brand__logo--footer" src="<?= e(url('/assets/images/icons/logo-white.png')) ?>" width="164" height="58" alt="Swasti Homoeo Clinic">
+<footer class="site-footer">
+    <div class="site-footer__wave" aria-hidden="true"></div>
+
+    <span class="site-footer__leaf site-footer__leaf--tl" aria-hidden="true"></span>
+    <span class="site-footer__leaf site-footer__leaf--bl" aria-hidden="true"></span>
+    <span class="site-footer__leaf site-footer__leaf--br" aria-hidden="true"></span>
+    <span class="site-footer__leaf site-footer__leaf--tr" aria-hidden="true"></span>
+
+    <div class="site-footer__main">
+        <div class="site-footer__container">
+            <div class="site-footer__brand">
+                <a class="site-footer__logo-link" href="<?= e(url('/')) ?>" aria-label="Swasti Homoeo Clinic — home">
+                    <img class="site-footer__logo"
+                         src="<?= e(url('/assets/images/icons/logo-white.png')) ?>"
+                         width="164" height="58"
+                         alt="Swasti Homoeo Clinic">
                 </a>
-                <p class="footer__claim">“<?= e($clinic['tagline'] ?? 'We believe in easy, safe and quick recovery') ?>”</p>
-                <p class="footer__blurb">
-                    A classical homoeopathy practice in Bhathu Basti, Port Blair, led by
-                    Dr. Smriti Das (BHMS, MD — WBUHS) with more than eight years of clinical experience.
-                </p>
-                <ul class="footer__contact">
-                    <li><span class="footer__contact-label">Address</span>
-                        <span><?= e(\App\Content\Clinic::addressOneLine()) ?></span></li>
-                    <li><span class="footer__contact-label">Phone</span>
-                        <span><a href="<?= e(tel_link()) ?>"><?= e(format_phone()) ?></a></span></li>
-                    <li><span class="footer__contact-label">Email</span>
-                        <span><a href="<?= e(mail_link()) ?>"><?= e($clinic['email'] ?? '') ?></a></span></li>
-                    <li><span class="footer__contact-label">Hours</span>
-                        <span>Mon–Fri 10:00 AM – 7:00 PM · Sat 10:00 AM – 3:00 PM</span></li>
-                </ul>
-                <?php if ($socials !== []): ?>
-                <ul class="footer__social">
-                    <?php foreach ($socials as $label => $href): ?>
-                        <li><a href="<?= e($href) ?>" rel="noopener nofollow" target="_blank" aria-label="Swasti Homoeo Clinic on <?= e($label) ?>">
-                            <?= icon('globe', 'icon icon--sm', 18) ?></a></li>
-                    <?php endforeach; ?>
-                </ul>
-                <?php endif; ?>
             </div>
 
-            <?php foreach ($footerNav as $heading => $links): ?>
-            <nav class="footer__col" aria-label="<?= e($heading) ?> navigation">
-                <h2 class="footer__heading"><?= e($heading) ?></h2>
-                <ul class="footer__links">
-                    <?php foreach ($links as $link): ?>
-                        <li><a href="<?= e(url($link['url'])) ?>"><?= e($link['label']) ?></a></li>
-                    <?php endforeach; ?>
-                </ul>
-            </nav>
-            <?php endforeach; ?>
+            <ul class="site-footer__socials">
+                <?php foreach ($socials as $social): ?>
+                    <?php
+                    $href     = $social['url'] !== '' ? $social['url'] : '#';
+                    $external = ($social['external'] ?? false) && $social['url'] !== '';
+                    ?>
+                    <li>
+                        <a class="footer-social"
+                           href="<?= e($href) ?>"
+                           aria-label="<?= e($social['label']) ?>"
+                           <?= $external ? 'target="_blank" rel="noopener nofollow"' : '' ?>>
+                            <?= icon($social['icon'], 'footer-social__icon', 24) ?>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
         </div>
-    </div>
 
-    <div class="footer__bottom">
-        <div class="container footer__bottom-inner">
-            <p class="footer__copy">
-                &copy; <?= e((string) $appYear) ?> Swasti Homoeo Clinic · <?= e($clinic['legal_name'] ?? 'Andaman Homoeo Health Care LLP') ?>. All rights reserved.
-            </p>
-            <p class="footer__disclaimer">
-                Information on this website is for general awareness and is not a substitute for a
-                consultation with a qualified doctor. In an emergency call <strong>112</strong>.
-            </p>
-            <p class="footer__meta">
-                <a href="<?= e(url('/privacy-policy')) ?>">Privacy Policy</a>
-                <span aria-hidden="true">·</span>
-                <a href="<?= e(url('/sitemap.xml')) ?>">Sitemap</a>
-                <span aria-hidden="true">·</span>
-                <a href="<?= e(url('/faq')) ?>">FAQ</a>
+        <div class="site-footer__container">
+            <hr class="site-footer__divider">
+        </div>
+
+        <div class="site-footer__container">
+            <p class="site-footer__bottom">
+                &copy; <?= e((string) $appYear) ?> Swasti Homoeo Clinic. All rights reserved.
             </p>
         </div>
     </div>
