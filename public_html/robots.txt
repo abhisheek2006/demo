@@ -1,0 +1,3 @@
+# Non-production environment (local) — kept out of search results.
+User-agent: *
+Disallow: /

@@ -1,0 +1,7 @@
+# Swasti Homoeo Clinic - deny all web access to runtime storage.
+Require all denied
+Deny from all
+Options -Indexes -ExecCGI
+<IfModule mod_authz_core.c>
+    Require all denied
+</IfModule>

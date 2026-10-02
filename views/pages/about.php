@@ -1,0 +1,186 @@
+<?php
+/**
+ * About Us.
+ *
+ * @var array<string,mixed> $clinic
+ * @var array<string,mixed> $doctor
+ * @var array<int,array{heading:string,body:string}> $biography
+ * @var array<int,array{title:string,text:string,icon:string}> $credentials
+ * @var array<int,string> $languages
+ * @var array<int,array{value:string,label:string,icon:string}> $stats
+ * @var array<int,array{title:string,text:string,icon:string}> $pillars
+ * @var array<int,array<string,mixed>> $testimonials
+ * @var array<int,array<string,mixed>> $services
+ */
+?>
+
+<?= component('page-hero', [
+    'eyebrow'   => 'About us',
+    'heading'   => 'A small clinic that takes its prescribing seriously',
+    'lead'      => \App\Content\Clinic::intro(),
+    'trail'     => [['name' => 'Home', 'url' => '/'], ['name' => 'About Us']],
+    'image'     => '/assets/images/about/clinic-interior.svg',
+    'imageAlt'  => 'Illustration of the reception and consultation area at Swasti Homoeo Clinic',
+]) ?>
+
+<section class="section" id="doctor">
+    <div class="container split">
+        <div class="split__media" data-reveal>
+            <div class="split__frame split__frame--portrait">
+                <img src="<?= e(image_url((string) $doctor['image'])) ?>"
+                     alt="<?= e((string) $doctor['image_alt']) ?>"
+                     width="520" height="620" loading="lazy" decoding="async">
+            </div>
+            <div class="split__badge">
+                <p class="split__badge-value"><?= e((string) $doctor['experience']) ?></p>
+                <p class="split__badge-label"><?= e((string) $doctor['role']) ?></p>
+            </div>
+        </div>
+
+        <div class="split__text" data-reveal>
+            <p class="eyebrow">The doctor</p>
+            <h2 class="section__title"><?= e((string) $doctor['name']) ?></h2>
+            <p class="section__lead"><?= e((string) $doctor['short_qualification']) ?></p>
+
+            <ul class="tag-list">
+                <?php foreach ((array) $doctor['qualifications'] as $qualification): ?>
+                    <li class="tag"><?= icon('certificate', 'icon icon--xs', 14) ?> <?= e((string) $qualification) ?></li>
+                <?php endforeach; ?>
+            </ul>
+
+            <div class="prose">
+                <?php foreach ($biography as $block): ?>
+                    <h3><?= e($block['heading']) ?></h3>
+                    <p><?= e($block['body']) ?></p>
+                <?php endforeach; ?>
+            </div>
+
+            <div class="detail-grid">
+                <div class="detail">
+                    <p class="detail__label">Registration</p>
+                    <p class="detail__value"><?= e((string) $doctor['registration_note']) ?></p>
+                </div>
+                <div class="detail">
+                    <p class="detail__label">Languages</p>
+                    <p class="detail__value"><?= e(implode(' · ', $languages)) ?></p>
+                </div>
+            </div>
+
+            <div class="split__actions">
+                <a class="btn btn--primary" href="<?= e(url('/book-consultation')) ?>">Book with Dr. Das</a>
+                <a class="btn btn--ghost" href="<?= e(tel_link()) ?>">Call <?= e(format_phone()) ?></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section section--soft" id="approach">
+    <div class="container">
+        <header class="section__head" data-reveal>
+            <p class="eyebrow">How we work</p>
+            <h2 class="section__title">Three things we will not compromise on</h2>
+            <p class="section__lead section__lead--center">
+                These are the principles behind every prescription written at the clinic.
+            </p>
+        </header>
+
+        <div class="cards cards--three">
+            <?php foreach ($pillars as $pillar): ?>
+            <article class="card card--pillar" data-reveal>
+                <span class="card__icon"><?= icon($pillar['icon'], 'icon', 26) ?></span>
+                <h3 class="card__title"><?= e($pillar['title']) ?></h3>
+                <p class="card__text"><?= e($pillar['text']) ?></p>
+            </article>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <header class="section__head" data-reveal>
+            <p class="eyebrow">Credentials</p>
+            <h2 class="section__title">Registered, licensed and accountable</h2>
+        </header>
+
+        <div class="cards cards--four">
+            <?php foreach ($credentials as $credential): ?>
+            <article class="card card--small" data-reveal>
+                <span class="card__icon card__icon--soft"><?= icon($credential['icon'], 'icon', 22) ?></span>
+                <h3 class="card__title card__title--sm"><?= e($credential['title']) ?></h3>
+                <p class="card__text"><?= e($credential['text']) ?></p>
+            </article>
+            <?php endforeach; ?>
+        </div>
+
+        <ul class="stats stats--inline">
+            <?php foreach ($stats as $stat): ?>
+            <li class="stat">
+                <span class="stat__value"><?= e($stat['value']) ?></span>
+                <span class="stat__label"><?= e($stat['label']) ?></span>
+            </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+</section>
+
+<section class="section section--soft section--services-preview">
+    <div class="container">
+        <header class="section__head" data-reveal>
+            <p class="eyebrow">What we treat</p>
+            <h2 class="section__title">The four most requested appointments</h2>
+        </header>
+
+        <div class="cards cards--four">
+            <?php foreach ($services as $service): ?>
+            <article class="card card--service card--small" data-reveal>
+                <span class="card__icon"><?= icon($service['icon'], 'icon', 22) ?></span>
+                <h3 class="card__title card__title--sm"><?= e($service['title']) ?></h3>
+                <p class="card__text"><?= e(truncate($service['intro'], 120)) ?></p>
+                <a class="card__link" href="<?= e(url('/services#' . $service['id'])) ?>">
+                    Details <?= icon('arrow-right', 'icon icon--xs', 15) ?>
+                </a>
+            </article>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+
+<section class="section section--testimonials" id="testimonials">
+    <div class="container">
+        <header class="section__head" data-reveal>
+            <p class="eyebrow">In their words</p>
+            <h2 class="section__title">What patients tell us</h2>
+            <p class="section__lead section__lead--center">
+                Real feedback matters more than marketing, so this is exactly what we are told — including the
+                parts that are not flattering.
+            </p>
+        </header>
+
+        <div class="testimonials">
+            <div class="testimonials__grid">
+                <?php foreach ($testimonials as $testimonial): ?>
+                <figure class="testimonial" data-reveal>
+                    <?= icon('quote', 'testimonial__quote-mark', 30) ?>
+                    <blockquote class="testimonial__quote"><?= e($testimonial['quote']) ?></blockquote>
+                    <figcaption class="testimonial__meta">
+                        <?php $avatar = (string) ($testimonial['avatar'] ?? ''); ?>
+                        <?php if (has_image($avatar)): ?>
+                        <img class="testimonial__avatar" src="<?= e(asset($avatar)) ?>" width="108" height="108" loading="lazy" decoding="async" alt="<?= e($testimonial['name']) ?>">
+                        <?php else: ?>
+                        <span class="testimonial__avatar testimonial__avatar--initials" aria-hidden="true"><?= e(initials((string) $testimonial['name'])) ?></span>
+                        <?php endif; ?>
+                        <span>
+                            <span class="testimonial__name"><?= e($testimonial['name']) ?></span>
+                            <span class="testimonial__meta-line">Verified patient<?= ($testimonial['when'] ?? '') !== '' ? ' · ' . e((string) $testimonial['when']) : '' ?></span>
+                        </span>
+                        <?= stars((int) $testimonial['rating']) ?>
+                    </figcaption>
+                </figure>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
+</section>
+
+<?= component('cta-band') ?>
