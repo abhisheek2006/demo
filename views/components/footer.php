@@ -53,7 +53,7 @@ $socials = [
             <div class="site-footer__brand">
                 <a class="site-footer__logo-link" href="<?= e(url('/')) ?>" aria-label="Swasti Homoeo Clinic — home">
                     <img class="site-footer__logo"
-                         src="<?= e(url('/assets/images/icons/logo-white.png')) ?>"
+                         src="<?= e(url('/assets/images/icons/logo.png')) ?>"
                          width="164" height="58"
                          alt="Swasti Homoeo Clinic">
                 </a>
