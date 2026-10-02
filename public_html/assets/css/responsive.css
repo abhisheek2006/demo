@@ -135,7 +135,7 @@
     }
 
     /* Layouts that become single column */
-    .booking-layout,
+    .booking-grid,
     .contact-grid,
     .article-layout,
     .cta-band__inner,
@@ -145,7 +145,7 @@
         grid-template-columns: minmax(0, 1fr);
     }
 
-    .booking-layout__aside,
+    .booking-grid__aside,
     .contact-grid__aside,
     .panel--sticky,
     .admin-card--side {
@@ -218,6 +218,11 @@
     /* Contact */
     .contact-cards {
         grid-template-columns: minmax(0, 1fr);
+    }
+
+    /* Booking keeps two cards per row on tablets so the form stays reachable */
+    .booking-grid .contact-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     /* Testimonials */
@@ -564,6 +569,10 @@
 
     .panel {
         padding: 24px 20px;
+    }
+
+    .booking-grid .contact-cards {
+        grid-template-columns: minmax(0, 1fr);
     }
 
     .admin-card {

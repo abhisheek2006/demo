@@ -14,7 +14,7 @@ $errors = is_array($errors ?? null) ? $errors : [];
 
 <div class="auth-card">
     <div class="auth-card__head">
-        <img class="auth-card__logo" src="<?= e(url('/assets/images/icons/logo-white.png')) ?>" width="52" height="52" alt="">
+        <img class="auth-card__logo" src="<?= e(url('/assets/images/icons/logo.png')) ?>" width="52" height="52" alt="">
         <h1 class="auth-card__title">Clinic admin sign in</h1>
         <p class="auth-card__sub"><?= e((string) ($clinic['name'] ?? '')) ?> · Port Blair</p>
     </div>

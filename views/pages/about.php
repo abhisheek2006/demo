@@ -29,7 +29,7 @@
             <div class="split__frame split__frame--portrait">
                 <img src="<?= e(image_url((string) $doctor['image'])) ?>"
                      alt="<?= e((string) $doctor['image_alt']) ?>"
-                     width="520" height="620" loading="lazy" decoding="async">
+                     width="700" height="1050" loading="lazy" decoding="async">
             </div>
             <div class="split__badge">
                 <p class="split__badge-value"><?= e((string) $doctor['experience']) ?></p>
@@ -158,7 +158,7 @@
         </header>
 
         <div class="testimonials">
-            <div class="testimonials__grid">
+            <div class="testimonials__track" data-testimonials>
                 <?php foreach ($testimonials as $testimonial): ?>
                 <figure class="testimonial" data-reveal>
                     <?= icon('quote', 'testimonial__quote-mark', 30) ?>

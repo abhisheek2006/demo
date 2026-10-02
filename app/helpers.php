@@ -488,6 +488,8 @@ if (!function_exists('icon_paths')) {
             'facebook'    => '<path d="M14.5 8.5h2.2V5.6h-2.4c-2.2 0-3.6 1.4-3.6 3.7v1.6H8.4v2.9h2.3v7.7h3V13.8h2.4l.4-2.9h-2.8V9.6c0-.7.3-1.1 1.3-1.1Z" fill="currentColor" stroke="none"/>',
             'instagram'   => '<rect x="3.5" y="3.5" width="17" height="17" rx="4.6"/><circle cx="12" cy="12" r="4"/><circle cx="16.9" cy="7.1" r="1" fill="currentColor" stroke="none"/>',
             'x'           => '<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="currentColor" stroke="none"/>',
+            'youtube'     => '<rect x="2.6" y="5.4" width="18.8" height="13.2" rx="4"/><path d="M10.4 9.5v5l4.6-2.5-4.6-2.5Z" fill="currentColor" stroke="none"/>',
+            'link'        => '<path d="M10.2 13.8a3.6 3.6 0 0 0 5.1 0l2.9-2.9a3.6 3.6 0 0 0-5.1-5.1l-1.3 1.3"/><path d="M13.8 10.2a3.6 3.6 0 0 0-5.1 0l-2.9 2.9a3.6 3.6 0 0 0 5.1 5.1l1.3-1.3"/>',
             'clock-open'  => '<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l2.6 1.6"/><path d="M17 3.5 19 5.5"/>',
             'logout'      => '<path d="M14 4.5H6.5A1.5 1.5 0 0 0 5 6v12a1.5 1.5 0 0 0 1.5 1.5H14"/><path d="M17 8.5 20.5 12 17 15.5"/><path d="M20 12H9.5"/>',
             'inbox'       => '<path d="M3.5 13.5 6 5.5h12l2.5 8v5a1.5 1.5 0 0 1-1.5 1.5H5a1.5 1.5 0 0 1-1.5-1.5Z"/><path d="M3.5 13.5H9a3 3 0 0 0 6 0h5.5"/>',

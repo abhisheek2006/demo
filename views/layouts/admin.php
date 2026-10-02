@@ -50,7 +50,7 @@ $isActive = static function (string $url, string $page): bool {
 <meta name="referrer" content="same-origin">
 <meta name="theme-color" content="#0d2a5e">
 <link rel="icon" href="<?= e(url('/favicon.ico')) ?>" sizes="any">
-<link rel="icon" type="image/svg+xml" href="<?= e(url('/assets/images/icons/logo-white.png')) ?>">
+<link rel="icon" type="image/png" href="<?= e(url('/assets/images/icons/logo.png')) ?>">
 <link rel="stylesheet" href="<?= e(asset('/assets/css/main.css')) ?>">
 <?= !empty($jsonLd) ? json_ld($jsonLd) : '' ?>
 </head>
@@ -61,7 +61,7 @@ $isActive = static function (string $url, string $page): bool {
 <aside class="admin-sidebar" data-sidebar>
     <div class="admin-sidebar__head">
         <a class="brand brand--admin" href="<?= e(url('/admin')) ?>">
-            <img class="brand__mark" src="<?= e(url('/assets/images/icons/logo-white.png')) ?>" width="34" height="34" alt="" aria-hidden="true">
+            <img class="brand__mark" src="<?= e(url('/assets/images/icons/logo.png')) ?>" width="34" height="34" alt="" aria-hidden="true">
             <span class="brand__text">
                 <span class="brand__name">Clinic Admin</span>
                 <span class="brand__tag"><?= e((string) ($clinic['name'] ?? '')) ?></span>

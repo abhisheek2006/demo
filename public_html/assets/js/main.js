@@ -77,6 +77,123 @@
         });
     });
 
+    /* ---------------------------------------------------- testimonial rotator */
+
+    /* Patient reviews advance one card at a time on their own. The track is a
+       native scroll-snap container, so it stays swipeable when the timer is
+       suppressed, and the markup is fully readable with JavaScript off. */
+
+    var ROTATE_DELAY = 6000;
+
+    Array.prototype.forEach.call(document.querySelectorAll('[data-testimonials]'), function (track) {
+        var cards = Array.prototype.slice.call(track.children);
+
+        if (cards.length < 2) {
+            return;
+        }
+
+        var index = 0;
+        var timer = null;
+        var onScreen = false;
+        var scrolling = false;
+
+        /* Distance from the track's left edge to a card, independent of which
+           element happens to be the offsetParent. */
+        var offsetOf = function (card) {
+            return card.getBoundingClientRect().left - track.getBoundingClientRect().left + track.scrollLeft;
+        };
+
+        var scrollToIndex = function (target, smooth) {
+            index = ((target % cards.length) + cards.length) % cards.length;
+
+            var left = offsetOf(cards[index]);
+
+            if (typeof track.scrollTo === 'function') {
+                track.scrollTo({ left: left, behavior: smooth && !reduceMotion ? 'smooth' : 'auto' });
+            } else {
+                track.scrollLeft = left;
+            }
+        };
+
+        /* Swiping or dragging the track moves it under the visitor's control,
+           so adopt that position as the new index instead of fighting it. */
+        var syncFromScroll = function () {
+            if (scrolling) {
+                return;
+            }
+
+            scrolling = true;
+            window.requestAnimationFrame(function () {
+                scrolling = false;
+
+                var closest = 0;
+                var smallest = Infinity;
+
+                cards.forEach(function (card, i) {
+                    var distance = Math.abs(offsetOf(card) - track.scrollLeft);
+
+                    if (distance < smallest) {
+                        smallest = distance;
+                        closest = i;
+                    }
+                });
+
+                index = closest;
+            });
+        };
+
+        var tick = function () {
+            scrollToIndex(index + 1, true);
+        };
+
+        var stop = function () {
+            if (timer) {
+                window.clearTimeout(timer);
+                timer = null;
+            }
+        };
+
+        var start = function () {
+            stop();
+
+            /* The track is not scrollable and has no controls, so there is
+               nothing for a visitor to interrupt: keep advancing while the
+               section is on screen. Only a background tab or a reduced-motion
+               preference stops it. */
+            if (reduceMotion || !onScreen || document.hidden) {
+                return;
+            }
+
+            timer = window.setTimeout(function () {
+                tick();
+                start();
+            }, ROTATE_DELAY);
+        };
+
+        track.addEventListener('scroll', syncFromScroll, { passive: true });
+
+        document.addEventListener('visibilitychange', function () {
+            if (document.hidden) {
+                stop();
+            } else {
+                start();
+            }
+        });
+
+        /* Never rotate a section nobody is looking at. */
+        if ('IntersectionObserver' in window) {
+            new IntersectionObserver(function (entries) {
+                onScreen = entries[entries.length - 1].isIntersecting;
+                start();
+            }, { threshold: 0.2 }).observe(track);
+        } else {
+            onScreen = true;
+        }
+
+        index = 0;
+        start();
+    });
+
     /* ---------------------------------------------------------------- forms */
 
     var normaliseDigits = function (value) {

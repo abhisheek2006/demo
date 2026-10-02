@@ -18,7 +18,7 @@
 <meta name="robots" content="noindex, nofollow, noarchive">
 <meta name="referrer" content="same-origin">
 <link rel="icon" href="<?= e(url('/favicon.ico')) ?>" sizes="any">
-<link rel="icon" type="image/svg+xml" href="<?= e(url('/assets/images/icons/logo-white.png')) ?>">
+<link rel="icon" type="image/png" href="<?= e(url('/assets/images/icons/logo.png')) ?>">
 <link rel="stylesheet" href="<?= e(asset('/assets/css/main.css')) ?>">
 </head>
 <body class="auth-body">

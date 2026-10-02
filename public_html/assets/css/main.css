@@ -2122,11 +2122,13 @@ select.field__input {
 
 .checkbox__box {
 
-    width: 20px; height: 20px;
+    display: grid; place-items: center;
+
+    width: 22px; height: 22px;
 
     flex: none;
 
-    margin-top: 2px;
+    margin-top: 1px;
 
     border: 1.5px solid var(--ink-300);
 
@@ -2134,39 +2136,28 @@ select.field__input {
 
     background: #fff;
 
-    transition: background var(--t-fast), border-color var(--t-fast);
+    color: transparent;
+
+    transition: background var(--t-fast), border-color var(--t-fast), color var(--t-fast);
 
 }
 
+.checkbox:hover .checkbox__box { border-color: var(--blue-400); }
 
+.checkbox__box .icon { opacity: 0; transition: opacity var(--t-fast); }
 
 .checkbox input { position: absolute; opacity: 0; width: 0; height: 0; }
 
-.checkbox input:checked + .checkbox__box { background: var(--blue-800); border-color: var(--blue-800); }
+.checkbox input:checked + .checkbox__box { background: var(--blue-800); border-color: var(--blue-800); color: #fff; }
 
-.checkbox input:checked + .checkbox__box::after {
-
-    content: "";
-
-    display: block;
-
-    width: 5px; height: 9px;
-
-    margin: 3px 0 0 6px;
-
-    border: solid #fff;
-
-    border-width: 0 2px 2px 0;
-
-    transform: rotate(45deg);
-
-}
+.checkbox input:checked + .checkbox__box .icon { opacity: 1; }
 
 .checkbox input:focus-visible + .checkbox__box { outline: 3px solid var(--blue-500); outline-offset: 2px; }
 
 .checkbox__text { font-size: .92rem; color: var(--ink-700); }
 
 .checkbox__text a { text-decoration: underline; }
+
 
 
 
@@ -2260,29 +2251,16 @@ select.field__input {
 
 
 
-.booking-layout {
+.booking-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: 44px; align-items: start; }
 
-    display: grid;
+.booking-grid__main { display: grid; gap: 28px; min-width: 0; }
 
-    grid-template-columns: minmax(0, 1fr) minmax(0, .62fr);
-
-    gap: 44px;
-
-    align-items: start;
-
-}
-
-
-
-.booking-layout__form { min-width: 0; }
-
-.booking-layout__aside { display: grid; gap: 22px; position: sticky; top: calc(var(--header-h) + 24px); }
-
-
+.booking-grid__aside { display: grid; gap: 22px; position: sticky; top: calc(var(--header-h) + 24px); }
 
 .contact-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: 44px; align-items: start; }
 
 .contact-grid__main { display: grid; gap: 28px; }
+
 
 .contact-grid__aside { display: grid; gap: 22px; position: sticky; top: calc(var(--header-h) + 24px); }
 
@@ -2452,7 +2430,10 @@ select.field__input {
 
     gap: 24px;
 
-    overflow-x: auto;
+    /* Not visitor-scrollable: the rotator advances the reviews on its own and
+       nothing here should be draggable or swipeable. Programmatic scrolling
+       still works, so the timer in main.js is unaffected. */
+    overflow-x: hidden;
 
     scroll-snap-type: x mandatory;
 
@@ -2460,13 +2441,18 @@ select.field__input {
 
     padding-bottom: 10px;
 
-    scrollbar-width: thin;
+    scrollbar-width: none;
+
+    -ms-overflow-style: none;
 
 }
 
+.testimonials__track::-webkit-scrollbar { display: none; }
 
 
-/* The about page shows every review as a grid instead of a carousel. */
+
+/* Unused fallback: reviews currently render as a rotator (see
+   .testimonials__track below). Kept in case a section wants a static grid. */
 
 .testimonials__grid {
 
@@ -2480,31 +2466,19 @@ select.field__input {
 
 
 
-.testimonials__grid .testimonial {
+/* Patient reviews vary from one line to several paragraphs. The rotator shows
+   one card at a time, so trim the long ones or the tallest card sets the
+   height of every card next to it. */
 
-    flex: none;
-
-    display: flex;
-
-    flex-direction: column;
-
-    height: 100%;
-
-}
-
-
-
-/* Patient reviews vary a lot in length — trim the long ones so the grid stays even. */
-
-.testimonials__grid .testimonial__quote {
+.testimonials__track .testimonial__quote {
 
     display: -webkit-box;
 
     -webkit-box-orient: vertical;
 
-    -webkit-line-clamp: 9;
+    -webkit-line-clamp: 8;
 
-    line-clamp: 9;
+    line-clamp: 8;
 
     overflow: hidden;
 
@@ -2512,7 +2486,17 @@ select.field__input {
 
 
 
-.testimonials__grid .testimonial__meta { margin-top: auto; }
+/* One review fills the track so every tick moves to a card that is really off
+   screen. The padding keeps the text in a readable column on wide displays
+   while the card border still spans the section. */
+
+.testimonials__track .testimonial {
+
+    flex: 0 0 100%;
+
+    padding-inline: max(28px, calc((100% - 780px) / 2));
+
+}
 
 
 

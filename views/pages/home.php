@@ -96,9 +96,9 @@ $waBooking = whatsapp_link(
     <div class="container split">
         <div class="split__media" data-reveal>
             <div class="split__frame">
-                <img src="<?= e(image_url('/assets/images/about/doctor-smriti-das.svg')) ?>"
+                <img src="<?= e(image_url('/assets/images/about/doctor-smriti-das.jpg')) ?>"
                      alt="<?= e($doctor['image_alt'] ?? 'Dr. Smriti Das') ?>"
-                     width="520" height="620" loading="lazy" decoding="async">
+                     width="700" height="1050" loading="lazy" decoding="async">
             </div>
             <div class="split__badge">
                 <p class="split__badge-value"><?= e($doctor['short_qualification'] ?? 'BHMS, MD (WBUHS)') ?></p>
@@ -214,7 +214,7 @@ $waBooking = whatsapp_link(
         </header>
 
         <div class="testimonials">
-            <div class="testimonials__grid">
+            <div class="testimonials__track" data-testimonials>
             <?php foreach ($testimonials as $testimonial): ?>
             <figure class="testimonial" data-reveal>
                 <?= icon('quote', 'testimonial__quote-mark', 34) ?>

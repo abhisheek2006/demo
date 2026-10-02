@@ -1,20 +1,22 @@
 /* ==========================================================================
-   SITE FOOTER — minimal premium footer
+   SITE FOOTER — four-column botanical footer
    Scoped entirely under .site-footer so nothing else on the site is affected.
    Colours follow the clinic's deep-green / mint palette.
    ========================================================================== */
 
 .site-footer {
     --sf-bg: #003f35;
-    --sf-bg-deep: #002d27;
-    --sf-accent: #18d6a0;
-    --sf-accent-2: #08b98c;
+    --sf-bg-deep: #002f29;
+    --sf-bg-darkest: #00251f;
+    --sf-accent: #19d6a0;
+    --sf-accent-2: #10cfa0;
+    --sf-accent-3: #00b98a;
     --sf-text: #fff;
-    --sf-muted: rgba(255, 255, 255, .7);
+    --sf-muted: rgba(255, 255, 255, .75);
 
     position: relative;
     margin-top: 0;
-    background: var(--sf-bg);
+    background: var(--sf-bg-deep);
     color: var(--sf-text);
     overflow: hidden;
     isolation: isolate;
@@ -22,17 +24,17 @@
 
 /* ---------------------------------------------------------- top wave ---- */
 
+/* Three stacked elliptical layers make a smooth multi-curve transition from
+   the white section above into the dark footer. */
 .site-footer__wave {
     position: absolute;
     inset: 0 0 auto 0;
-    height: 132px;
+    height: 150px;
     margin-top: -1px;
     pointer-events: none;
     z-index: 0;
 }
 
-/* Two stacked elliptical layers make a smooth multi-curve transition from the
-   white section above into the dark footer. */
 .site-footer__wave::before,
 .site-footer__wave::after {
     content: "";
@@ -43,23 +45,24 @@
 }
 
 .site-footer__wave::before {
-    top: -118px;
-    height: 168px;
-    background: var(--sf-accent-2);
-    opacity: .5;
+    top: -132px;
+    height: 186px;
+    background: var(--sf-accent-3);
+    opacity: .45;
 }
 
+/* Third curve: a soft mint band between the accent rim and the dark body. */
 .site-footer__wave::after {
-    top: -92px;
-    height: 150px;
+    top: -104px;
+    height: 162px;
     background: var(--sf-bg);
 }
 
-/* Third curve: a thin mint rim hugging the top of the dark body. */
+/* The dark body itself, curved so the footer edge is never a straight line. */
 .site-footer__wave {
     background:
-        radial-gradient(120% 100% at 50% 100%, transparent 58%, rgba(24, 214, 160, .28) 59%, transparent 61%),
-        linear-gradient(180deg, transparent 0 62%, rgba(8, 185, 140, .22) 63%, transparent 65%);
+        radial-gradient(120% 100% at 50% 100%, transparent 60%, rgba(25, 214, 160, .3) 61%, transparent 63%),
+        linear-gradient(180deg, transparent 0 64%, rgba(16, 207, 160, .2) 65%, transparent 67%);
 }
 
 /* ------------------------------------------------------ leaf decoration -- */
@@ -67,8 +70,8 @@
 .site-footer__leaf {
     position: absolute;
     z-index: 0;
-    width: 190px;
-    height: 190px;
+    width: 200px;
+    height: 200px;
     pointer-events: none;
     opacity: .1;
     background: var(--sf-accent);
@@ -80,32 +83,80 @@
     content: "";
     position: absolute;
     inset: 18% 12%;
-    border-left: 2px solid rgba(0, 45, 39, .55);
+    border-left: 2px solid rgba(0, 37, 31, .55);
     transform: rotate(38deg);
     transform-origin: left center;
 }
 
-.site-footer__leaf--tl { top: 96px;    left: -70px;  transform: rotate(18deg); }
-.site-footer__leaf--bl { bottom: 24px; left: 26px;   transform: rotate(-24deg) scale(.72); }
-.site-footer__leaf--br { bottom: -46px; right: -54px; transform: rotate(14deg) scale(1.12); }
-.site-footer__leaf--tr { top: 150px;   right: 40px;  transform: rotate(-38deg) scale(.55); }
+.site-footer__leaf--tl { top: 108px;   left: -74px;  transform: rotate(18deg); }
+.site-footer__leaf--bl { bottom: 26px; left: 22px;   transform: rotate(-24deg) scale(.72); }
+.site-footer__leaf--br { bottom: -52px; right: -58px; transform: rotate(14deg) scale(1.15); }
+.site-footer__leaf--tr { top: 168px;   right: 34px;  transform: rotate(-38deg) scale(.58); }
+
+/* Small medicinal sprig tucked into the bottom-right corner. */
+.site-footer__sprig {
+    position: absolute;
+    z-index: 0;
+    right: 96px;
+    bottom: 58px;
+    width: 74px;
+    height: 74px;
+    pointer-events: none;
+    opacity: .16;
+    background: var(--sf-accent-2);
+    clip-path: polygon(50% 0, 62% 34%, 96% 22%, 68% 50%, 96% 78%, 62% 66%, 50% 100%, 38% 66%, 4% 78%, 32% 50%, 4% 22%, 38% 34%);
+}
 
 /* -------------------------------------------------------------- layout -- */
 
 .site-footer__main {
     position: relative;
     z-index: 1;
-    padding: 150px 0 34px;
+    padding: 168px 0 56px;
+    background: linear-gradient(180deg, var(--sf-bg) 0 46%, var(--sf-bg-deep) 46% 100%);
 }
 
 .site-footer__container {
-    width: min(1400px, calc(100% - 80px));
+    width: min(1500px, calc(100% - 120px));
     margin: 0 auto;
 }
 
-.site-footer__brand {
+/* Two columns only. The grid is capped and centred so the two blocks of text
+   stay a comfortable measure instead of stretching the full 1500px shell. */
+.site-footer__grid {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 64px;
+    align-items: start;
+    max-width: 940px;
+    margin: 0 auto;
+}
+
+/* ----------------------------------------------------------- headings --- */
+
+.site-footer__heading {
     display: flex;
     align-items: center;
+    gap: 10px;
+    margin: 0 0 22px;
+    color: var(--sf-text);
+    font-size: 1.06rem;
+    font-weight: 700;
+    letter-spacing: .01em;
+}
+
+.site-footer__heading-icon {
+    flex: none;
+    color: var(--sf-accent);
+}
+
+/* -------------------------------------------------------------- brand --- */
+
+.site-footer__brand {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-right: 12px;
 }
 
 .site-footer__logo-link {
@@ -120,129 +171,296 @@
     height: auto;
 }
 
+.site-footer__tagline {
+    margin: 24px 0 0;
+    color: var(--sf-text);
+    font-family: var(--font-display, Georgia, serif);
+    font-size: 1.24rem;
+    font-style: italic;
+    line-height: 1.4;
+}
+
+.site-footer__rule {
+    display: block;
+    width: 74px;
+    height: 2px;
+    margin: 18px 0 20px;
+    background: var(--sf-accent);
+    border-radius: 2px;
+}
+
+.site-footer__about {
+    margin: 0;
+    max-width: 40ch;
+    color: var(--sf-muted);
+    font-size: .95rem;
+    line-height: 1.72;
+}
+
 /* ------------------------------------------------------------- socials -- */
 
 .site-footer__socials {
     display: flex;
     align-items: center;
-    gap: 18px;
+    gap: 14px;
     list-style: none;
-    margin: 0;
+    margin: 30px 0 0;
     padding: 0;
 }
 
-.footer-social {
+.site-footer__social {
     display: grid;
     place-items: center;
-    width: 60px;
-    height: 60px;
-    border: 1.5px solid var(--sf-accent);
+    width: 58px;
+    height: 58px;
+    border: 1.5px solid rgba(25, 214, 160, .45);
     border-radius: 50%;
     color: var(--sf-accent);
-    background: transparent;
+    background: rgba(0, 37, 31, .45);
     transition: background-color .25s ease, color .25s ease,
                 transform .25s ease, border-color .25s ease;
 }
 
-.footer-social:hover,
-.footer-social:focus-visible {
+.site-footer__social:hover,
+.site-footer__social:focus-visible {
     background: var(--sf-accent);
     border-color: var(--sf-accent);
-    color: var(--sf-bg-deep);
+    color: var(--sf-bg-darkest);
     transform: translateY(-3px);
 }
 
-.footer-social:focus-visible {
+.site-footer__social:focus-visible {
     outline: 2px solid #fff;
     outline-offset: 3px;
 }
 
-.footer-social__icon {
+.site-footer__social-icon {
     display: block;
     width: 24px;
     height: 24px;
 }
 
-/* ------------------------------------------------------------- divider -- */
+/* ------------------------------------------------------------- clinic --- */
 
-.site-footer__divider {
+.site-footer__address {
+    display: block;
+    margin: 0 0 24px;
+    color: var(--sf-muted);
+    font-size: .95rem;
+    font-style: normal;
+    line-height: 1.78;
+}
+
+.site-footer__address-line {
+    display: block;
+}
+
+.site-footer__contact {
+    list-style: none;
+    margin: 0 0 28px;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+}
+
+.site-footer__contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    color: var(--sf-text);
+    font-size: .97rem;
+    font-weight: 600;
+    transition: color .22s ease;
+}
+
+.site-footer__contact-link:hover,
+.site-footer__contact-link:focus-visible {
+    color: var(--sf-accent);
+}
+
+.site-footer__contact-icon {
+    flex: none;
+    color: var(--sf-accent);
+}
+
+.site-footer__directions {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 22px;
+    border: 1.5px solid var(--sf-accent);
+    border-radius: var(--radius-pill, 999px);
+    color: var(--sf-accent);
+    background: transparent;
+    font-size: .93rem;
+    font-weight: 700;
+    transition: background-color .25s ease, color .25s ease, border-color .25s ease;
+}
+
+.site-footer__directions:hover,
+.site-footer__directions:focus-visible {
+    background: var(--sf-accent);
+    border-color: var(--sf-accent);
+    color: var(--sf-bg-darkest);
+}
+
+.site-footer__directions-icon,
+.site-footer__directions-arrow {
+    flex: none;
+}
+
+.site-footer__directions:hover .site-footer__directions-arrow,
+.site-footer__directions:focus-visible .site-footer__directions-arrow {
+    transform: translateX(3px);
+}
+
+.site-footer__directions-arrow {
+    transition: transform .25s ease;
+}
+
+/* ------------------------------------------------- full-width divider --- */
+
+.site-footer__rule-full {
+    position: relative;
+    z-index: 1;
     height: 1px;
-    border: 0;
-    margin: 46px auto 0;
-    width: 92%;
     background: linear-gradient(90deg,
         transparent,
-        rgba(24, 214, 160, .38),
+        rgba(25, 214, 160, .55),
         transparent);
 }
 
 /* ------------------------------------------------------------- bottom --- */
 
 .site-footer__bottom {
+    position: relative;
+    z-index: 1;
+    background: var(--sf-bg-darkest);
+}
+
+.site-footer__bottom-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 24px 0 28px;
+}
+
+.site-footer__copy {
     margin: 0;
-    padding-top: 26px;
     color: var(--sf-muted);
-    font-size: .92rem;
-    text-align: center;
+    font-size: .88rem;
+    line-height: 1.6;
+}
+
+.site-footer__legal {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: .88rem;
+}
+
+.site-footer__legal li + li::before {
+    content: "|";
+    margin-right: 14px;
+    color: rgba(255, 255, 255, .3);
+}
+
+.site-footer__legal-link {
+    color: var(--sf-muted);
+    transition: color .22s ease;
+}
+
+.site-footer__legal-link:hover,
+.site-footer__legal-link:focus-visible {
+    color: var(--sf-accent);
+}
+
+/* Visible focus for every footer link. */
+.site-footer a:focus-visible {
+    outline: 2px solid var(--sf-accent);
+    outline-offset: 3px;
+    border-radius: 4px;
 }
 
 /* ---------------------------------------------------------- responsive -- */
 
-@media (min-width: 768px) and (max-width: 1024px) {
-    .site-footer__container { width: min(1400px, calc(100% - 48px)); }
-    .site-footer__main { padding-top: 132px; }
-    .site-footer__wave { height: 112px; }
-    .site-footer__logo { max-width: 240px; }
-    .footer-social { width: 54px; height: 54px; }
-    .site-footer__socials { gap: 14px; }
+@media (max-width: 1200px) {
+    .site-footer__container { width: min(1500px, calc(100% - 80px)); }
+    .site-footer__grid { gap: 48px; }
 }
 
-@media (max-width: 767px) {
-    .site-footer__container { width: calc(100% - 32px); }
-    .site-footer__main { padding-top: 118px; padding-bottom: 26px; }
+@media (max-width: 1024px) {
+    .site-footer__main { padding-top: 148px; }
 
-    .site-footer__wave { height: 92px; }
-    .site-footer__wave::before { top: -84px;  height: 120px; }
-    .site-footer__wave::after  { top: -64px;  height: 106px; }
+    /* Still two columns on tablets, just closer together. */
+    .site-footer__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 44px;
+    }
+}
 
-    /* Stack the logo and icons, both centred. */
-    .site-footer__brand { justify-content: center; }
+@media (max-width: 768px) {
+    .site-footer__container { width: calc(100% - 40px); }
+    .site-footer__main { padding: 128px 0 44px; }
+    .site-footer__wave { height: 100px; }
+    .site-footer__wave::before { top: -88px; height: 128px; }
+    .site-footer__wave::after  { top: -68px; height: 110px; }
 
-    .site-footer__socials {
-        justify-content: center;
-        gap: 14px;
-        margin-top: 26px;
+    /* One column, brand first. Logo and socials centred; text stays readable. */
+    .site-footer__grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 40px;
     }
 
-    .footer-social { width: 50px; height: 50px; }
-    .footer-social__icon { width: 21px; height: 21px; }
+    .site-footer__brand {
+        align-items: center;
+        text-align: center;
+        padding-right: 0;
+    }
 
-    .site-footer__logo { max-width: 220px; }
+    .site-footer__about { max-width: 42ch; }
+    .site-footer__socials { justify-content: center; }
 
-    .site-footer__divider { margin-top: 32px; width: 100%; }
-    .site-footer__bottom { padding-top: 20px; font-size: .87rem; }
+    .site-footer__bottom-inner {
+        flex-direction: column;
+        text-align: center;
+        gap: 14px;
+    }
 
+    .site-footer__legal { justify-content: center; }
+
+    /* Smaller, subtler decoration on small screens. */
     .site-footer__leaf { width: 130px; height: 130px; }
-    .site-footer__leaf--tl { top: 74px;   left: -60px; }
-    .site-footer__leaf--bl { bottom: 8px; left: -18px; }
-    .site-footer__leaf--br { bottom: -40px; right: -46px; }
+    .site-footer__leaf--tl { top: 82px;   left: -62px; }
+    .site-footer__leaf--bl { bottom: 10px; left: -20px; }
+    .site-footer__leaf--br { bottom: -42px; right: -48px; }
     .site-footer__leaf--tr { display: none; }
+
+    .site-footer__sprig { display: none; }
 }
 
-/* Very small phones: keep all four icons on one row. */
-@media (max-width: 380px) {
-    .site-footer__socials { gap: 10px; }
-    .footer-social { width: 46px; height: 46px; }
-    .footer-social__icon { width: 19px; height: 19px; }
-    .site-footer__logo { max-width: 190px; }
+@media (max-width: 480px) {
+    .site-footer__container { width: calc(100% - 32px); }
+    .site-footer__logo { max-width: 216px; }
+    .site-footer__tagline { font-size: 1.12rem; }
+    .site-footer__socials { gap: 11px; }
+    .site-footer__social { width: 50px; height: 50px; }
+    .site-footer__social-icon { width: 21px; height: 21px; }
+    .site-footer__legal { flex-wrap: wrap; gap: 8px 12px; }
+    .site-footer__legal li + li::before { margin-right: 12px; }
 }
 
 /* ------------------------------------------------------ reduced motion -- */
 
 @media (prefers-reduced-motion: reduce) {
-    .footer-social,
-    .footer-social:hover,
-    .footer-social:focus-visible {
+    .site-footer__social,
+    .site-footer__social:hover,
+    .site-footer__social:focus-visible,
+    .site-footer__directions-arrow {
         transition: none;
         transform: none;
     }

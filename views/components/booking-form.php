@@ -166,10 +166,10 @@ $prefix = in_array($formId, ['consultation-form', 'followup-form'], true) ? '' :
             <label class="checkbox">
                 <input type="checkbox" name="consent" value="1" required
                        <?= old('consent') === '1' ? 'checked' : '' ?>
-                       aria-describedby="consent-help<?= has_error('consent') ? ' consent-err' : '' ?>"
+                       aria-describedby="<?= $prefix ?>consent-text<?= has_error('consent') ? ' ' . $prefix . 'consent-err' : '' ?>"
                        <?= has_error('consent') ? 'aria-invalid="true"' : '' ?>>
-                <span class="checkbox__box" aria-hidden="true"><?= icon('check', 'icon icon--xs', 12) ?></span>
-                <span class="checkbox__text">
+                <span class="checkbox__box" aria-hidden="true"><?= icon('check', 'icon icon--xs', 13) ?></span>
+                <span class="checkbox__text" id="<?= $prefix ?>consent-text">
                     I consent to <?= e($clinic['name'] ?? 'Swasti Homoeo Clinic') ?> contacting me by phone or WhatsApp
                     about this appointment, and I understand this form is not for emergencies.
                     <span class="field__req" aria-hidden="true">*</span>
