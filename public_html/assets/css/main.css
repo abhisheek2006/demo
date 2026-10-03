@@ -1006,6 +1006,8 @@ blockquote { margin: 0 0 1em; }
 
 .hero__lead { max-width: 46ch; color: rgba(255, 255, 255, .9); font-size: 1.04rem; }
 
+.hero__doctor { color: #18D6A0; font-weight: 700; }
+
 
 
 .hero__actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 1.8rem 0 1.6rem; }

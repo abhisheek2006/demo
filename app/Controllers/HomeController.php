@@ -33,7 +33,6 @@ final class HomeController extends Controller
             'clinic'       => Clinic::info(),
             'doctor'       => Doctor::profile(),
             'pillars'      => Clinic::pillars(),
-            'process'      => Clinic::process(),
             'testimonials' => $featured,
             'faqs'         => array_slice($faqs, 0, 6),
             'jsonLd'       => Seo::graph([

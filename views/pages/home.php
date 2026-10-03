@@ -5,7 +5,6 @@
  * @var array<string,string> $clinic
  * @var array<string,mixed> $doctor
  * @var array<int,array{icon:string,title:string,text:string}> $pillars
- * @var array<int,array{step:string,title:string,text:string}> $process
  * @var array<int,array<string,mixed>> $testimonials
  * @var array<int,array{question:string,answer:string}> $faqs
  */
@@ -27,7 +26,7 @@ $waBooking = whatsapp_link(
             <p class="hero__claim">“<?= e($clinic['tagline'] ?? 'We believe in easy, safe and quick recovery') ?>”</p>
 
             <p class="hero__lead">
-                Led by <strong><?= e($doctor['name'] ?? 'Dr. Smriti Das') ?></strong>,
+                Led by <strong class="hero__doctor"><?= e($doctor['name'] ?? 'Dr. Smriti Das') ?></strong>,
                 <span class="nowrap"><?= e($doctor['short_qualification'] ?? 'BHMS, MD (WBUHS)') ?></span> — with
                 <?= e($doctor['experience'] ?? '8+ years of clinical experience') ?>. A classical
                 homoeopathy practice in Bhathu Basti, a short walk from Garacharma.
@@ -130,28 +129,6 @@ $waBooking = whatsapp_link(
                 <a class="btn btn--ghost" href="<?= e(url('/book-consultation')) ?>">Book a consultation</a>
             </div>
         </div>
-    </div>
-</section>
-
-<section class="section section--process">
-    <div class="container">
-        <header class="section__head" data-reveal>
-            <p class="eyebrow">How it works</p>
-            <h2 class="section__title">Four steps, no surprises</h2>
-            <p class="section__lead section__lead--center">
-                We keep the process simple, because treatment that is hard to follow is treatment that does not work.
-            </p>
-        </header>
-
-        <ol class="process">
-            <?php foreach ($process as $step): ?>
-            <li class="process__step" data-reveal>
-                <span class="process__num"><?= e($step['step']) ?></span>
-                <h3 class="process__title"><?= e($step['title']) ?></h3>
-                <p class="process__text"><?= e($step['text']) ?></p>
-            </li>
-            <?php endforeach; ?>
-        </ol>
     </div>
 </section>
 

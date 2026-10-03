@@ -222,41 +222,6 @@ final class Clinic
     }
 
     /**
-     * The clinic's treatment process, used on the home page and about page.
-     *
-     * @return array<int,array{step:string,title:string,text:string}>
-     */
-    public static function process(): array
-    {
-        return [
-            [
-                'step'  => '01',
-                'title' => 'Book your slot',
-                'text'  => 'Send a consultation request online, or call or WhatsApp the clinic directly. '
-                    . 'We confirm a convenient morning or evening time.',
-            ],
-            [
-                'step'  => '02',
-                'title' => 'Detailed case history',
-                'text'  => 'Dr. Smriti Das takes a full history — symptoms, timeline, sleep, digestion, '
-                    . 'stress, past illness and family tendency — before selecting any remedy.',
-            ],
-            [
-                'step'  => '03',
-                'title' => 'Remedy and written plan',
-                'text'  => 'You receive a dispensed remedy with written instructions on dose, timing and '
-                    . 'diet. Nothing is withheld and nothing is added that you have not asked for.',
-            ],
-            [
-                'step'  => '04',
-                'title' => 'Follow-up and review',
-                'text'  => 'A short review appointment tracks your progress and the prescription is '
-                    . 'reworked if your symptoms have changed.',
-            ],
-        ];
-    }
-
-    /**
      * Emergency and out-of-scope guidance. Shown on booking and contact pages
      * so visitors know when not to wait for a homoeopathic appointment.
      *
