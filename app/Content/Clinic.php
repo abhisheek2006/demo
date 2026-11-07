@@ -16,9 +16,9 @@ final class Clinic
     public const LEGAL_NAME      = 'Andaman Homoeo Health Care LLP';
     public const TAGLINE         = 'We believe in easy, safe and quick recovery';
     public const SERVICE_LINE    = 'Classical Homoeopathic Treatment';
-    public const HEADLINE        = 'Best Homoeopathy Clinic in Port Blair';
+    public const HEADLINE        = 'Best Homoeopathy Clinic in Sri Vijaya Puram';
     public const ESTABLISHED     = '2017';
-    public const LOCALITY        = 'Garacharma, Port Blair';
+    public const LOCALITY        = 'Garacharma, Sri Vijaya Puram';
 
     /**
      * @return array<string,string>
@@ -42,7 +42,7 @@ final class Clinic
             'youtube'      => Config::string('clinic.youtube', ''),
             'address'      => self::addressLines(),
             'address_full' => self::addressOneLine(),
-            'city'         => 'Port Blair',
+            'city'         => 'Sri Vijaya Puram',
             'state'        => 'Andaman and Nicobar Islands',
             'country'      => 'India',
             'country_code' => 'IN',
@@ -57,19 +57,14 @@ final class Clinic
     public static function addressLines(): array
     {
         return [
-            'Solar Colony, Solar Plant Road',
-            'Above Bala Dental Clinic',
-            "Opposite Tulasi's Diagnostic Centre",
-            'Housing Colony, Bhathu Basti',
-            'Port Blair, Andaman & Nicobar Islands 744105',
+            'NH4 main road, Garacharma',
+            'Near Susane roses',
         ];
     }
 
     public static function addressOneLine(): string
     {
-        return 'Solar Colony, Solar Plant Road, above Bala Dental Clinic, opposite Tulasi’s '
-            . 'Diagnostic Centre, Housing Colony, Bhathu Basti, Port Blair, Andaman & Nicobar '
-            . 'Islands 744105';
+        return 'NH4 main road, Garacharma, near Susane roses';
     }
 
     /**
@@ -80,9 +75,8 @@ final class Clinic
      */
     public static function mapQuery(): string
     {
-        return 'SWASTI HOMOEO CLINIC | Dr. Smriti Das, BHMS, MD (Hom) | Garacharma, on, NH 4, '
-            . 'above Bala Dental Clinic, opposite Tulasi\'s Diagnostic centre, Garacharama, '
-            . 'Sri Vijaya Puram, Andaman and Nicobar Islands 744105';
+        return 'SWASTI HOMOEO CLINIC | Dr. Smriti Das, BHMS, MD (Hom) | NH4 main road, '
+            . 'Garacharma, near Susane roses';
     }
 
     /**
@@ -198,25 +192,20 @@ final class Clinic
             [
                 'icon'  => 'leaf',
                 'title' => 'Classical homoeopathy, practised properly',
-                'text'  => 'Every prescription is worked out from your own symptoms and history '
-                    . 'using classical homoeopathic principles — never a fixed package deal for a '
-                    . 'named disease. Remedies are prepared in a licensed pharmacy and dispensed '
-                    . 'with clear written instructions.',
+                'text'  => 'Each prescription is based on your symptoms and history, with clear '
+                    . 'written instructions.',
             ],
             [
                 'icon'  => 'shield',
                 'title' => 'Safe for the whole family',
-                'text'  => 'Homoeopathic medicines are prescribed in potency and dose appropriate to '
-                    . 'age and sensitivity, which is why they can be used for infants, pregnancy, '
-                    . 'seniors and people managing long-term conditions. No antibiotics, no steroids, '
-                    . 'no sedatives hidden in the prescription.',
+                'text'  => 'We tailor each prescription to your age and sensitivity, with no hidden '
+                    . 'antibiotics, steroids or sedatives.',
             ],
             [
                 'icon'  => 'clock',
                 'title' => 'Easy, safe and quick recovery',
-                'text'  => 'We keep the process simple: book a slot, come in for a proper history, '
-                    . 'leave with a written plan. Follow-up reviews are short, focused and free of '
-                    . 'pressure, so treatment stays affordable and realistic.',
+                'text'  => 'Book a slot, share your history and leave with a written plan. Follow-ups '
+                    . 'are focused and pressure-free.',
             ],
         ];
     }
@@ -248,10 +237,9 @@ final class Clinic
      */
     public static function intro(): string
     {
-        return 'Swasti Homoeo Clinic is a classical homoeopathy practice in Bhathu Basti, Port Blair, '
-            . 'led by Dr. Smriti Das (BHMS, MD — WBUHS) with more than eight years of clinical '
-            . 'experience. We believe in easy, safe and quick recovery — and that means honest '
-            . 'assessment, careful prescribing and a plan you can actually follow.';
+        return 'Swasti Homoeo Clinic is led by Dr. Smriti Das (BHMS, MD — WBUHS), with over eight '
+            . 'years of clinical experience. We offer careful, individualised care and a clear plan '
+            . 'you can follow.';
     }
 
     /**
@@ -265,7 +253,7 @@ final class Clinic
             [
                 'title' => 'Who we are',
                 'body'  => 'Swasti Homoeo Clinic ("we", "us") is operated by ' . self::LEGAL_NAME . ', '
-                    . 'a Limited Liability Partnership registered in Port Blair, Andaman and Nicobar '
+                    . 'a Limited Liability Partnership registered in Sri Vijaya Puram, Andaman and Nicobar '
                     . 'Islands, India. For any question about this policy or your health information, '
                     . 'contact us at ' . Config::string('clinic.email', 'info@swastihomeo.com') . '.',
             ],

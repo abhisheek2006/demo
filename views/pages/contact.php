@@ -186,8 +186,7 @@ $isToday    = static function (string $day) use ($todayKey): bool {
                 </address>
                 <p class="panel__note">
                     <?= icon('pin', 'icon icon--xs', 15) ?>
-                    Landmarks: above Bala Dental Clinic, opposite Tulasi’s Diagnostic Centre, on Solar Plant
-                    Road. Nearest landmark area is Garacharma.
+                    Near Susane roses on NH4 main road, Garacharma.
                 </p>
                 <p class="panel__actions">
                     <a class="btn btn--outline btn--sm" target="_blank" rel="noopener nofollow"
@@ -241,7 +240,3 @@ $isToday    = static function (string $day) use ($todayKey): bool {
     </div>
 </section>
 
-<?= component('cta-band', [
-    'heading' => 'Prefer to just book?',
-    'text'    => 'The booking form takes about a minute, and you can pick a morning or evening slot.',
-]) ?>

@@ -11,7 +11,7 @@
     <div class="header__bar">
         <div class="container header__inner">
             <a class="brand" href="<?= e(url('/')) ?>" aria-label="Swasti Homoeo Clinic — home">
-                <img class="brand__logo" src="<?= e(url('/assets/images/icons/logo.png')) ?>" width="164" height="58" alt="Swasti Homoeo Clinic">
+                <img class="brand__logo" src="<?= e(url('/assets/images/icons/logo.png')) ?>" width="203" height="72" alt="Swasti Homoeo Clinic">
             </a>
 
             <nav class="nav" aria-label="Primary">

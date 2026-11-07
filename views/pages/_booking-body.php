@@ -149,7 +149,7 @@ $formLead  = $isFollowUp
                 <h2 class="panel__title panel__title--sm">Clinic</h2>
                 <ul class="mini-list">
                     <li><span><?= icon('stethoscope', 'icon icon--xs', 15) ?></span> <?= e((string) $doctor['name']) ?>, <?= e((string) $doctor['short_qualification']) ?></li>
-                    <li><span><?= icon('pin', 'icon icon--xs', 15) ?></span> Solar Colony, Bhathu Basti, Port Blair 744105</li>
+                    <li><span><?= icon('pin', 'icon icon--xs', 15) ?></span> <?= e((string) $clinic['address_full']) ?></li>
                     <li><span><?= icon('phone', 'icon icon--xs', 15) ?></span> <a href="<?= e(tel_link()) ?>"><?= e(format_phone()) ?></a></li>
                     <li><span><?= icon('clock-open', 'icon icon--xs', 15) ?></span> Mon–Fri 10 AM–7 PM · Sat 10 AM–3 PM</li>
                     <li><span><?= icon('globe', 'icon icon--xs', 15) ?></span> <?= e(implode(', ', (array) ($doctor['languages'] ?? []))) ?></li>

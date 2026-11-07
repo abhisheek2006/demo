@@ -23,7 +23,7 @@ final class PageController extends Controller
         $this->setSeo([
             'title'       => 'About Us & Dr. Smriti Das, BHMS MD (WBUHS) | ' . Clinic::NAME,
             'description' => 'Meet Dr. Smriti Das, the homoeopathic physician behind ' . Clinic::NAME
-                . ' in Port Blair. Eight years of classical homoeopathic practice, and an honest view of '
+                . ' in Sri Vijaya Puram. Eight years of classical homoeopathic practice, and an honest view of '
                 . 'what this treatment can and cannot do.',
             'canonical'   => url('/about-us'),
             'image'       => url('/assets/images/og/og-about.png'),
@@ -55,9 +55,9 @@ final class PageController extends Controller
     public function contact(): Response
     {
         $this->setSeo([
-            'title'       => 'Contact & Directions — ' . Clinic::NAME . ', Port Blair',
+            'title'       => 'Contact & Directions — ' . Clinic::NAME . ', Sri Vijaya Puram',
             'description' => 'Address, phone, WhatsApp and opening hours for ' . Clinic::NAME . ', '
-                . 'Solar Colony, Bhathu Basti, Port Blair 744105. Directions and parking notes.',
+                . Clinic::addressOneLine() . '. Directions and parking notes.',
             'canonical'   => url('/contact'),
         ]);
 

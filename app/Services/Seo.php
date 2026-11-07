@@ -66,9 +66,9 @@ final class Seo
 
     public static function defaultKeywords(): string
     {
-        return 'homoeopathy clinic Port Blair, homeopathic doctor Port Blair, homoeopathic treatment '
+        return 'homoeopathy clinic Sri Vijaya Puram, homeopathic doctor Sri Vijaya Puram, homoeopathic treatment '
             . 'Andaman, BHMS doctor Andaman, classical homoeopathy Garacharma, homeopathy doctor Bhathu '
-            . 'Basti, Swasti Homoeo Clinic, homoeopathic consultation Port Blair';
+            . 'Basti, Swasti Homoeo Clinic, homoeopathic consultation Sri Vijaya Puram';
     }
 
     /* -------------------------------------------------------------------- */
@@ -150,7 +150,7 @@ final class Seo
             ],
             'openingHoursSpecification' => self::openingHours(),
             'areaServed'     => [
-                ['@type' => 'City', 'name' => 'Port Blair'],
+                ['@type' => 'City', 'name' => 'Sri Vijaya Puram'],
                 ['@type' => 'State', 'name' => 'Andaman and Nicobar Islands'],
             ],
             'parentOrganization' => ['@id' => url('/#clinic')],
@@ -170,8 +170,7 @@ final class Seo
 
         return [
             '@type'           => 'PostalAddress',
-            'streetAddress'   => 'Solar Colony, Solar Plant Road, above Bala Dental Clinic, opposite '
-                . 'Tulasi’s Diagnostic Centre, Housing Colony, Bhathu Basti',
+            'streetAddress'   => $clinic['address_full'],
             'addressLocality' => $clinic['city'],
             'addressRegion'   => $clinic['state'],
             'postalCode'      => $clinic['pin'],

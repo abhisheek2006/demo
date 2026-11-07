@@ -21,7 +21,7 @@ $waBooking = whatsapp_link(
         <div class="hero__text">
             <p class="eyebrow eyebrow--light"><?= icon('leaf', 'icon icon--xs', 15) ?> Classical Homoeopathic Treatment</p>
 
-            <h1 class="hero__title">Best Homoeopathy Clinic in <span>Port Blair</span></h1>
+            <h1 class="hero__title">Best Homoeopathy Clinic in <span>Sri Vijaya Puram</span></h1>
 
             <p class="hero__claim">“<?= e($clinic['tagline'] ?? 'We believe in easy, safe and quick recovery') ?>”</p>
 
@@ -56,7 +56,7 @@ $waBooking = whatsapp_link(
                      width="620" height="520" decoding="async">
 
                 <div class="hero__caption">
-                    <p class="hero__caption-kicker">Classical homoeopathy in Port Blair</p>
+                    <p class="hero__caption-kicker">Classical homoeopathy in Sri Vijaya Puram</p>
                     <p class="hero__caption-title">Treatment that respects your body’s own healing</p>
                     <p class="hero__caption-text">Individualised remedies selected from your own symptoms and history — not a fixed package deal for a named disease.</p>
                 </div>
@@ -132,6 +132,44 @@ $waBooking = whatsapp_link(
     </div>
 </section>
 
+<section class="section section--testimonials">
+    <div class="container">
+        <header class="section__head" data-reveal>
+            <p class="eyebrow">Patient experiences</p>
+            <h2 class="section__title">What patients say</h2>
+        </header>
+
+        <div class="testimonials">
+            <div class="testimonials__track" data-testimonials>
+            <?php foreach ($testimonials as $testimonial): ?>
+            <figure class="testimonial" data-reveal>
+                <?= icon('quote', 'testimonial__quote-mark', 34) ?>
+                <blockquote class="testimonial__quote"><?= e($testimonial['quote']) ?></blockquote>
+                <figcaption class="testimonial__meta">
+                    <?php $avatar = (string) ($testimonial['avatar'] ?? ''); ?>
+                    <?php if (has_image($avatar)): ?>
+                    <img class="testimonial__avatar" src="<?= e(asset($avatar)) ?>" width="108" height="108" loading="lazy" decoding="async" alt="<?= e($testimonial['name']) ?>">
+                    <?php else: ?>
+                    <span class="testimonial__avatar testimonial__avatar--initials" aria-hidden="true"><?= e(initials((string) $testimonial['name'])) ?></span>
+                    <?php endif; ?>
+                    <span>
+                        <span class="testimonial__name"><?= e($testimonial['name']) ?></span>
+                        <span class="testimonial__meta-line">Verified patient<?= ($testimonial['when'] ?? '') !== '' ? ' · ' . e((string) $testimonial['when']) : '' ?></span>
+                    </span>
+                    <?= stars((int) $testimonial['rating']) ?>
+                </figcaption>
+            </figure>
+            <?php endforeach; ?>
+            </div>
+        </div>
+
+        <p class="section__more">
+            <a class="btn btn--ghost" href="<?= e(url('/about-us#testimonials')) ?>">More about our patients</a>
+        </p>
+    </div>
+</section>
+
+
 <section class="section section--why">
     <div class="container">
         <header class="section__head" data-reveal>
@@ -183,43 +221,6 @@ $waBooking = whatsapp_link(
     </div>
 </section>
 
-<section class="section section--testimonials">
-    <div class="container">
-        <header class="section__head" data-reveal>
-            <p class="eyebrow">Patient experiences</p>
-            <h2 class="section__title">What patients say</h2>
-        </header>
-
-        <div class="testimonials">
-            <div class="testimonials__track" data-testimonials>
-            <?php foreach ($testimonials as $testimonial): ?>
-            <figure class="testimonial" data-reveal>
-                <?= icon('quote', 'testimonial__quote-mark', 34) ?>
-                <blockquote class="testimonial__quote"><?= e($testimonial['quote']) ?></blockquote>
-                <figcaption class="testimonial__meta">
-                    <?php $avatar = (string) ($testimonial['avatar'] ?? ''); ?>
-                    <?php if (has_image($avatar)): ?>
-                    <img class="testimonial__avatar" src="<?= e(asset($avatar)) ?>" width="108" height="108" loading="lazy" decoding="async" alt="<?= e($testimonial['name']) ?>">
-                    <?php else: ?>
-                    <span class="testimonial__avatar testimonial__avatar--initials" aria-hidden="true"><?= e(initials((string) $testimonial['name'])) ?></span>
-                    <?php endif; ?>
-                    <span>
-                        <span class="testimonial__name"><?= e($testimonial['name']) ?></span>
-                        <span class="testimonial__meta-line">Verified patient<?= ($testimonial['when'] ?? '') !== '' ? ' · ' . e((string) $testimonial['when']) : '' ?></span>
-                    </span>
-                    <?= stars((int) $testimonial['rating']) ?>
-                </figcaption>
-            </figure>
-            <?php endforeach; ?>
-            </div>
-        </div>
-
-        <p class="section__more">
-            <a class="btn btn--ghost" href="<?= e(url('/about-us#testimonials')) ?>">More about our patients</a>
-        </p>
-    </div>
-</section>
-
 <section class="section section--faq section--soft">
     <div class="container container--narrow">
         <header class="section__head" data-reveal>
@@ -238,4 +239,3 @@ $waBooking = whatsapp_link(
     </div>
 </section>
 
-<?= component('cta-band') ?>

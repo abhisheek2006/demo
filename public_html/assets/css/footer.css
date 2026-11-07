@@ -167,7 +167,7 @@
 .site-footer__logo {
     display: block;
     width: 100%;
-    max-width: 280px;
+    max-width: 320px;
     height: auto;
 }
 
@@ -445,7 +445,7 @@
 
 @media (max-width: 480px) {
     .site-footer__container { width: calc(100% - 32px); }
-    .site-footer__logo { max-width: 216px; }
+    .site-footer__logo { max-width: 240px; }
     .site-footer__tagline { font-size: 1.12rem; }
     .site-footer__socials { gap: 11px; }
     .site-footer__social { width: 50px; height: 50px; }

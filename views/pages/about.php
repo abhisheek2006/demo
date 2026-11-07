@@ -183,4 +183,3 @@
     </div>
 </section>
 
-<?= component('cta-band') ?>

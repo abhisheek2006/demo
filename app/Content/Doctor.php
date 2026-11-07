@@ -23,7 +23,7 @@ final class Doctor
             'experience_years' => 8,
             'role'        => 'Principal Homoeopathic Physician',
             'image'       => '/assets/images/about/doctor-smriti-das.jpg',
-            'image_alt'   => 'Photograph of Dr. Smriti Das, Principal Homoeopathic Physician at Swasti Homoeo Clinic, Port Blair',
+            'image_alt'   => 'Photograph of Dr. Smriti Das, Principal Homoeopathic Physician at Swasti Homoeo Clinic, Sri Vijaya Puram',
             'registration_note' => 'Registered homoeopathic practitioner licensed to practise in '
                 . 'Andaman and Nicobar Islands. Registration particulars are available on request and '
                 . 'are displayed in the clinic.',
@@ -73,7 +73,7 @@ final class Doctor
             ],
             [
                 'heading' => 'Eight years of island practice',
-                'body'    => 'Most of her clinical years have been spent in Port Blair, which shapes the '
+                'body'    => 'Most of her clinical years have been spent in Sri Vijaya Puram, which shapes the '
                     . 'way the clinic works. Patients here travel for consultations, and many arrive '
                     . 'after months of interrupted treatment. Practical care means shorter follow-up '
                     . 'intervals, a written plan that fits a real household routine, and remedies that '

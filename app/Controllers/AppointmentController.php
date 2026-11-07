@@ -51,8 +51,8 @@ final class AppointmentController extends Controller
         $this->setSeo([
             'title'       => ($isFollowUp ? 'Book a Follow-Up Review' : 'Book a Consultation') . ' | ' . Clinic::NAME,
             'description' => ($isFollowUp
-                ? 'Book a follow-up review with Dr. Smriti Das at ' . Clinic::NAME . ' in Port Blair. Short, focused review of your current homoeopathic prescription.'
-                : 'Request a homoeopathic consultation at ' . Clinic::NAME . ', Port Blair. Choose a convenient morning or evening slot and we will confirm by phone or WhatsApp.'),
+                ? 'Book a follow-up review with Dr. Smriti Das at ' . Clinic::NAME . ' in Sri Vijaya Puram. Short, focused review of your current homoeopathic prescription.'
+                : 'Request a homoeopathic consultation at ' . Clinic::NAME . ', Sri Vijaya Puram. Choose a convenient morning or evening slot and we will confirm by phone or WhatsApp.'),
             'canonical'   => url('/' . $slug),
             'noindex'     => false,
         ]);

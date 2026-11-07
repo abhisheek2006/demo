@@ -35,7 +35,10 @@ final class Faq
             );
 
             if ($rows !== []) {
-                return $rows;
+                return array_values(array_filter(
+                    $rows,
+                    static fn (array $row): bool => strcasecmp(trim((string) ($row['question'] ?? '')), 'Do you accept insurance?') !== 0
+                ));
             }
         } catch (Throwable) {
             // Fall through to bundled content.

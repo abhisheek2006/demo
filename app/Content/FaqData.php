@@ -41,9 +41,7 @@ final class FaqData
             'About the clinic' => [
                 [
                     'q' => 'Where is Swasti Homoeo Clinic located?',
-                    'a' => 'The clinic is at Solar Colony, Solar Plant Road, above Bala Dental Clinic, '
-                        . 'opposite Tulasi’s Diagnostic Centre, Housing Colony, Bhathu Basti, '
-                        . 'Port Blair 744105. It is a few minutes from Garacharma. Call '
+                    'a' => 'The clinic is at NH4 main road, Garacharma, near Susane roses. Call '
                         . '+91 79806 44867 or send a WhatsApp message and we will share the exact '
                         . 'location pin as well.',
                 ],
@@ -62,13 +60,6 @@ final class FaqData
                         . 'symptoms after starting a remedy, and the remedy must be chosen for the right '
                         . 'person. The real risk is delaying necessary medical care, which is why we '
                         . 'always tell you when a condition needs hospital treatment.',
-                ],
-                [
-                    'q' => 'Do you accept insurance?',
-                    'a' => 'We currently provide treatment on a self-pay basis and issue a proper receipt '
-                        . 'for each consultation and remedy. For corporate or insurance reimbursement '
-                        . 'enquiries, please contact the clinic directly and we will tell you exactly what '
-                        . 'documentation we can issue.',
                 ],
                 [
                     'q' => 'What are your consultation timings?',

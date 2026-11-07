@@ -27,7 +27,7 @@ $currentPath = $currentPath === '/' ? '/' : rtrim($currentPath, '/');
 <meta name="description" content="<?= e($seo['description'] ?? '') ?>">
 <meta name="keywords" content="<?= e($seo['keywords'] ?? '') ?>">
 <meta name="robots" content="<?= e($seo['robots'] ?? 'index, follow') ?>">
-<meta name="author" content="Swasti Homoeo Clinic, Port Blair">
+<meta name="author" content="Swasti Homoeo Clinic, Sri Vijaya Puram">
 <meta name="theme-color" content="#0f6f68">
 <link rel="canonical" href="<?= e($seo['canonical'] ?? url('/')) ?>">
 
@@ -42,7 +42,7 @@ $currentPath = $currentPath === '/' ? '/' : rtrim($currentPath, '/');
 <meta property="og:description" content="<?= e($seo['description'] ?? '') ?>">
 <meta property="og:url" content="<?= e($seo['canonical'] ?? url('/')) ?>">
 <meta property="og:image" content="<?= e($seo['image'] ?? url('/assets/images/og/og-default.png')) ?>">
-<meta property="og:image:alt" content="Swasti Homoeo Clinic — homoeopathic clinic in Port Blair">
+<meta property="og:image:alt" content="Swasti Homoeo Clinic — homoeopathic clinic in Sri Vijaya Puram">
 <?php if (!empty($seo['published_time'])): ?>
 <meta property="article:published_time" content="<?= e($seo['published_time']) ?>">
 <?php endif; ?>

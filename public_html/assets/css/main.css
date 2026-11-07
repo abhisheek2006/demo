@@ -768,7 +768,7 @@ blockquote { margin: 0 0 1em; }
 
     width: auto;
 
-    height: 46px;
+    height: 72px;
 
     object-fit: contain;
 
@@ -3666,7 +3666,7 @@ h1, h2, h3, h4, h5, .section__title, .panel__title, .card__title {
 
 
 
-.brand__logo { height: 48px; }
+.brand__logo { height: 72px; }
 
 .brand:hover .brand__logo { opacity: 1; }
 
@@ -4373,7 +4373,7 @@ a:hover {
 
 .brand__logo {
 
-    height: 50px;
+    height: 72px;
 
 }
 
@@ -5197,7 +5197,7 @@ a:hover {
 
     .brand__logo {
 
-        height: 42px;
+        height: 60px;
 
     }
 

@@ -21,13 +21,11 @@ START TRANSACTION;
 TRUNCATE TABLE `faqs`;
 
 INSERT INTO `faqs` (`question`, `answer`, `category`, `sort_order`, `is_published`, `created_at`, `updated_at`)
-VALUES ('Where is Swasti Homoeo Clinic located?', 'The clinic is at Solar Colony, Solar Plant Road, above Bala Dental Clinic, opposite Tulasi’s Diagnostic Centre, Housing Colony, Bhathu Basti, Port Blair 744105. It is a few minutes from Garacharma. Call +91 79806 44867 or send a WhatsApp message and we will share the exact location pin as well.', 'About the clinic', 10, 1, NOW(), NOW());
+VALUES ('Where is Swasti Homoeo Clinic located?', 'The clinic is at NH4 main road, Garacharma, near Susane roses. Call +91 79806 44867 or send a WhatsApp message and we will share the exact location pin as well.', 'About the clinic', 10, 1, NOW(), NOW());
 INSERT INTO `faqs` (`question`, `answer`, `category`, `sort_order`, `is_published`, `created_at`, `updated_at`)
 VALUES ('Who treats patients at the clinic?', 'All consultations are conducted by Dr. Smriti Das, BHMS, MD (Homeopathy, WBUHS), the principal homoeopathic physician, with more than eight years of clinical experience. Registration particulars are displayed at the clinic and available on request.', 'About the clinic', 20, 1, NOW(), NOW());
 INSERT INTO `faqs` (`question`, `answer`, `category`, `sort_order`, `is_published`, `created_at`, `updated_at`)
 VALUES ('Is homoeopathy safe without side effects?', 'Homoeopathic medicines are highly diluted and, when prescribed in the correct potency and dose, are generally very well tolerated. "No side effects" is not the right claim, though — some patients notice a temporary change in symptoms after starting a remedy, and the remedy must be chosen for the right person. The real risk is delaying necessary medical care, which is why we always tell you when a condition needs hospital treatment.', 'About the clinic', 30, 1, NOW(), NOW());
-INSERT INTO `faqs` (`question`, `answer`, `category`, `sort_order`, `is_published`, `created_at`, `updated_at`)
-VALUES ('Do you accept insurance?', 'We currently provide treatment on a self-pay basis and issue a proper receipt for each consultation and remedy. For corporate or insurance reimbursement enquiries, please contact the clinic directly and we will tell you exactly what documentation we can issue.', 'About the clinic', 40, 1, NOW(), NOW());
 INSERT INTO `faqs` (`question`, `answer`, `category`, `sort_order`, `is_published`, `created_at`, `updated_at`)
 VALUES ('What are your consultation timings?', 'Monday to Friday the OPD runs from 10:00 AM to 7:00 PM with a break for lunch. Saturday is a morning OPD from 10:00 AM to 3:00 PM. Sunday is reserved for emergency calls only. Patients are always given a specific slot so the waiting time is short.', 'About the clinic', 50, 1, NOW(), NOW());
 INSERT INTO `faqs` (`question`, `answer`, `category`, `sort_order`, `is_published`, `created_at`, `updated_at`)

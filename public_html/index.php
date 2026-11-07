@@ -57,6 +57,15 @@ if (PHP_VERSION_ID < 80100) {
 //    everything else. Production (Apache/LiteSpeed) never reaches this branch.
 // ---------------------------------------------------------------------------
 if (PHP_SAPI === 'cli-server') {
+    // The built-in server prefers index.php over index.html for `/`, while
+    // Apache/LiteSpeed use the DirectoryIndex order configured in .htaccess.
+    // Keep local previews aligned with production's static homepage.
+    if ($__sh_request === '/' && is_file(__DIR__ . '/index.html')) {
+        header('Content-Type: text/html; charset=UTF-8');
+        readfile(__DIR__ . '/index.html');
+        exit;
+    }
+
     $__sh_file = __DIR__ . parse_url($__sh_request, PHP_URL_PATH);
     if (is_file($__sh_file) && basename($__sh_file) !== 'index.php') {
         $__sh_ext = strtolower(pathinfo($__sh_file, PATHINFO_EXTENSION));
