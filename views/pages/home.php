@@ -170,57 +170,6 @@ $waBooking = whatsapp_link(
 </section>
 
 
-<section class="section section--why">
-    <div class="container">
-        <header class="section__head" data-reveal>
-            <p class="eyebrow">How we practise</p>
-            <h2 class="section__title">Why patients choose us</h2>
-        </header>
-
-        <?php
-        $whyPoints = [
-            [
-                'title' => 'In depth case taking',
-                'text'  => 'A full history before any remedy is chosen — symptoms, sleep, digestion, '
-                    . 'food and reactions. This is where the difference is made.',
-            ],
-            [
-                'title' => 'Previous reports, properly read',
-                'text'  => 'Bring your old reports and prescriptions. We study what you already have '
-                    . 'instead of repeating tests you do not need.',
-            ],
-            [
-                'title' => 'Accurate prescription, own pharmacy',
-                'text'  => 'Prepared and dispensed from our own pharmacy, so what you take is genuine '
-                    . 'and correctly potent.',
-            ],
-            [
-                'title' => 'Authentic',
-                'text'  => 'Honest diet and lifestyle advice. You will never be pushed into unwanted '
-                    . 'investigations.',
-            ],
-            [
-                'title' => 'Accurate',
-                'text'  => 'You are not misled. If a cure is not possible, you will be told so honestly.',
-            ],
-            [
-                'title' => 'Effective',
-                'text'  => 'The more accurately you describe your complaints, the sooner you feel relief.',
-            ],
-        ];
-        ?>
-        <ul class="why-list" data-reveal>
-            <?php foreach ($whyPoints as $why): ?>
-            <li class="why-list__item">
-                <span class="why-list__mark"><?= icon('check', 'icon icon--xs', 15) ?></span>
-                <h3 class="why-list__title"><?= e($why['title']) ?></h3>
-                <p class="why-list__text"><?= e($why['text']) ?></p>
-            </li>
-            <?php endforeach; ?>
-        </ul>
-    </div>
-</section>
-
 <section class="section section--faq section--soft">
     <div class="container container--narrow">
         <header class="section__head" data-reveal>
