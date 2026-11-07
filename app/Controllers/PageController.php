@@ -21,10 +21,8 @@ final class PageController extends Controller
     public function about(): Response
     {
         $this->setSeo([
-            'title'       => 'About Us & Dr. Smriti Das, BHMS MD (WBUHS) | ' . Clinic::NAME,
-            'description' => 'Meet Dr. Smriti Das, the homoeopathic physician behind ' . Clinic::NAME
-                . ' in Sri Vijaya Puram. Eight years of classical homoeopathic practice, and an honest view of '
-                . 'what this treatment can and cannot do.',
+            'title'       => 'Dr. Smriti Das, BHMS, MD | ' . Clinic::NAME,
+            'description' => 'Meet Dr. Smriti Das (BHMS, MD—WBUHS) and learn about her training, experience and approach at Swasti Homoeo Clinic in Garacharma, Sri Vijaya Puram.',
             'canonical'   => url('/about-us'),
             'image'       => url('/assets/images/og/og-about.png'),
         ]);
@@ -69,7 +67,7 @@ final class PageController extends Controller
             'emergency'   => Clinic::emergencyGuidance(),
             'jsonLd'      => Seo::graph([
                 Seo::medicalClinic(),
-                Seo::localBusiness(),
+                Seo::schemaPerson(),
                 Seo::breadcrumb([
                     ['name' => 'Home', 'url' => '/'],
                     ['name' => 'Contact', 'url' => '/contact'],

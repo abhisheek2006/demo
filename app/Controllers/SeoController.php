@@ -19,15 +19,11 @@ final class SeoController extends Controller
 
 
         $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
-        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
-            . 'xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">' . "\n";
+        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
 
         foreach ($entries as $entry) {
             $xml .= "  <url>\n";
             $xml .= '    <loc>' . e($entry['loc']) . "</loc>\n";
-            $xml .= '    <lastmod>' . e($entry['lastmod']) . "</lastmod>\n";
-            $xml .= '    <changefreq>' . e($entry['changefreq']) . "</changefreq>\n";
-            $xml .= '    <priority>' . e($entry['priority']) . "</priority>\n";
             $xml .= "  </url>\n";
         }
 

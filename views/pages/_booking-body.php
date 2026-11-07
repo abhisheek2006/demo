@@ -45,7 +45,7 @@ $formLead  = $isFollowUp
                     <span class="contact-card__body">
                         <span class="contact-card__label">Call the clinic</span>
                         <span class="contact-card__value"><?= e(format_phone()) ?></span>
-                        <span class="contact-card__hint">Fastest way to book. Mon–Fri 10 AM–7 PM, Sat 10 AM–3 PM.</span>
+                        <span class="contact-card__hint">Fastest way to book. Mon–Sat 9 AM–12:30 PM and 4:30–7:30 PM.</span>
                     </span>
                 </a>
 
@@ -151,7 +151,7 @@ $formLead  = $isFollowUp
                     <li><span><?= icon('stethoscope', 'icon icon--xs', 15) ?></span> <?= e((string) $doctor['name']) ?>, <?= e((string) $doctor['short_qualification']) ?></li>
                     <li><span><?= icon('pin', 'icon icon--xs', 15) ?></span> <?= e((string) $clinic['address_full']) ?></li>
                     <li><span><?= icon('phone', 'icon icon--xs', 15) ?></span> <a href="<?= e(tel_link()) ?>"><?= e(format_phone()) ?></a></li>
-                    <li><span><?= icon('clock-open', 'icon icon--xs', 15) ?></span> Mon–Fri 10 AM–7 PM · Sat 10 AM–3 PM</li>
+                    <li><span><?= icon('clock-open', 'icon icon--xs', 15) ?></span> Mon–Sat 9 AM–12:30 PM and 4:30–7:30 PM · Sun closed</li>
                     <li><span><?= icon('globe', 'icon icon--xs', 15) ?></span> <?= e(implode(', ', (array) ($doctor['languages'] ?? []))) ?></li>
                 </ul>
                 <p class="panel__actions">

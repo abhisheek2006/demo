@@ -4,8 +4,7 @@ declare(strict_types=1);
 namespace App\Content;
 
 /**
- * Services offered by the clinic. Rendered on the home page, the services
- * page, and as Service nodes in the site's structured data.
+ * Services offered by the clinic and shown on the About page.
  */
 final class Services
 {
@@ -254,26 +253,4 @@ final class Services
             . 'prescribed. Where a case needs hospital care, we will tell you plainly and refer you.';
     }
 
-    /**
-     * @return array<int,array{id:string,title:string}>
-     */
-    public static function schemaGraph(): array
-    {
-        $out = [];
-        foreach (self::all() as $service) {
-            $out[] = [
-                '@type'    => 'MedicalTherapy',
-                'name'     => $service['title'],
-                'url'      => url('/services#' . $service['id']),
-                'image'    => url($service['image']),
-                'description' => truncate($service['intro'], 300),
-                'provider' => [
-                    '@type' => 'MedicalClinic',
-                    'name'  => Clinic::NAME,
-                ],
-            ];
-        }
-
-        return $out;
-    }
 }

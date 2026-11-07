@@ -5,8 +5,6 @@ namespace App\Services;
 
 use App\Content\Clinic;
 use App\Content\Doctor;
-use App\Content\FaqData;
-use App\Content\Services as ServiceContent;
 use App\Core\Config;
 use App\Core\Request;
 
@@ -30,8 +28,7 @@ final class Seo
         $image       = (string) ($overrides['image'] ?? url(Config::string('seo.default_image', '/assets/images/og/og-default.png')));
         $type        = (string) ($overrides['type'] ?? 'website');
 
-        $titleParts = explode(' · ', $title);
-        if (count($titleParts) === 1 && $title !== $appName) {
+        if ($title !== $appName && !str_contains($title, $appName)) {
             $title = $title . ' · ' . $appName;
         }
 
@@ -46,7 +43,6 @@ final class Seo
             'robots'           => (string) ($overrides['robots'] ?? ($overrides['noindex'] ?? false ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1')),
             'published_time'   => (string) ($overrides['published_time'] ?? ''),
             'modified_time'    => (string) ($overrides['modified_time'] ?? ''),
-            'keywords'         => (string) ($overrides['keywords'] ?? self::defaultKeywords()),
             'twitter_site'     => Config::string('seo.twitter_site', ''),
             'twitter_creator'  => (string) ($overrides['twitter_creator'] ?? ''),
             'json_ld'          => (array) ($overrides['json_ld'] ?? []),
@@ -56,19 +52,13 @@ final class Seo
 
     public static function defaultTitle(): string
     {
-        return Clinic::HEADLINE . ' · ' . Clinic::LOCALITY;
+        return Clinic::HEADLINE;
     }
 
     public static function defaultDescription(): string
     {
-        return truncate(Clinic::intro(), 300, '');
-    }
-
-    public static function defaultKeywords(): string
-    {
-        return 'homoeopathy clinic Sri Vijaya Puram, homeopathic doctor Sri Vijaya Puram, homoeopathic treatment '
-            . 'Andaman, BHMS doctor Andaman, classical homoeopathy Garacharma, homeopathy doctor Bhathu '
-            . 'Basti, Swasti Homoeo Clinic, homoeopathic consultation Sri Vijaya Puram';
+        return 'Swasti Homoeo Clinic in ' . Clinic::addressOneLine() . ', ' . Clinic::info()['city']
+            . ' offers consultations with Dr. Smriti Das (BHMS, MD—WBUHS). Call ' . Clinic::info()['phone'] . ' to book.';
     }
 
     /* -------------------------------------------------------------------- */
@@ -86,31 +76,29 @@ final class Seo
             'name'                 => $clinic['name'],
             'legalName'            => Clinic::LEGAL_NAME,
             'alternateName'        => $clinic['name'] . ' — ' . Clinic::LOCALITY,
-            'description'          => truncate(Clinic::intro(), 500, ''),
+            'description'          => truncate(Clinic::intro() . ' Located at ' . $clinic['address_full'] . ', ' . $clinic['city'] . '.', 500, ''),
             'slogan'               => Clinic::TAGLINE,
             'url'                  => url('/'),
             'telephone'            => $clinic['phone'],
             'email'                => $clinic['email'],
-            'image'                => url('/assets/images/og/og-default.png'),
+            'image'                => [
+                url('/assets/images/hero/clinic-room.jpg'),
+                url('/assets/images/hero/clinic-room-2.jpg'),
+                url('/assets/images/hero/clinic-room-3.jpg'),
+                url('/assets/images/hero/clinic-room-4.jpg'),
+                url('/assets/images/hero/clinic-room-5.jpg'),
+            ],
             'logo'                 => url('/assets/images/icons/logo.png'),
-            'priceRange'           => '₹₹',
             'currenciesAccepted'   => 'INR',
             'address'              => self::postalAddress(),
-            'geo'                  => [
-                '@type'     => 'GeoCoordinates',
-                'latitude'  => $clinic['geo_lat'],
-                'longitude' => $clinic['geo_lng'],
-            ],
             'hasMap'               => Clinic::mapUrl(),
             'openingHoursSpecification' => self::openingHours(),
             'medicalSpecialty'     => 'Homeopathic',
-            'availableService'     => ServiceContent::schemaGraph(),
-            'employee'             => [
-                '@type'    => 'Physician',
-                'name'     => Doctor::profile()['name'],
-                'jobTitle' => Doctor::profile()['role'],
-                'url'      => url('/about-us#doctor'),
+            'areaServed'           => [
+                ['@type' => 'City', 'name' => $clinic['city']],
+                ['@type' => 'AdministrativeArea', 'name' => $clinic['state']],
             ],
+            'employee'             => ['@id' => url('/about-us#doctor')],
             'sameAs'               => self::sameAs(),
         ];
     }
@@ -123,37 +111,9 @@ final class Seo
             '@id'             => url('/#website'),
             'url'             => url('/'),
             'name'            => Clinic::NAME,
-            'description'     => truncate(Clinic::intro(), 300, ''),
+            'description'     => self::defaultDescription(),
             'inLanguage'      => 'en-IN',
             'publisher'       => ['@id' => url('/#clinic')],
-        ];
-    }
-
-    /** @return array<string,mixed> */
-    public static function localBusiness(): array
-    {
-        $clinic = Clinic::info();
-
-        return [
-            '@type'          => 'LocalBusiness',
-            '@id'            => url('/#localbusiness'),
-            'name'           => $clinic['name'],
-            'image'          => url('/assets/images/og/og-default.png'),
-            'url'            => url('/'),
-            'telephone'      => $clinic['phone'],
-            'priceRange'     => '₹₹',
-            'address'        => self::postalAddress(),
-            'geo'            => [
-                '@type'     => 'GeoCoordinates',
-                'latitude'  => $clinic['geo_lat'],
-                'longitude' => $clinic['geo_lng'],
-            ],
-            'openingHoursSpecification' => self::openingHours(),
-            'areaServed'     => [
-                ['@type' => 'City', 'name' => 'Sri Vijaya Puram'],
-                ['@type' => 'State', 'name' => 'Andaman and Nicobar Islands'],
-            ],
-            'parentOrganization' => ['@id' => url('/#clinic')],
         ];
     }
 
@@ -184,12 +144,14 @@ final class Seo
         $specs = [];
 
         foreach (Clinic::hours() as $day => $slot) {
-            $specs[] = [
-                '@type'     => 'OpeningHoursSpecification',
-                'dayOfWeek' => 'https://schema.org/' . ucfirst($day),
-                'opens'     => $slot['open'],
-                'closes'    => $slot['close'],
-            ];
+            foreach ($slot['periods'] as $period) {
+                $specs[] = [
+                    '@type'     => 'OpeningHoursSpecification',
+                    'dayOfWeek' => 'https://schema.org/' . ucfirst($day),
+                    'opens'     => $period['open'],
+                    'closes'    => $period['close'],
+                ];
+            }
         }
 
         return $specs;
@@ -285,20 +247,18 @@ final class Seo
     /**
      * Sitemap entries for every public route.
      *
-     * @return array<int,array{loc:string,lastmod:string,changefreq:string,priority:string}>
+     * @return array<int,array{loc:string}>
      */
     public static function sitemapEntries(): array
     {
-        $today = date('Y-m-d');
-
         $entries = [
-            ['loc' => url('/'),                  'lastmod' => $today, 'changefreq' => 'weekly',  'priority' => '1.0'],
-            ['loc' => url('/about-us'),          'lastmod' => $today, 'changefreq' => 'monthly', 'priority' => '0.9'],
-            ['loc' => url('/faq'),               'lastmod' => $today, 'changefreq' => 'monthly', 'priority' => '0.8'],
-            ['loc' => url('/book-consultation'), 'lastmod' => $today, 'changefreq' => 'monthly', 'priority' => '0.9'],
-            ['loc' => url('/book-follow-up'),    'lastmod' => $today, 'changefreq' => 'monthly', 'priority' => '0.7'],
-            ['loc' => url('/contact'),           'lastmod' => $today, 'changefreq' => 'monthly', 'priority' => '0.7'],
-            ['loc' => url('/privacy-policy'),    'lastmod' => $today, 'changefreq' => 'yearly',  'priority' => '0.4'],
+            ['loc' => url('/')],
+            ['loc' => url('/about-us')],
+            ['loc' => url('/faq')],
+            ['loc' => url('/book-consultation')],
+            ['loc' => url('/book-follow-up')],
+            ['loc' => url('/contact')],
+            ['loc' => url('/privacy-policy')],
         ];
 
 

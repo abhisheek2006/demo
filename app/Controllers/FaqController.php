@@ -19,7 +19,7 @@ final class FaqController extends Controller
         $grouped = Faq::grouped();
 
         $this->setSeo([
-            'title'       => 'Frequently Asked Questions — Homoeopathy in Sri Vijaya Puram | ' . Clinic::NAME,
+            'title'       => 'Homoeopathy FAQs in Sri Vijaya Puram | ' . Clinic::NAME,
             'description' => 'Straight answers about homoeopathy treatment, consultation fees, appointment '
                 . 'booking, children, pregnancy and emergencies at ' . Clinic::NAME . ' in Sri Vijaya Puram.',
             'canonical'   => url('/faq'),

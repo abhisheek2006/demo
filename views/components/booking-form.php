@@ -97,6 +97,7 @@ $prefix = in_array($formId, ['consultation-form', 'followup-form'], true) ? '' :
                    min="<?= e($minDate ?? date('Y-m-d')) ?>"
                    max="<?= e($maxDate ?? date('Y-m-d', strtotime('+60 days'))) ?>"
                    value="<?= old('preferred_date') ?>"
+                   data-no-sundays data-sunday-message="The clinic is closed on Sundays. Choose a Monday–Saturday date."
                    aria-describedby="preferred_date-help<?= has_error('preferred_date') ? ' preferred_date-err' : '' ?>"
                    <?= has_error('preferred_date') ? 'aria-invalid="true"' : '' ?>>
             <p class="field__help" id="<?= $prefix ?>preferred_date-help">Monday to Saturday OPD. We confirm the exact time.</p>
@@ -119,7 +120,7 @@ $prefix = in_array($formId, ['consultation-form', 'followup-form'], true) ? '' :
                     </label>
                 <?php endforeach; ?>
             </div>
-            <p class="field__help"><?= $isFollowUp ? 'Short review slot.' : 'Morning OPD 10:00–11:30, evening OPD 4:00–6:30 PM.' ?></p>
+            <p class="field__help"><?= $isFollowUp ? 'Short review slot.' : 'OPD: Monday–Saturday, 9:00 AM–12:30 PM and 4:30–7:30 PM. Closed Sunday.' ?></p>
             <?php if (has_error('preferred_time')): ?>
                 <p class="field__error"><?= e(error_for('preferred_time')) ?></p>
             <?php endif; ?>

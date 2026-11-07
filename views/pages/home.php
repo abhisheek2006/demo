@@ -21,7 +21,7 @@ $waBooking = whatsapp_link(
         <div class="hero__text">
             <p class="eyebrow eyebrow--light"><?= icon('leaf', 'icon icon--xs', 15) ?> Classical Homoeopathic Treatment</p>
 
-            <h1 class="hero__title">Best Homoeopathy Clinic in <span>Sri Vijaya Puram</span></h1>
+            <h1 class="hero__title">Homoeopathy Clinic in <span>Sri Vijaya Puram</span></h1>
 
             <p class="hero__claim">“<?= e($clinic['tagline'] ?? 'We believe in easy, safe and quick recovery') ?>”</p>
 
@@ -29,7 +29,7 @@ $waBooking = whatsapp_link(
                 Led by <strong class="hero__doctor"><?= e($doctor['name'] ?? 'Dr. Smriti Das') ?></strong>,
                 <span class="nowrap"><?= e($doctor['short_qualification'] ?? 'BHMS, MD (WBUHS)') ?></span> — with
                 <?= e($doctor['experience'] ?? '8+ years of clinical experience') ?>. A classical
-                homoeopathy practice in Bhathu Basti, a short walk from Garacharma.
+                homoeopathy practice in Garacharma, Sri Vijaya Puram.
             </p>
 
             <div class="hero__actions">
@@ -50,11 +50,21 @@ $waBooking = whatsapp_link(
 
         <div class="hero__media">
             <div class="hero__figure">
-                <div class="hero__slides" data-hero-slides aria-hidden="true">
-                    <?php foreach (['clinic-room.jpg', 'clinic-room-2.jpg', 'clinic-room-3.jpg', 'clinic-room-4.jpg', 'clinic-room-5.jpg'] as $index => $slide): ?>
+                <?php
+                $clinicPhotos = [
+                    ['file' => 'clinic-room.jpg', 'alt' => 'Consultation room at Swasti Homoeo Clinic in Garacharma'],
+                    ['file' => 'clinic-room-2.jpg', 'alt' => 'Dr. Smriti Das at the clinic reception in Sri Vijaya Puram'],
+                    ['file' => 'clinic-room-3.jpg', 'alt' => 'Reception area at Swasti Homoeo Clinic'],
+                    ['file' => 'clinic-room-4.jpg', 'alt' => 'Entrance to Swasti Homoeo Clinic in Garacharma'],
+                    ['file' => 'clinic-room-5.jpg', 'alt' => 'Clinic interior and waiting area at Swasti Homoeo Clinic'],
+                ];
+                ?>
+                <div class="hero__slides" data-hero-slides>
+                    <?php foreach ($clinicPhotos as $index => $photo): ?>
                     <img class="hero__slide<?= $index === 0 ? ' is-active' : '' ?>"
-                         src="<?= e(image_url('/assets/images/hero/' . $slide)) ?>"
-                         alt="" width="1600" height="900" decoding="async"<?= $index === 0 ? ' fetchpriority="high"' : '' ?>>
+                         src="<?= e(image_url('/assets/images/hero/' . $photo['file'])) ?>"
+                         alt="<?= e($photo['alt']) ?>" width="1600" height="900" decoding="async"
+                         aria-hidden="<?= $index === 0 ? 'false' : 'true' ?>"<?= $index === 0 ? ' fetchpriority="high"' : '' ?>>
                     <?php endforeach; ?>
                 </div>
                 <div class="hero__caption">
@@ -83,7 +93,7 @@ $waBooking = whatsapp_link(
                     <span class="hero__card-icon"><?= icon('clock-open', 'icon icon--sm', 20) ?></span>
                     <div>
                         <p class="hero__card-label">OPD timings</p>
-                        <p class="hero__card-value hero__card-value--sm">Mon–Fri 10 AM–7 PM · Sat 10 AM–3 PM</p>
+                        <p class="hero__card-value hero__card-value--sm">Mon–Sat 9 AM–12:30 PM and 4:30–7:30 PM · Sun closed</p>
                     </div>
                 </div>
             </div>

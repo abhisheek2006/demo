@@ -37,6 +37,7 @@ final class Doctor
         $profile = self::profile();
 
         return [
+            '@id'         => url('/about-us#doctor'),
             '@type'       => 'Physician',
             'name'        => $profile['name'],
             'honorificPrefix' => 'Dr.',
@@ -44,14 +45,11 @@ final class Doctor
             'description' => 'Homoeopathic physician with ' . $profile['experience'] . ' at '
                 . Clinic::NAME . ', ' . Clinic::LOCALITY . '.',
             'medicalSpecialty' => 'Homeopathy',
-            'url'         => '/about-us#doctor',
+            'url'         => url('/about-us#doctor'),
             'image'       => url($profile['image']),
             'telephone'   => Clinic::info()['phone'],
             'email'       => Clinic::info()['email'],
-            'worksFor'    => [
-                '@type' => 'MedicalClinic',
-                'name'  => Clinic::NAME,
-            ],
+            'worksFor'    => ['@id' => url('/#clinic')],
         ];
     }
 

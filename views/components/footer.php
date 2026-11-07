@@ -59,7 +59,7 @@ $emailCompose = $email !== ''
                     <span class="site-footer__rule" aria-hidden="true"></span>
 
                     <p class="site-footer__about">
-                        A classical homoeopathy practice in Bhathu Basti, Sri Vijaya Puram, led by
+                        A classical homoeopathy practice in Garacharma, Sri Vijaya Puram, led by
                         Dr.&nbsp;Smriti Das (BHMS, MD&nbsp;— WBUHS). Your health, our sincere care.
                     </p>
 

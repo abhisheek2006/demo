@@ -39,11 +39,13 @@ if (!function_exists('e_js')) {
     /** Escape a value for embedding inside a <script type="application/ld+json"> block. */
     function e_js(mixed $value): string
     {
-        return htmlspecialchars(
-            (string) json_encode($value, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE),
-            ENT_NOQUOTES | ENT_SUBSTITUTE | ENT_HTML5,
-            'UTF-8'
+        $json = json_encode(
+            $value,
+            JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE
+                | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT
         );
+
+        return $json === false ? 'null' : $json;
     }
 }
 

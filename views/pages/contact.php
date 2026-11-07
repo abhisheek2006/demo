@@ -3,7 +3,7 @@
  * Contact page: details, hours, directions and the contact form.
  *
  * @var array<string,mixed> $clinic
- * @var array<string,array{open:string,close:string,closed?:bool,note?:string}> $hours
+ * @var array<string,array{periods:array<int,array{open:string,close:string}>,closed?:bool,note?:string}> $hours
  * @var array<int,string> $addressLines
  */
 $dayLabels = [
@@ -25,7 +25,7 @@ $isToday    = static function (string $day) use ($todayKey): bool {
 <?= component('page-hero', [
     'eyebrow'   => 'Contact',
     'heading'   => 'Contact & Directions',
-    'lead'      => 'Call, WhatsApp or send a message. We are in Bhathu Basti, a few minutes from Garacharma, '
+    'lead'      => 'Call, WhatsApp or send a message. We are in Garacharma, Sri Vijaya Puram, '
         . 'and we answer every message ourselves.',
     'trail'     => [['name' => 'Home', 'url' => '/'], ['name' => 'Contact']],
     'variant'   => 'blue',
@@ -40,7 +40,7 @@ $isToday    = static function (string $day) use ($todayKey): bool {
                     <span class="contact-card__body">
                         <span class="contact-card__label">Call the clinic</span>
                         <span class="contact-card__value"><?= e(format_phone()) ?></span>
-                        <span class="contact-card__hint">Fastest way to book. Mon–Fri 10 AM–7 PM, Sat 10 AM–3 PM.</span>
+                        <span class="contact-card__hint">OPD Mon–Sat, 9 AM–12:30 PM and 4:30–7:30 PM. Closed Sunday.</span>
                     </span>
                 </a>
 
@@ -203,17 +203,26 @@ $isToday    = static function (string $day) use ($todayKey): bool {
                     <tbody>
                     <?php foreach ($hours as $day => $slot): ?>
                         <?php
-                        $openM  = ((int) substr((string) $slot['open'], 0, 2)) * 60 + (int) substr((string) $slot['open'], 3, 2);
-                        $closeM = ((int) substr((string) $slot['close'], 0, 2)) * 60 + (int) substr((string) $slot['close'], 3, 2);
-                        $isOpen = empty($slot['closed']) && $nowMinutes >= $openM && $nowMinutes <= $closeM;
+                        $isOpen = false;
+                        $periodLabels = [];
+                        $nextOpening = null;
+                        foreach ($slot['periods'] as $period) {
+                            $openM = ((int) substr($period['open'], 0, 2)) * 60 + (int) substr($period['open'], 3, 2);
+                            $closeM = ((int) substr($period['close'], 0, 2)) * 60 + (int) substr($period['close'], 3, 2);
+                            $isOpen = $isOpen || ($nowMinutes >= $openM && $nowMinutes < $closeM);
+                            if ($openM > $nowMinutes && ($nextOpening === null || $openM < $nextOpening)) {
+                                $nextOpening = $openM;
+                            }
+                            $periodLabels[] = minutes_to_label($period['open']) . ' – ' . minutes_to_label($period['close']);
+                        }
                         ?>
                         <tr class="hours__row<?= $isToday($day) ? ' hours__row--today' : '' ?>">
                             <th scope="row"><?= e($dayLabels[$day] ?? ucfirst((string) $day)) ?></th>
                             <td>
                                 <?php if (!empty($slot['closed'])): ?>
-                                    <span class="hours__closed">Closed — emergency calls only</span>
+                                    <span class="hours__closed">Closed</span>
                                 <?php else: ?>
-                                    <?= e(minutes_to_label((string) $slot['open'])) ?> – <?= e(minutes_to_label((string) $slot['close'])) ?>
+                                    <?= e(implode(' · ', $periodLabels)) ?>
                                 <?php endif; ?>
                             </td>
                             <td class="hours__state">
@@ -222,6 +231,9 @@ $isToday    = static function (string $day) use ($todayKey): bool {
                                         <span class="badge badge--success">Open now</span>
                                     <?php elseif (!empty($slot['closed'])): ?>
                                         <span class="badge badge--muted">Closed</span>
+                                    <?php elseif ($nextOpening !== null): ?>
+                                        <?php $nextOpeningTime = sprintf('%02d:%02d', intdiv($nextOpening, 60), $nextOpening % 60); ?>
+                                        <span class="badge badge--muted">Opens at <?= e(minutes_to_label($nextOpeningTime)) ?></span>
                                     <?php else: ?>
                                         <span class="badge badge--muted">Closed for today</span>
                                     <?php endif; ?>

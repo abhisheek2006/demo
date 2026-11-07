@@ -154,6 +154,9 @@ final class AppointmentController extends Controller
             if ($ts !== false && $ts < strtotime('today')) {
                 $validator->reject('preferred_date', 'Choose today or a future date.');
             }
+            if (Booking::isClosedDate($bookingDate)) {
+                $validator->reject('preferred_date', 'The clinic is closed on Sundays. Choose a Monday–Saturday date.');
+            }
         }
 
         if ($validator->fails()) {

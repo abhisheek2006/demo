@@ -25,7 +25,6 @@ $currentPath = $currentPath === '/' ? '/' : rtrim($currentPath, '/');
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title><?= e($seo['title'] ?? 'Swasti Homoeo Clinic') ?></title>
 <meta name="description" content="<?= e($seo['description'] ?? '') ?>">
-<meta name="keywords" content="<?= e($seo['keywords'] ?? '') ?>">
 <meta name="robots" content="<?= e($seo['robots'] ?? 'index, follow') ?>">
 <meta name="author" content="Swasti Homoeo Clinic, Sri Vijaya Puram">
 <meta name="theme-color" content="#0f6f68">

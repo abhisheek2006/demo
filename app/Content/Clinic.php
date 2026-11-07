@@ -16,7 +16,7 @@ final class Clinic
     public const LEGAL_NAME      = 'Andaman Homoeo Health Care LLP';
     public const TAGLINE         = 'We believe in easy, safe and quick recovery';
     public const SERVICE_LINE    = 'Classical Homoeopathic Treatment';
-    public const HEADLINE        = 'Best Homoeopathy Clinic in Sri Vijaya Puram';
+    public const HEADLINE        = 'Homoeopathy Clinic in Sri Vijaya Puram';
     public const ESTABLISHED     = '2017';
     public const LOCALITY        = 'Garacharma, Sri Vijaya Puram';
 
@@ -48,8 +48,6 @@ final class Clinic
             'country_code' => 'IN',
             'pin'          => '744105',
             'timezone'     => 'Asia/Kolkata',
-            'geo_lat'      => '11.616087460214711',
-            'geo_lng'      => '92.70467519725416',
         ];
     }
 
@@ -132,35 +130,37 @@ final class Clinic
         ];
     }
 
-    /**
-     * Opening hours. Keys are lowercase English day names.
-     *
-     * @return array<string,array{open:string,close:string,closed?:bool,note?:string}>
-     */
+    /** Opening periods. Keys are lowercase English day names. */
     public static function hours(): array
     {
+        $weekday = [
+            ['open' => '09:00', 'close' => '12:30'],
+            ['open' => '16:30', 'close' => '19:30'],
+        ];
+
         return [
-            'monday'    => ['open' => '10:00', 'close' => '19:00', 'note' => 'Morning and evening OPD'],
-            'tuesday'   => ['open' => '10:00', 'close' => '19:00', 'note' => 'Morning and evening OPD'],
-            'wednesday' => ['open' => '10:00', 'close' => '19:00', 'note' => 'Morning and evening OPD'],
-            'thursday'  => ['open' => '10:00', 'close' => '19:00', 'note' => 'Morning and evening OPD'],
-            'friday'    => ['open' => '10:00', 'close' => '19:00', 'note' => 'Morning and evening OPD'],
-            'saturday'  => ['open' => '10:00', 'close' => '15:00', 'note' => 'Morning OPD only'],
-            'sunday'    => ['open' => '10:00', 'close' => '12:00', 'closed' => true, 'note' => 'Emergency calls only'],
+            'monday'    => ['periods' => $weekday],
+            'tuesday'   => ['periods' => $weekday],
+            'wednesday' => ['periods' => $weekday],
+            'thursday'  => ['periods' => $weekday],
+            'friday'    => ['periods' => $weekday],
+            'saturday'  => ['periods' => $weekday],
+            'sunday'    => ['periods' => [], 'closed' => true, 'note' => 'Closed'],
         ];
     }
 
-    /** @return array<int,array{day:string,open:string,close:string,note:string}> */
+    /** @return array<int,array{day:string,open:string,close:string}> */
     public static function hoursForSchema(): array
     {
         $out = [];
         foreach (self::hours() as $day => $slot) {
-            $out[] = [
-                'day'   => ucfirst($day),
-                'open'  => $slot['open'],
-                'close' => $slot['close'],
-                'note'  => $slot['note'] ?? '',
-            ];
+            foreach ($slot['periods'] as $period) {
+                $out[] = [
+                    'day'   => ucfirst($day),
+                    'open'  => $period['open'],
+                    'close' => $period['close'],
+                ];
+            }
         }
 
         return $out;

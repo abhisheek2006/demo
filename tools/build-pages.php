@@ -206,9 +206,6 @@ function buildSitemap(): string
     foreach (Seo::sitemapEntries() as $entry) {
         $xml .= "  <url>\n";
         $xml .= '    <loc>' . htmlspecialchars((string) $entry['loc'], ENT_XML1, 'UTF-8') . "</loc>\n";
-        $xml .= '    <lastmod>' . htmlspecialchars((string) $entry['lastmod'], ENT_XML1, 'UTF-8') . "</lastmod>\n";
-        $xml .= '    <changefreq>' . htmlspecialchars((string) $entry['changefreq'], ENT_XML1, 'UTF-8') . "</changefreq>\n";
-        $xml .= '    <priority>' . htmlspecialchars((string) $entry['priority'], ENT_XML1, 'UTF-8') . "</priority>\n";
         $xml .= "  </url>\n";
     }
 

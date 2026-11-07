@@ -22,17 +22,23 @@ final class Booking
     }
 
     /**
-     * Appointment slots in 12-hour display form. Sunday slots are excluded
-     * because the clinic is closed apart from emergency calls.
+     * Appointment start times within the published Monday–Saturday OPD hours.
      *
      * @return array<int,string>
      */
     public static function timeSlots(): array
     {
         return [
-            '10:00', '10:30', '11:00', '11:30',
-            '16:00', '16:30', '17:00', '17:30', '18:00', '18:30',
+            '09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00',
+            '16:30', '17:00', '17:30', '18:00', '18:30', '19:00',
         ];
+    }
+
+    public static function isClosedDate(string $date): bool
+    {
+        $timestamp = strtotime($date);
+
+        return $timestamp !== false && date('N', $timestamp) === '7';
     }
 
     /**

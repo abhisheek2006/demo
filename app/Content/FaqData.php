@@ -63,9 +63,8 @@ final class FaqData
                 ],
                 [
                     'q' => 'What are your consultation timings?',
-                    'a' => 'Monday to Friday the OPD runs from 10:00 AM to 7:00 PM with a break for lunch. '
-                        . 'Saturday is a morning OPD from 10:00 AM to 3:00 PM. Sunday is reserved for '
-                        . 'emergency calls only. Patients are always given a specific slot so the waiting '
+                    'a' => 'Monday to Saturday the OPD runs from 9:00 AM to 12:30 PM and 4:30 PM to 7:30 PM. '
+                        . 'The clinic is closed on Sunday. Patients are always given a specific slot so the waiting '
                         . 'time is short.',
                 ],
             ],

@@ -216,8 +216,10 @@
 
         var advance = function () {
             slides[index].classList.remove('is-active');
+            slides[index].setAttribute('aria-hidden', 'true');
             index = (index + 1) % slides.length;
             slides[index].classList.add('is-active');
+            slides[index].setAttribute('aria-hidden', 'false');
         };
 
         var start = function () {
@@ -254,6 +256,23 @@
     });
 
     /* ---------------------------------------------------------------- forms */
+
+    Array.prototype.forEach.call(document.querySelectorAll('[data-no-sundays]'), function (input) {
+        var validateDay = function () {
+            if (!input.value) {
+                input.setCustomValidity('');
+                return;
+            }
+
+            var selectedDate = new Date(input.value + 'T12:00:00');
+            var isSunday = !Number.isNaN(selectedDate.getTime()) && selectedDate.getDay() === 0;
+            input.setCustomValidity(isSunday ? input.getAttribute('data-sunday-message') : '');
+        };
+
+        input.addEventListener('input', validateDay);
+        input.addEventListener('change', validateDay);
+        validateDay();
+    });
 
     var normaliseDigits = function (value) {
         var digits = value.replace(/\D+/g, '');
