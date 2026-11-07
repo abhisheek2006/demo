@@ -1,3 +1,14 @@
-# Non-production environment (local) — kept out of search results.
 User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /index.php
+
+# Ad crawlers: no ads on this site.
+User-agent: Mediapartners-Google
 Disallow: /
+
+User-agent: AdsBot-Google
+Disallow: /
+
+Sitemap: https://swastihomoeo.com/sitemap.xml

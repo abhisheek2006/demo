@@ -50,11 +50,13 @@ $waBooking = whatsapp_link(
 
         <div class="hero__media">
             <div class="hero__figure">
-                <img class="hero__image"
-                     src="<?= e(image_url('/assets/images/hero/hero-1.svg')) ?>"
-                     alt="Illustration of a calm homoeopathic consultation room"
-                     width="620" height="520" decoding="async">
-
+                <div class="hero__slides" data-hero-slides aria-hidden="true">
+                    <?php foreach (['clinic-room.jpg', 'clinic-room-2.jpg', 'clinic-room-3.jpg', 'clinic-room-4.jpg', 'clinic-room-5.jpg'] as $index => $slide): ?>
+                    <img class="hero__slide<?= $index === 0 ? ' is-active' : '' ?>"
+                         src="<?= e(image_url('/assets/images/hero/' . $slide)) ?>"
+                         alt="" width="1600" height="900" decoding="async"<?= $index === 0 ? ' fetchpriority="high"' : '' ?>>
+                    <?php endforeach; ?>
+                </div>
                 <div class="hero__caption">
                     <p class="hero__caption-kicker">Classical homoeopathy in Sri Vijaya Puram</p>
                     <p class="hero__caption-title">Treatment that respects your body’s own healing</p>

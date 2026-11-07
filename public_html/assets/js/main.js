@@ -194,6 +194,65 @@
         start();
     });
 
+    /* ------------------------------------------------------- hero rotator */
+
+    Array.prototype.forEach.call(document.querySelectorAll('[data-hero-slides]'), function (rotator) {
+        var slides = Array.prototype.slice.call(rotator.children);
+
+        if (slides.length < 2) {
+            return;
+        }
+
+        var index = 0;
+        var timer = null;
+        var onScreen = false;
+
+        var stop = function () {
+            if (timer) {
+                window.clearTimeout(timer);
+                timer = null;
+            }
+        };
+
+        var advance = function () {
+            slides[index].classList.remove('is-active');
+            index = (index + 1) % slides.length;
+            slides[index].classList.add('is-active');
+        };
+
+        var start = function () {
+            stop();
+
+            if (reduceMotion || !onScreen || document.hidden) {
+                return;
+            }
+
+            timer = window.setTimeout(function () {
+                advance();
+                start();
+            }, ROTATE_DELAY);
+        };
+
+        document.addEventListener('visibilitychange', function () {
+            if (document.hidden) {
+                stop();
+            } else {
+                start();
+            }
+        });
+
+        if ('IntersectionObserver' in window) {
+            new IntersectionObserver(function (entries) {
+                onScreen = entries[entries.length - 1].isIntersecting;
+                start();
+            }, { threshold: 0.2 }).observe(rotator);
+        } else {
+            onScreen = true;
+        }
+
+        start();
+    });
+
     /* ---------------------------------------------------------------- forms */
 
     var normaliseDigits = function (value) {
