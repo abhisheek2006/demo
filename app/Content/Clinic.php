@@ -182,7 +182,7 @@ final class Clinic
     }
 
     /**
-     * The three "why choose us" pillars.
+     * The clinic's care pillars shown on the homepage.
      *
      * @return array<int,array{title:string,text:string,icon:string}>
      */
@@ -200,12 +200,6 @@ final class Clinic
                 'title' => 'Safe for the whole family',
                 'text'  => 'We tailor each prescription to your age and sensitivity, with no hidden '
                     . 'antibiotics, steroids or sedatives.',
-            ],
-            [
-                'icon'  => 'clock',
-                'title' => 'Easy, safe and quick recovery',
-                'text'  => 'Book a slot, share your history and leave with a written plan. Follow-ups '
-                    . 'are focused and pressure-free.',
             ],
         ];
     }
