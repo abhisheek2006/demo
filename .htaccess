@@ -1,0 +1,27 @@
+# Hostinger compatibility when the repository archive is extracted directly
+# into the domain's public_html directory. The actual site files live in the
+# repository's nested public_html/ directory.
+Options -Indexes -MultiViews
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Keep project source and runtime data out of the document root.
+    RewriteRule ^(?:app|config|database|storage|views|tools|vendor|tmp)(?:/|$) - [F,L,NC]
+    RewriteRule ^\.(?!well-known(?:/|$)) - [F,L]
+
+    # Let requests already addressed to the nested document root pass through.
+    RewriteCond %{REQUEST_URI} !^/public_html(?:/|$)
+    RewriteRule ^(.*)$ public_html/$1 [L]
+</IfModule>
+
+# Block project and secret file types if a request reaches the repository root.
+<FilesMatch "(^\.|\.(env|example|sql|sql\.gz|bak|backup|old|log|ini|sh|jsonl|lock|yml|yaml|dist|toml|conf)$)">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
