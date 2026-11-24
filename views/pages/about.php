@@ -5,12 +5,8 @@
  * @var array<string,mixed> $clinic
  * @var array<string,mixed> $doctor
  * @var array<int,array{heading:string,body:string}> $biography
- * @var array<int,array{title:string,text:string,icon:string}> $credentials
  * @var array<int,string> $languages
- * @var array<int,array{value:string,label:string,icon:string}> $stats
- * @var array<int,array{title:string,text:string,icon:string}> $pillars
  * @var array<int,array<string,mixed>> $testimonials
- * @var array<int,array<string,mixed>> $services
  */
 ?>
 
@@ -25,11 +21,14 @@
 <section class="section" id="doctor">
     <div class="container split">
         <div class="split__media" data-reveal>
-            <div class="doctor-profile-card doctor-profile-card--about">
-                <img class="doctor-profile-card__photo" src="<?= e(asset('assets/images/about/dr-smriti-das-portrait.jpg')) ?>" alt="Dr. Smriti Das at Swasti Homoeo Clinic" width="420" height="520">
-                <p class="doctor-profile-card__name"><?= e((string) $doctor['name']) ?></p>
-                <p class="doctor-profile-card__qualification"><?= e((string) $doctor['short_qualification']) ?></p>
-                <p class="doctor-profile-card__role"><?= e((string) $doctor['experience']) ?></p>
+            <div class="split__frame split__frame--portrait">
+                <img src="<?= e(asset('assets/images/about/doctor-smriti-das.jpg')) ?>"
+                     alt="Photograph of Dr. Smriti Das, Homoeopathic Physician at Swasti Homoeo Clinic, Sri Vijaya Puram"
+                     width="700" height="1050" loading="lazy" decoding="async">
+            </div>
+            <div class="split__badge">
+                <p class="split__badge-value"><?= e((string) $doctor['experience']) ?></p>
+                <p class="split__badge-label">Homoeopathic Physician</p>
             </div>
         </div>
 
@@ -45,20 +44,39 @@
             </ul>
 
             <div class="prose">
-                <?php foreach ($biography as $block): ?>
-                    <h3><?= e($block['heading']) ?></h3>
-                    <p><?= e($block['body']) ?></p>
+                <?php foreach ([
+                    'Dr. Smriti is a well experienced physician with profound clinical knowledge, she is committed and dedicated towards alleviating patients’ illnesses since she has started her clinical journey.',
+                    'She pursued her graduation from D.N.De HMC&H under West Bengal University of Health Sciences.',
+                    'She pursued her post-graduation at Mahesh Bhattacharya HMC&H under West Bengal University of Health Sciences.',
+                    'She received the prestigious academic excellence award, the Dr. Malati Allen Noble Award in 2017, world’s largest award ceremony in the field of Homoeopathy.',
+                ] as $paragraph): ?>
+                    <p><?= e($paragraph) ?></p>
                 <?php endforeach; ?>
+            </div>
+
+            <div class="about-award-gallery" data-hero-slides aria-label="Dr. Smriti Das receiving the Dr. Malati Allen Noble Award">
+                <figure class="about-award-gallery__slide hero__slide is-active" aria-hidden="false">
+                    <img src="<?= e(asset('assets/images/about/dr-smriti-malati-allen-award-medal.jpg')) ?>"
+                         alt="Dr. Smriti Das receiving the Dr. Malati Allen Noble Award medal"
+                         width="3216" height="2136" loading="lazy" decoding="async">
+                    <figcaption>Receiving the Dr. Malati Allen Noble Award</figcaption>
+                </figure>
+                <figure class="about-award-gallery__slide hero__slide" aria-hidden="true">
+                    <img src="<?= e(asset('assets/images/about/dr-smriti-malati-allen-award-certificate.jpg')) ?>"
+                         alt="Dr. Smriti Das receiving her Dr. Malati Allen Noble Award certificate"
+                         width="3216" height="2136" loading="lazy" decoding="async">
+                    <figcaption>The award presentation</figcaption>
+                </figure>
             </div>
 
             <div class="detail-grid">
                 <div class="detail">
                     <p class="detail__label">Registration</p>
-                    <p class="detail__value"><?= e((string) $doctor['registration_note']) ?></p>
+                    <p class="detail__value">Registered with the National Commission for Homoeopathy (NCH), National Register of Homoeopathy (NRH), registration no. NRH/0030897; also registered under the Central Council of Homoeopathy (CCH), CRH no. 149349.</p>
                 </div>
                 <div class="detail">
                     <p class="detail__label">Languages</p>
-                    <p class="detail__value"><?= e(implode(' · ', $languages)) ?></p>
+                    <p class="detail__value">English · Hindi · Bengali</p>
                 </div>
             </div>
 
@@ -70,93 +88,17 @@
     </div>
 </section>
 
-<section class="section section--soft" id="approach">
-    <div class="container">
-        <header class="section__head" data-reveal>
-            <p class="eyebrow">How we work</p>
-            <h2 class="section__title">Three things we will not compromise on</h2>
-            <p class="section__lead section__lead--center">
-                These are the principles behind every prescription written at the clinic.
-            </p>
-        </header>
-
-        <div class="cards cards--three">
-            <?php foreach ($pillars as $pillar): ?>
-            <article class="card card--pillar" data-reveal>
-                <span class="card__icon"><?= icon($pillar['icon'], 'icon', 26) ?></span>
-                <h3 class="card__title"><?= e($pillar['title']) ?></h3>
-                <p class="card__text"><?= e($pillar['text']) ?></p>
-            </article>
-            <?php endforeach; ?>
-        </div>
-    </div>
-</section>
-
-<section class="section">
-    <div class="container">
-        <header class="section__head" data-reveal>
-            <p class="eyebrow">Credentials</p>
-            <h2 class="section__title">Registered, licensed and accountable</h2>
-        </header>
-
-        <div class="cards cards--four">
-            <?php foreach ($credentials as $credential): ?>
-            <article class="card card--small" data-reveal>
-                <span class="card__icon card__icon--soft"><?= icon($credential['icon'], 'icon', 22) ?></span>
-                <h3 class="card__title card__title--sm"><?= e($credential['title']) ?></h3>
-                <p class="card__text"><?= e($credential['text']) ?></p>
-            </article>
-            <?php endforeach; ?>
-        </div>
-
-        <ul class="stats stats--inline">
-            <?php foreach ($stats as $stat): ?>
-            <li class="stat">
-                <span class="stat__value"><?= e($stat['value']) ?></span>
-                <span class="stat__label"><?= e($stat['label']) ?></span>
-            </li>
-            <?php endforeach; ?>
-        </ul>
-    </div>
-</section>
-
-<section class="section section--soft section--services-preview">
-    <div class="container">
-        <header class="section__head" data-reveal>
-            <p class="eyebrow">What we treat</p>
-            <h2 class="section__title">The four most requested appointments</h2>
-        </header>
-
-        <div class="cards cards--four">
-            <?php foreach ($services as $service): ?>
-            <article class="card card--service card--small" data-reveal>
-                <span class="card__icon"><?= icon($service['icon'], 'icon', 22) ?></span>
-                <h3 class="card__title card__title--sm"><?= e($service['title']) ?></h3>
-                <p class="card__text"><?= e(truncate($service['intro'], 120)) ?></p>
-                <a class="card__link" href="<?= e(url('/book-consultation')) ?>">
-                    Book this appointment <?= icon('arrow-right', 'icon icon--xs', 15) ?>
-                </a>
-            </article>
-            <?php endforeach; ?>
-        </div>
-    </div>
-</section>
-
 <section class="section section--testimonials" id="testimonials">
     <div class="container">
-        <header class="section__head">
+        <header class="section__head" data-reveal>
             <p class="eyebrow">In their words</p>
             <h2 class="section__title">What patients tell us</h2>
-            <p class="section__lead section__lead--center">
-                Real feedback matters more than marketing, so this is exactly what we are told — including the
-                parts that are not flattering.
-            </p>
         </header>
 
         <div class="testimonials">
             <div class="testimonials__track" data-testimonials>
                 <?php foreach ($testimonials as $testimonial): ?>
-                <figure class="testimonial">
+                <figure class="testimonial" data-reveal>
                     <?= icon('quote', 'testimonial__quote-mark', 30) ?>
                     <blockquote class="testimonial__quote"><?= e($testimonial['quote']) ?></blockquote>
                     <figcaption class="testimonial__meta">
@@ -168,7 +110,7 @@
                         <?php endif; ?>
                         <span>
                             <span class="testimonial__name"><?= e($testimonial['name']) ?></span>
-                            <span class="testimonial__meta-line">Verified patient<?= ($testimonial['when'] ?? '') !== '' ? ' · ' . e((string) $testimonial['when']) : '' ?></span>
+                            <span class="testimonial__meta-line"><?= !empty($testimonial['source']) ? e((string) $testimonial['source']) : 'Verified patient' ?><?= ($testimonial['when'] ?? '') !== '' ? ' · ' . e((string) $testimonial['when']) : '' ?></span>
                         </span>
                         <?= stars((int) $testimonial['rating']) ?>
                     </figcaption>
