@@ -18,8 +18,8 @@
 use App\Content\Clinic;
 
 $socials = [
-    ['label' => 'Facebook',  'icon' => 'facebook',  'url' => (string) ($clinic['facebook'] ?? '')],
-    ['label' => 'Instagram', 'icon' => 'instagram', 'url' => (string) ($clinic['instagram'] ?? '')],
+    ['label' => 'Facebook',  'icon' => 'facebook',  'url' => (string) ($clinic['facebook'] ?? ''), 'external' => true],
+    ['label' => 'Instagram', 'icon' => 'instagram', 'url' => (string) ($clinic['instagram'] ?? ''), 'external' => true],
     ['label' => 'YouTube',   'icon' => 'youtube',   'url' => (string) ($clinic['youtube'] ?? '')],
     ['label' => 'Location',  'icon' => 'pin',       'url' => Clinic::mapUrl(), 'external' => true],
 ];
