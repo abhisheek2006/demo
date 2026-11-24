@@ -11,11 +11,7 @@
     <div class="header__bar">
         <div class="container header__inner">
             <a class="brand" href="<?= e(url('/')) ?>" aria-label="Swasti Homoeo Clinic — home">
-<<<<<<< Updated upstream
-                <img class="brand__logo" src="<?= e(url('/assets/images/icons/logo.png')) ?>" width="1295" height="344" alt="Swasti Homoeo Clinic">
-=======
                 <img class="brand__logo" src="<?= e(url('/assets/images/icons/logo.png')) ?>" width="1295" height="360" alt="Swasti Homoeo Clinic">
->>>>>>> Stashed changes
             </a>
 
             <nav class="nav" aria-label="Primary">

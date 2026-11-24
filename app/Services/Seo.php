@@ -79,15 +79,12 @@ final class Seo
             'url'                  => url('/'),
             'telephone'            => $clinic['phone'],
             'email'                => $clinic['email'],
-<<<<<<< Updated upstream
-=======
             'image'                => [
                 url('/assets/images/hero/clinic-room.jpg'),
                 url('/assets/images/hero/clinic-room-2.jpg'),
                 url('/assets/images/hero/clinic-room-3.jpg'),
                 url('/assets/images/hero/clinic-room-5.jpg'),
             ],
->>>>>>> Stashed changes
             'logo'                 => url('/assets/images/icons/logo.png'),
             'currenciesAccepted'   => 'INR',
             'address'              => self::postalAddress(),

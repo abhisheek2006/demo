@@ -13,11 +13,7 @@ $grouped    = $grouped    ?? [];
 $id         = $id         ?? 'faq';
 $searchable = $searchable ?? false;
 $intro      = $intro      ?? null;
-<<<<<<< Updated upstream
-$showGroupTitle = $showGroupTitle ?? true;
-=======
 $hideGroupTitles = $hideGroupTitles ?? false;
->>>>>>> Stashed changes
 $total      = array_sum(array_map('count', $grouped));
 ?>
 <div class="faq" id="<?= e($id) ?>" data-faq>
@@ -44,11 +40,7 @@ $total      = array_sum(array_map('count', $grouped));
 
     <?php foreach ($grouped as $category => $items): ?>
     <section class="faq__group" data-faq-group>
-<<<<<<< Updated upstream
-        <?php if ($showGroupTitle): ?>
-=======
         <?php if (!$hideGroupTitles): ?>
->>>>>>> Stashed changes
         <h3 class="faq__group-title"><?= e((string) $category) ?></h3>
         <?php endif; ?>
         <div class="accordion">

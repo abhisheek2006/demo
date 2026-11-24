@@ -20,9 +20,6 @@ final class HomeController extends Controller
 {
     public function index(): Response
     {
-<<<<<<< Updated upstream
-        $faqs     = self::featuredFaqs(Faq::forSchema());
-=======
         $faqs     = Faq::forSchema();
         $faqLookup = [];
         foreach ($faqs as $faq) {
@@ -54,7 +51,6 @@ final class HomeController extends Controller
                 }
             }
         }
->>>>>>> Stashed changes
         $featured = Testimonials::featured();
         $featuredNames = array_column($featured, 'name');
         $remainingTestimonials = array_values(array_filter(
@@ -77,13 +73,8 @@ final class HomeController extends Controller
             'clinic'       => $clinic,
             'doctor'       => $doctor,
             'pillars'      => array_slice(Clinic::pillars(), 0, 2),
-<<<<<<< Updated upstream
-            'testimonials' => $testimonials,
-            'faqs'         => $faqs,
-=======
             'testimonials' => $featured,
             'faqs'         => $homeFaqs,
->>>>>>> Stashed changes
             'jsonLd'       => Seo::graph([
                 Seo::medicalClinic(),
                 Seo::webSite(),

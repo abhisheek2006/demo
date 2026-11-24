@@ -16,14 +16,9 @@
 
 <?= component('page-hero', [
     'eyebrow'   => 'About us',
-<<<<<<< Updated upstream
-    'heading'   => 'About Swasti Homoeo Clinic',
-    'lead'      => \App\Content\Clinic::intro(),
-=======
     'heading'   => 'TRUE HOMOEOPATHY',
     'principles' => true,
     'lead'      => '',
->>>>>>> Stashed changes
     'trail'     => [['name' => 'Home', 'url' => '/'], ['name' => 'About Us']],
 ]) ?>
 
