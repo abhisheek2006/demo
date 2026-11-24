@@ -50,6 +50,11 @@ $waBooking = whatsapp_link(
 
         <div class="hero__media">
             <div class="hero__figure">
+                <div class="hero__slides" data-hero-slides aria-label="Photos of the Swasti Homoeo Clinic">
+                    <img class="hero__slide is-active" src="<?= e(asset('assets/images/hero/swasti-clinic-reception.jpg')) ?>" alt="Reception area at Swasti Homoeo Clinic" width="2000" height="1333" fetchpriority="high" decoding="async" aria-hidden="false">
+                    <img class="hero__slide" src="<?= e(asset('assets/images/hero/swasti-clinic-consultation.jpg')) ?>" alt="Consultation room at Swasti Homoeo Clinic" width="2000" height="1125" loading="lazy" decoding="async" aria-hidden="true">
+                    <img class="hero__slide" src="<?= e(asset('assets/images/hero/swasti-clinic-doctor.jpg')) ?>" alt="Dr. Smriti Das in her consultation room" width="2000" height="1282" loading="lazy" decoding="async" aria-hidden="true">
+                </div>
                 <div class="hero__caption">
                     <p class="hero__caption-title">Treatment that respects your body’s own healing</p>
                 </div>
@@ -91,7 +96,6 @@ $waBooking = whatsapp_link(
                 <img class="doctor-profile-card__photo" src="<?= e(asset('assets/images/about/dr-smriti-das-portrait.jpg')) ?>" alt="Dr. Smriti Das at Swasti Homoeo Clinic" width="420" height="520" loading="lazy">
                 <p class="doctor-profile-card__name"><?= e((string) ($doctor['name'] ?? 'Dr. Smriti Das')) ?></p>
                 <p class="doctor-profile-card__qualification"><?= e($doctor['short_qualification'] ?? 'BHMS, MD (WBUHS)') ?></p>
-                <p class="doctor-profile-card__role">Principal Homoeopathic Physician</p>
             </div>
         </div>
 

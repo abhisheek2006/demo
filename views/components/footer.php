@@ -51,7 +51,7 @@ $emailCompose = $email !== ''
                     <a class="site-footer__logo-link" href="<?= e(url('/')) ?>" aria-label="Swasti Homoeo Clinic — home">
                         <img class="site-footer__logo"
                              src="<?= e(url('/assets/images/icons/logo.png')) ?>"
-                             width="280" height="99"
+                             width="1295" height="344"
                              alt="Swasti Homoeo Clinic">
                     </a>
 

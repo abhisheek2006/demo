@@ -1051,7 +1051,7 @@ blockquote { margin: 0 0 1em; }
     align-items: flex-end;
     padding: clamp(24px, 4vw, 44px);
 
-    background: var(--blue-900) url('../images/hero/swasti-clinic-reception.png') center 54% / cover no-repeat;
+    background: var(--blue-900);
 
     border-radius: var(--radius-lg);
 
