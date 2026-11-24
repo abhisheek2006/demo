@@ -20,7 +20,41 @@ final class HomeController extends Controller
 {
     public function index(): Response
     {
+<<<<<<< Updated upstream
         $faqs     = self::featuredFaqs(Faq::forSchema());
+=======
+        $faqs     = Faq::forSchema();
+        $faqLookup = [];
+        foreach ($faqs as $faq) {
+            $faqLookup[mb_strtolower(trim((string) $faq['question']))] = $faq;
+        }
+        foreach (FaqData::all() as $faq) {
+            $faqLookup[mb_strtolower(trim((string) $faq['question']))] ??= [
+                'question' => (string) $faq['question'],
+                'answer'   => (string) $faq['answer'],
+            ];
+        }
+
+        $homeFaqs = [];
+        $homeQuestions = [
+            'Is homoeopathy safe?' => ['Is homoeopathy safe?', 'Is homoeopathy safe without side effects?'],
+            'Can I take homoeopathic medicines alongside allopathic medication, or should I stop my current medicines?' => [
+                'Can I take homoeopathic medicines alongside allopathic medication, or should I stop my current medicines?',
+            ],
+            'Can homoeopathy be given to infants and children?' => ['Can homoeopathy be given to infants and children?'],
+            'What should I bring to my first appointment?' => ['What should I bring to my first appointment?'],
+            'Where is Swasti Homoeo Clinic located?' => ['Where is Swasti Homoeo Clinic located?'],
+        ];
+        foreach ($homeQuestions as $displayQuestion => $lookupQuestions) {
+            foreach ($lookupQuestions as $lookupQuestion) {
+                $faq = $faqLookup[mb_strtolower($lookupQuestion)] ?? null;
+                if ($faq !== null) {
+                    $homeFaqs[] = ['question' => $displayQuestion, 'answer' => (string) $faq['answer']];
+                    break;
+                }
+            }
+        }
+>>>>>>> Stashed changes
         $featured = Testimonials::featured();
         $featuredNames = array_column($featured, 'name');
         $remainingTestimonials = array_values(array_filter(
@@ -43,8 +77,13 @@ final class HomeController extends Controller
             'clinic'       => $clinic,
             'doctor'       => $doctor,
             'pillars'      => array_slice(Clinic::pillars(), 0, 2),
+<<<<<<< Updated upstream
             'testimonials' => $testimonials,
             'faqs'         => $faqs,
+=======
+            'testimonials' => $featured,
+            'faqs'         => $homeFaqs,
+>>>>>>> Stashed changes
             'jsonLd'       => Seo::graph([
                 Seo::medicalClinic(),
                 Seo::webSite(),

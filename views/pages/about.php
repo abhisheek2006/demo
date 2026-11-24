@@ -16,8 +16,14 @@
 
 <?= component('page-hero', [
     'eyebrow'   => 'About us',
+<<<<<<< Updated upstream
     'heading'   => 'About Swasti Homoeo Clinic',
     'lead'      => \App\Content\Clinic::intro(),
+=======
+    'heading'   => 'TRUE HOMOEOPATHY',
+    'principles' => true,
+    'lead'      => '',
+>>>>>>> Stashed changes
     'trail'     => [['name' => 'Home', 'url' => '/'], ['name' => 'About Us']],
 ]) ?>
 
@@ -35,7 +41,7 @@
         <div class="split__text" data-reveal>
             <p class="eyebrow">The doctor</p>
             <h2 class="section__title"><?= e((string) $doctor['name']) ?></h2>
-            <p class="section__lead"><?= e((string) $doctor['short_qualification']) ?></p>
+            <p class="section__title about-doctor__qualification"><?= e((string) $doctor['short_qualification']) ?></p>
 
             <ul class="tag-list">
                 <?php foreach ((array) $doctor['qualifications'] as $qualification): ?>

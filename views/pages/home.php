@@ -19,14 +19,22 @@ $waBooking = whatsapp_link(
     <div class="hero__bg" aria-hidden="true"></div>
     <div class="container hero__inner">
         <div class="hero__text">
+<<<<<<< Updated upstream
             <h1 class="hero__title">Homoeopathy Clinic in <span>Sri Vijaya Puram</span></h1>
+=======
+            <h1 class="hero__title">Homoeopathy Clinic<br>in <span>Sri Vijaya Puram</span></h1>
+>>>>>>> Stashed changes
 
             <p class="hero__claim">“<?= e($clinic['tagline'] ?? 'We believe in easy, safe and quick recovery') ?>”</p>
 
             <div class="hero-principles">
                 <p class="hero-principles__eyebrow"><strong>TRUE HOMOEOPATHY</strong></p>
                 <p class="hero-principles__promise"><em>Minimal Medicine.<br><strong>Maximum Results.</strong></em></p>
+<<<<<<< Updated upstream
                 <p class="hero-principles__single">Only Single-Constituent Medicines.</p>
+=======
+                <p class="hero-principles__single"><strong>Only Single-Constituent Medicines.</strong></p>
+>>>>>>> Stashed changes
                 <div class="hero-principles__standards" aria-label="Our medicine standards">
                     <span>No Patent Medicines.</span>
                     <span>No Combination Medicines.</span>
@@ -50,10 +58,28 @@ $waBooking = whatsapp_link(
 
         <div class="hero__media">
             <div class="hero__figure">
+<<<<<<< Updated upstream
                 <div class="hero__slides" data-hero-slides aria-label="Photos of the Swasti Homoeo Clinic">
                     <img class="hero__slide is-active" src="<?= e(asset('assets/images/hero/swasti-clinic-reception.jpg')) ?>" alt="Reception area at Swasti Homoeo Clinic" width="2000" height="1333" fetchpriority="high" decoding="async" aria-hidden="false">
                     <img class="hero__slide" src="<?= e(asset('assets/images/hero/swasti-clinic-consultation.jpg')) ?>" alt="Consultation room at Swasti Homoeo Clinic" width="2000" height="1125" loading="lazy" decoding="async" aria-hidden="true">
                     <img class="hero__slide" src="<?= e(asset('assets/images/hero/swasti-clinic-doctor.jpg')) ?>" alt="Dr. Smriti Das in her consultation room" width="2000" height="1282" loading="lazy" decoding="async" aria-hidden="true">
+=======
+                <?php
+                $clinicPhotos = [
+                    ['file' => 'clinic-room-2.jpg', 'alt' => 'Swasti Homoeo Clinic entrance decorated with yellow flower garlands'],
+                    ['file' => 'clinic-room.jpg', 'alt' => 'Consultation room at Swasti Homoeo Clinic in Garacharma'],
+                    ['file' => 'clinic-room-3.jpg', 'alt' => 'Reception area at Swasti Homoeo Clinic'],
+                    ['file' => 'clinic-room-5.jpg', 'alt' => 'Clinic interior and waiting area at Swasti Homoeo Clinic'],
+                ];
+                ?>
+                <div class="hero__slides" data-hero-slides>
+                    <?php foreach ($clinicPhotos as $index => $photo): ?>
+                    <img class="hero__slide<?= $index === 0 ? ' is-active' : '' ?>"
+                         src="<?= e(image_url('/assets/images/hero/' . $photo['file'])) ?>"
+                         alt="<?= e($photo['alt']) ?>" width="1600" height="900" decoding="async"
+                         aria-hidden="<?= $index === 0 ? 'false' : 'true' ?>"<?= $index === 0 ? ' fetchpriority="high"' : '' ?>>
+                    <?php endforeach; ?>
+>>>>>>> Stashed changes
                 </div>
                 <div class="hero__caption">
                     <p class="hero__caption-title">Treatment that respects your body’s own healing</p>
@@ -92,10 +118,21 @@ $waBooking = whatsapp_link(
 <section class="section section--about">
     <div class="container split">
         <div class="split__media" data-reveal>
+<<<<<<< Updated upstream
             <div class="doctor-profile-card">
                 <img class="doctor-profile-card__photo" src="<?= e(asset('assets/images/about/dr-smriti-das-portrait.jpg')) ?>" alt="Dr. Smriti Das at Swasti Homoeo Clinic" width="420" height="520" loading="lazy">
                 <p class="doctor-profile-card__name"><?= e((string) ($doctor['name'] ?? 'Dr. Smriti Das')) ?></p>
                 <p class="doctor-profile-card__qualification"><?= e($doctor['short_qualification'] ?? 'BHMS, MD (WBUHS)') ?></p>
+=======
+            <div class="split__frame">
+                <img src="<?= e(image_url('/assets/images/about/doctor-smriti-das.jpg')) ?>"
+                     alt="<?= e($doctor['image_alt'] ?? 'Dr. Smriti Das') ?>"
+                     width="700" height="1050" loading="lazy" decoding="async">
+            </div>
+            <div class="split__badge">
+                <p class="split__badge-value"><?= e($doctor['name'] ?? 'Dr. Smriti Das') ?></p>
+                <p class="split__badge-label"><?= e($doctor['short_qualification'] ?? 'BHMS, MD (WBUHS)') ?></p>
+>>>>>>> Stashed changes
             </div>
         </div>
 
@@ -171,9 +208,15 @@ $waBooking = whatsapp_link(
         </header>
 
         <?= component('faq-accordion', [
+<<<<<<< Updated upstream
             'grouped' => ['Featured questions' => $faqs],
             'id' => 'home-faq',
             'showGroupTitle' => false,
+=======
+            'grouped' => ['Common questions' => $faqs],
+            'id' => 'home-faq',
+            'hideGroupTitles' => true,
+>>>>>>> Stashed changes
         ]) ?>
 
         <p class="section__more">

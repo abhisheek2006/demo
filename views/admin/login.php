@@ -14,7 +14,11 @@ $errors = is_array($errors ?? null) ? $errors : [];
 
 <div class="auth-card">
     <div class="auth-card__head">
+<<<<<<< Updated upstream
         <img class="auth-card__logo" src="<?= e(url('/assets/images/icons/logo.png')) ?>" width="52" height="52" alt="">
+=======
+        <img class="auth-card__logo" src="/assets/images/icons/logo.png" width="130" height="36" alt="Swasti Homoeo Clinic">
+>>>>>>> Stashed changes
         <h1 class="auth-card__title">Clinic admin sign in</h1>
         <p class="auth-card__sub"><?= e((string) ($clinic['name'] ?? '')) ?> · Sri Vijaya Puram</p>
     </div>

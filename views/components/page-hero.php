@@ -9,6 +9,7 @@
  * @var string|null $image
  * @var string|null $imageAlt
  * @var string|null $variant
+ * @var bool $principles
  */
 $eyebrow   = $eyebrow   ?? null;
 $heading   = $heading   ?? '';
@@ -17,6 +18,7 @@ $trail     = $trail     ?? [];
 $image     = $image     ?? null;
 $imageAlt  = $imageAlt  ?? null;
 $variant   = $variant   ?? 'blue';
+$principles = $principles ?? false;
 $crumbs    = breadcrumb_trail($trail);
 ?>
 <section class="page-hero page-hero--<?= e($variant) ?>">
@@ -44,7 +46,24 @@ $crumbs    = breadcrumb_trail($trail);
                 <p class="eyebrow eyebrow--light"><?= e($eyebrow) ?></p>
             <?php endif; ?>
 
-            <h1 class="page-hero__title"><?= e($heading) ?></h1>
+            <?php if (!empty($heading)): ?>
+                <h1 class="page-hero__title"><?= e($heading) ?></h1>
+            <?php endif; ?>
+
+            <?php if ($principles): ?>
+            <div class="hero-principles">
+                <p class="hero-principles__promise"><em>Minimal Medicine.<br><strong>Maximum Results.</strong></em></p>
+                <p class="hero-principles__single"><strong>Only Single-Constituent Medicines.</strong></p>
+                <div class="hero-principles__standards" aria-label="Our medicine standards">
+                    <span>No Patent Medicines.</span>
+                    <span>No Combination Medicines.</span>
+                    <span>No Syrups.</span>
+                    <span>No Combination Drops.</span>
+                </div>
+                <p class="hero-principles__authentic"><strong><em>Authentic. Individualised Prescriptions.</em></strong></p>
+                <p class="hero-principles__closing">Following the principles of <em>Classical Homoeopathy.</em></p>
+            </div>
+            <?php endif; ?>
 
             <?php if (!empty($lead)): ?>
                 <p class="page-hero__lead"><?= e($lead) ?></p>
