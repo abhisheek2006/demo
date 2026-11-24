@@ -44,12 +44,31 @@ final class Faq
             );
 
             if ($rows !== []) {
-                return array_values(array_filter($rows, static function (array $row): bool {
+                $rows = array_values(array_filter($rows, static function (array $row): bool {
                     $question = trim((string) ($row['question'] ?? ''));
 
                     return strcasecmp($question, 'Do you accept insurance?') !== 0
                         && !in_array($question, self::HIDDEN_PUBLIC_QUESTIONS, true);
                 }));
+                $canonical = [];
+                foreach (FaqData::all() as $default) {
+                    $canonical[mb_strtolower(trim($default['question']))] = $default;
+                }
+                $aliases = [
+                    'is homoeopathy safe without side effects?' => 'is homoeopathy safe?',
+                    'can i stop my allopathic medicines once i feel better?' => 'can i take homoeopathic medicines alongside allopathic medication, or should i stop my current medicines?',
+                ];
+                foreach ($rows as &$row) {
+                    $key = mb_strtolower(trim((string) ($row['question'] ?? '')));
+                    $key = $aliases[$key] ?? $key;
+                    if (isset($canonical[$key])) {
+                        $row['question'] = $canonical[$key]['question'];
+                        $row['answer'] = $canonical[$key]['answer'];
+                    }
+                }
+                unset($row);
+
+                return $rows;
             }
         } catch (Throwable) {
             // Fall through to bundled content.

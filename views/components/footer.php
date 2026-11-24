@@ -55,7 +55,9 @@ $emailCompose = $email !== ''
                              alt="Swasti Homoeo Clinic">
                     </a>
 
+                    <?php if (($page ?? '') !== 'home'): ?>
                     <p class="site-footer__tagline"><?= e((string) ($clinic['tagline'] ?? Clinic::TAGLINE)) ?></p>
+                    <?php endif; ?>
                     <span class="site-footer__rule" aria-hidden="true"></span>
 
                     <p class="site-footer__about">

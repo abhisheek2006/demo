@@ -19,12 +19,6 @@
 
 <section class="section">
     <div class="container container--narrow">
-        <p class="faq-lede">
-            <?= icon('info', 'icon icon--xs', 16) ?>
-            <strong><?= e((string) $total) ?> questions</strong> across <?= e((string) count($grouped)) ?> topics.
-            Everything here is editable by the clinic and was written to be read, not skimmed.
-        </p>
-
         <?= component('faq-accordion', [
             'grouped'    => $grouped,
             'id'         => 'faq-page',

@@ -53,13 +53,8 @@ final class FaqData
                         . 'available on request.',
                 ],
                 [
-                    'q' => 'Is homoeopathy safe without side effects?',
-                    'a' => 'Homoeopathic medicines are highly diluted and, when prescribed in the correct '
-                        . 'potency and dose, are generally very well tolerated. "No side effects" is not '
-                        . 'the right claim, though — some patients notice a temporary change in '
-                        . 'symptoms after starting a remedy, and the remedy must be chosen for the right '
-                        . 'person. The real risk is delaying necessary medical care, which is why we '
-                        . 'always tell you when a condition needs hospital treatment.',
+                    'q' => 'Is homoeopathy safe?',
+                    'a' => 'Safety depends on the product. Many highly diluted homeopathic products may contain little or none of the starting substance, but some products labelled homeopathic can contain active ingredients and may cause side effects or interact with medicines. Do not use homoeopathy to replace proven treatment or delay medical care. Ask a qualified health professional or pharmacist about any product you plan to use.',
                 ],
                 [
                     'q' => 'What are your consultation timings?',
@@ -102,12 +97,8 @@ final class FaqData
             ],
             'Treatment and results' => [
                 [
-                    'q' => 'Can I stop my allopathic medicines once I feel better?',
-                    'a' => 'No. Do not stop, reduce or change any prescribed medicine without speaking to '
-                        . 'the doctor who prescribed it. In particular, insulin, blood-pressure and thyroid '
-                        . 'medicines, anti-epileptics, steroids and antibiotics must continue exactly as '
-                        . 'prescribed. Our aim is to work alongside your medical care, never to replace it '
-                        . 'unilaterally.',
+                    'q' => 'Can I take homoeopathic medicines alongside allopathic medication, or should I stop my current medicines?',
+                    'a' => 'Do not stop, reduce, or change any prescribed medicine without speaking with the clinician who prescribed it. Tell your doctor or pharmacist about any homoeopathic product you plan to use and show them its label; some products can contain active ingredients and may interact with other medicines. Do not let complementary products delay or replace proven care.',
                 ],
                 [
                     'q' => 'What should I avoid while taking treatment?',

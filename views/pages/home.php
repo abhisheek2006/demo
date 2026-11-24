@@ -21,8 +21,6 @@ $waBooking = whatsapp_link(
         <div class="hero__text">
             <h1 class="hero__title">Homoeopathy Clinic<br>in <span>Sri Vijaya Puram</span></h1>
 
-            <p class="hero__claim">“<?= e($clinic['tagline'] ?? 'We believe in easy, safe and quick recovery') ?>”</p>
-
             <div class="hero-principles">
                 <p class="hero-principles__eyebrow"><strong>TRUE HOMOEOPATHY</strong></p>
                 <p class="hero-principles__promise"><em>Minimal Medicine.<br><strong>Maximum Results.</strong></em></p>
@@ -120,18 +118,6 @@ $waBooking = whatsapp_link(
             <p class="section__lead">
                 <?= e(\App\Content\Clinic::intro()) ?>
             </p>
-
-            <ul class="pillars">
-                <?php foreach ($pillars as $pillar): ?>
-                <li class="pillar">
-                    <span class="pillar__icon"><?= icon($pillar['icon'], 'icon', 22) ?></span>
-                    <div>
-                        <h3 class="pillar__title"><?= e($pillar['title']) ?></h3>
-                        <p class="pillar__text"><?= e($pillar['text']) ?></p>
-                    </div>
-                </li>
-                <?php endforeach; ?>
-            </ul>
 
             <div class="split__actions">
                 <a class="btn btn--primary" href="<?= e(url('/about-us')) ?>">Read about the doctor <?= icon('arrow-right', 'icon icon--xs', 16) ?></a>

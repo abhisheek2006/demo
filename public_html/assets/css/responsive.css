@@ -277,13 +277,8 @@
         --header-h: 64px;
     }
 
-    html {
-        overflow-x: hidden;
-    }
-
     body {
         font-size: 16px;
-        overflow-x: hidden;
     }
 
     /* Header */
