@@ -24,7 +24,6 @@ final class PageController extends Controller
             'title'       => 'Dr. Smriti Das, BHMS, MD | ' . Clinic::NAME,
             'description' => 'Meet Dr. Smriti Das (BHMS, MD—WBUHS) and learn about her training, experience and approach at Swasti Homoeo Clinic in Garacharma, Sri Vijaya Puram.',
             'canonical'   => url('/about-us'),
-            'image'       => url('/assets/images/og/og-about.png'),
         ]);
 
         return $this->view('pages/about', [

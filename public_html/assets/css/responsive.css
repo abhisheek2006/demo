@@ -38,7 +38,7 @@
         --header-h: 70px;
     }
 
-
+    /* Header */
     .nav {
         display: none;
     }
@@ -206,10 +206,6 @@
    SMALL TABLETS
    -------------------------------------------------------------------------- */
 @media (max-width: 900px) {
-    .form--booking .form__grid {
-        grid-template-columns: minmax(0, 1fr);
-    }
-
     .cards {
         grid-template-columns: minmax(0, 1fr);
     }
@@ -278,7 +274,7 @@
     :root {
         --section-y: 56px;
         --gutter: 18px;
-        --header-h: 68px;
+        --header-h: 64px;
     }
 
     html {
@@ -288,20 +284,9 @@
     body {
         font-size: 16px;
         overflow-x: hidden;
-        padding-top: var(--header-h);
     }
 
-    .header {
-        position: fixed;
-        inset: 0 0 auto;
-        width: 100%;
-        z-index: 90;
-    }
-
-    .header__inner {
-        min-height: 68px;
-    }
-
+    /* Header */
     .brand__mark {
         width: 38px;
         height: 38px;
@@ -354,7 +339,7 @@
 
 
     .hero__caption {
-        padding: 34px 18px 16px;
+        padding: 0;
     }
 
     /* Stats */

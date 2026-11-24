@@ -12,8 +12,6 @@
  * @var array<int,array{file:string,records:int,size:int,modified:int}> $inventory
  * @var bool $mailReady
  * @var string $mailReason
- * @var bool $mongoConfigured
- * @var bool $mongoDriverAvailable
  * @var bool $appKeySet
  * @var bool $debug
  */
@@ -41,9 +39,9 @@ $unread           = (int) ($messageCounts['unread'] ?? 0);
 <div class="flash flash--error" role="alert">
     <span class="flash__icon"><?= icon('alert', 'icon icon--sm', 20) ?></span>
     <div class="flash__body">
-        <p class="flash__text"><strong>MongoDB is not available.</strong> New appointments and messages are
-        saved to <code>storage/submissions/</code> until MongoDB connects. They appear in the admin lists;
-        record edits require MongoDB.</p>
+        <p class="flash__text"><strong>The database is not available.</strong> Appointment and message forms are
+        still accepting submissions — they are being written to <code>storage/submissions/</code> instead of
+        MySQL so nothing is lost.</p>
         <?php if ($dbError !== ''): ?>
             <p class="flash__meta">Driver message: <?= e(truncate($dbError, 160)) ?></p>
         <?php endif; ?>
@@ -80,7 +78,7 @@ $unread           = (int) ($messageCounts['unread'] ?? 0);
 <?php endif; ?>
 
 <div class="stat-cards">
-    <a class="stat-card<?= (int) ($statusCounts['new'] ?? 0) > 0 ? ' stat-card--alert' : '' ?>" href="<?= e(url('/admin/appointments?status=new')) ?>">
+    <a class="stat-card" href="<?= e(url('/admin/appointments?status=new')) ?>">
         <span class="stat-card__label">New requests</span>
         <span class="stat-card__value"><?= e((string) ($statusCounts['new'] ?? 0)) ?></span>
         <span class="stat-card__meta">Awaiting confirmation</span>
@@ -113,7 +111,9 @@ $unread           = (int) ($messageCounts['unread'] ?? 0);
             <div class="empty">
                 <?= icon('inbox', 'icon', 28) ?>
                 <p class="empty__text">
-                    No appointment requests have come in yet.
+                    <?= $dbOk
+                        ? 'No appointment requests have come in yet.'
+                        : 'The database is unavailable, so this list is empty. Check the fallback files below.' ?>
                 </p>
             </div>
         <?php else: ?>
@@ -163,9 +163,7 @@ $unread           = (int) ($messageCounts['unread'] ?? 0);
         <ul class="check-list check-list--status">
             <li>
                 <?= icon($dbOk ? 'check-circle' : 'alert', 'icon icon--sm', 18) ?>
-                <span><strong>MongoDB</strong>
-                    <?= $dbOk ? 'connected' : (!$mongoConfigured ? 'URI not configured' : (!$mongoDriverAvailable ? 'PHP mongodb extension is required' : 'unavailable — using file fallback')) ?>
-                </span>
+                <span><strong>MySQL</strong> <?= $dbOk ? 'connected' : 'unavailable — using file fallback' ?></span>
             </li>
             <li>
                 <?= icon($mailReady ? 'check-circle' : 'alert', 'icon icon--sm', 18) ?>
@@ -195,8 +193,8 @@ $unread           = (int) ($messageCounts['unread'] ?? 0);
                 </p>
             <?php else: ?>
                 <p class="muted">
-                    These records were written to <code>storage/submissions/</code> because MongoDB was
-                    unavailable. Import them once MongoDB is working.
+                    These records were written to <code>storage/submissions/</code> because MySQL was
+                    unavailable. Import them once the database is working.
                 </p>
                 <ul class="file-list">
                     <?php foreach ($inventory as $file): ?>
@@ -218,7 +216,6 @@ $unread           = (int) ($messageCounts['unread'] ?? 0);
             <div class="button-row">
                 <a class="btn btn--outline btn--xs" href="<?= e(url('/admin/faqs')) ?>"><?= icon('list', 'icon icon--xs', 14) ?> Manage FAQs</a>
                 <a class="btn btn--outline btn--xs" href="<?= e(url('/admin/messages')) ?>"><?= icon('inbox', 'icon icon--xs', 14) ?> Read messages</a>
-                <a class="btn btn--outline btn--xs" href="<?= e(url('/admin/maintenance')) ?>"><?= icon('clock', 'icon icon--xs', 14) ?> Maintenance mode</a>
                 <a class="btn btn--outline btn--xs" href="<?= e(url('/sitemap.xml')) ?>" target="_blank" rel="noopener"><?= icon('globe', 'icon icon--xs', 14) ?> sitemap.xml</a>
                 <a class="btn btn--outline btn--xs" href="<?= e(url('/health')) ?>" target="_blank" rel="noopener"><?= icon('activity', 'icon icon--xs', 14) ?> Health check</a>
             </div>

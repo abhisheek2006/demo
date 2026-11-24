@@ -7,64 +7,6 @@
 
     var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    /* The public site is static on Vercel, so maintenance status is checked
-       through the PHP API before the page is revealed. API failures fail open. */
-    if (document.documentElement.classList.contains('maintenance-checking')
-        && !document.querySelector('[data-admin]')
-        && typeof window.fetch === 'function'
-    ) {
-        var root = document.documentElement;
-        var pendingTimeout = window.setTimeout(function () {
-            root.classList.remove('maintenance-checking');
-        }, 4000);
-
-        window.fetch('/api/maintenance-status.php', {
-            method: 'GET',
-            credentials: 'same-origin',
-            cache: 'no-store',
-            headers: { 'Accept': 'application/json' }
-        })
-            .then(function (response) {
-                if (!response.ok) {
-                    throw new Error('Maintenance status is unavailable.');
-                }
-                return response.json();
-            })
-            .then(function (status) {
-                window.clearTimeout(pendingTimeout);
-                root.classList.remove('maintenance-checking');
-
-                if (!status || status.enabled !== true || !document.body) {
-                    return;
-                }
-
-                root.classList.add('maintenance-active');
-                var screen = document.createElement('main');
-                screen.className = 'maintenance-screen';
-                screen.setAttribute('role', 'main');
-                screen.setAttribute('aria-labelledby', 'maintenance-title');
-                screen.innerHTML = '<section class="maintenance-screen__card">'
-                    + '<span class="maintenance-screen__mark" aria-hidden="true">S</span>'
-                    + '<p class="maintenance-screen__eyebrow">Swasti Homoeo Clinic</p>'
-                    + '<h1 id="maintenance-title">We’ll be back soon</h1>'
-                    + '<p class="maintenance-screen__message" data-maintenance-message></p>'
-                    + '<a class="maintenance-screen__call" href="tel:+917980644867">Call the clinic</a>'
-                    + '</section>';
-
-                var message = screen.querySelector('[data-maintenance-message]');
-                message.textContent = typeof status.message === 'string' && status.message.trim()
-                    ? status.message
-                    : 'We are making a few updates to our website. Please check back soon.';
-                document.body.appendChild(screen);
-            })
-            .catch(function () {
-                window.clearTimeout(pendingTimeout);
-                root.classList.remove('maintenance-checking');
-            });
-    } else {
-        document.documentElement.classList.remove('maintenance-checking');
-    }
-
     /* --------------------------------------------------------- scroll reveal */
 
     var revealables = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'));
@@ -87,111 +29,6 @@
                 observer.observe(el);
             });
         }
-    }
-
-    /* -------------------------------------------- today's clinic hours */
-
-    var hoursTable = document.querySelector('[data-hours-table]');
-
-    if (hoursTable && window.Intl && Intl.DateTimeFormat) {
-        var clinicTimeFormatter = new Intl.DateTimeFormat('en-GB', {
-            timeZone: 'Asia/Kolkata',
-            weekday: 'long',
-            hour: '2-digit',
-            minute: '2-digit',
-            hourCycle: 'h23'
-        });
-
-        var formatClinicTime = function (minutes) {
-            var hour = Math.floor(minutes / 60);
-            var minute = minutes % 60;
-            var suffix = hour >= 12 ? 'PM' : 'AM';
-            var displayHour = hour % 12 || 12;
-            return displayHour + ':' + (minute < 10 ? '0' : '') + minute + ' ' + suffix;
-        };
-
-        var updateClinicHours = function () {
-            var parts = {};
-            clinicTimeFormatter.formatToParts(new Date()).forEach(function (part) {
-                if (part.type !== 'literal') {
-                    parts[part.type] = part.value;
-                }
-            });
-
-            var clinicToday = (parts.weekday || '').toLowerCase();
-            var nowMinutes = (parseInt(parts.hour || '0', 10) * 60) + parseInt(parts.minute || '0', 10);
-
-            Array.prototype.forEach.call(hoursTable.querySelectorAll('[data-hours-day]'), function (row) {
-                var isToday = row.getAttribute('data-hours-day') === clinicToday;
-                row.classList.toggle('hours__row--today', isToday);
-
-                var label = row.querySelector('.hours__today-label');
-                if (isToday && !label) {
-                    label = document.createElement('span');
-                    label.className = 'hours__today-label';
-                    label.textContent = 'Today';
-                    row.querySelector('th').appendChild(label);
-                } else if (!isToday && label) {
-                    label.remove();
-                }
-
-                var state = row.querySelector('[data-hours-state]');
-                if (!state) {
-                    return;
-                }
-
-                state.replaceChildren();
-                if (!isToday) {
-                    return;
-                }
-
-                var periods = [];
-                try {
-                    periods = JSON.parse(row.getAttribute('data-hours-periods') || '[]');
-                } catch (error) {
-                    periods = [];
-                }
-
-                var isClosed = row.getAttribute('data-hours-closed') === 'true';
-                var isOpen = false;
-                var nextOpening = null;
-
-                periods.forEach(function (period) {
-                    var open = (parseInt(period.open.slice(0, 2), 10) * 60)
-                        + parseInt(period.open.slice(3, 5), 10);
-                    var close = (parseInt(period.close.slice(0, 2), 10) * 60)
-                        + parseInt(period.close.slice(3, 5), 10);
-
-                    if (nowMinutes >= open && nowMinutes < close) {
-                        isOpen = true;
-                    } else if (open > nowMinutes && (nextOpening === null || open < nextOpening)) {
-                        nextOpening = open;
-                    }
-                });
-
-                var badge = document.createElement('span');
-                badge.className = isOpen ? 'badge badge--success' : 'badge badge--muted';
-                if (isOpen) {
-                    badge.textContent = 'Open now';
-                } else if (isClosed) {
-                    badge.textContent = 'Closed';
-                } else if (nextOpening !== null) {
-                    badge.textContent = 'Opens at ' + formatClinicTime(nextOpening);
-                } else {
-                    badge.textContent = 'Closed for today';
-                }
-                state.appendChild(badge);
-            });
-        };
-
-        updateClinicHours();
-        window.setInterval(updateClinicHours, 60000);
-        window.addEventListener('focus', updateClinicHours);
-        document.addEventListener('visibilitychange', function () {
-            if (!document.hidden) {
-                updateClinicHours();
-            }
-        });
     }
 
 
@@ -259,7 +96,6 @@
         var timer = null;
         var onScreen = false;
         var scrolling = false;
-        var expandedQuote = null;
 
         /* Distance from the track's left edge to a card, independent of which
            element happens to be the offsetParent. */
@@ -324,7 +160,7 @@
                nothing for a visitor to interrupt: keep advancing while the
                section is on screen. Only a background tab or a reduced-motion
                preference stops it. */
-            if (reduceMotion || !onScreen || document.hidden || expandedQuote) {
+            if (!onScreen || document.hidden) {
                 return;
             }
 
@@ -333,65 +169,6 @@
                 start();
             }, ROTATE_DELAY);
         };
-
-        /* Long reviews begin at the same height as the other cards. Let a
-           reader expand one, and pause rotation until they collapse it again. */
-        var addReadMoreControls = function () {
-            cards.forEach(function (card, cardIndex) {
-                var quote = card.querySelector('.testimonial__quote');
-
-                if (!quote || quote.getAttribute('data-read-more-ready') === 'true') {
-                    return;
-                }
-
-                if (quote.scrollHeight <= quote.clientHeight + 2) {
-                    return;
-                }
-
-                quote.setAttribute('data-read-more-ready', 'true');
-                quote.id = quote.id || 'testimonial-quote-' + trackIndex + '-' + cardIndex;
-
-                var button = document.createElement('button');
-                button.type = 'button';
-                button.className = 'testimonial__read-more';
-                button.textContent = 'Read more';
-                button.setAttribute('aria-expanded', 'false');
-                button.setAttribute('aria-controls', quote.id);
-                quote.parentNode.insertBefore(button, quote.nextSibling);
-
-                button.addEventListener('click', function () {
-                    var isExpanded = button.getAttribute('aria-expanded') === 'true';
-
-                    if (isExpanded) {
-                        quote.classList.remove('testimonial__quote--expanded');
-                        button.setAttribute('aria-expanded', 'false');
-                        button.textContent = 'Read more';
-                        expandedQuote = null;
-                        start();
-                        return;
-                    }
-
-                    if (expandedQuote && expandedQuote !== quote) {
-                        expandedQuote.classList.remove('testimonial__quote--expanded');
-                        var previousButton = expandedQuote.parentNode.querySelector('.testimonial__read-more');
-                        if (previousButton) {
-                            previousButton.setAttribute('aria-expanded', 'false');
-                            previousButton.textContent = 'Read more';
-                        }
-                    }
-
-                    expandedQuote = quote;
-                    quote.classList.add('testimonial__quote--expanded');
-                    button.setAttribute('aria-expanded', 'true');
-                    button.textContent = 'Read less';
-                    stop();
-                });
-            });
-        };
-
-        var trackIndex = Array.prototype.indexOf.call(document.querySelectorAll('[data-testimonials]'), track);
-        window.requestAnimationFrame(addReadMoreControls);
-        window.addEventListener('resize', addReadMoreControls);
 
         track.addEventListener('scroll', syncFromScroll, { passive: true });
 
@@ -556,36 +333,6 @@
         });
     });
 
-    /* A free-text reason appears only when the patient chooses that option. */
-    Array.prototype.forEach.call(document.querySelectorAll('[data-own-words-select]'), function (select) {
-        var hiddenReason = document.getElementById(select.getAttribute('data-reason-hidden'));
-        var details = document.getElementById(select.getAttribute('data-reason-details'));
-        var wrapper = details ? details.parentElement : null;
-        if (!hiddenReason || !details || !wrapper) {
-            return;
-        }
-
-        var sync = function (focusDetails) {
-            var custom = select.value === '__custom__';
-            wrapper.hidden = !custom;
-            hiddenReason.disabled = custom;
-            details.disabled = !custom;
-            details.required = custom;
-            if (custom) {
-                hiddenReason.value = '';
-                details.dispatchEvent(new Event('input', { bubbles: true }));
-                if (focusDetails) {
-                    details.focus();
-                }
-            } else {
-                hiddenReason.value = select.value;
-            }
-        };
-
-        sync(false);
-        select.addEventListener('change', function () { sync(true); });
-    });
-
     /* Single-select radio chip groups. */
     Array.prototype.forEach.call(document.querySelectorAll('[data-chip-group]'), function (group) {
         var inputs = Array.prototype.slice.call(group.querySelectorAll('[data-chip-input]'));
@@ -625,6 +372,11 @@
 
     /* ------------------------------------------------- AJAX form submission */
 
+    function csrfToken(form) {
+        var field = form.querySelector('input[name="_token"]');
+        return field ? field.value : '';
+    }
+
     function setCsrfToken(form, token) {
         var field = form.querySelector('input[name="_token"]');
         if (field) {
@@ -638,21 +390,17 @@
         return fetch(url, {
             method: 'POST',
             credentials: 'same-origin',
-            headers: { 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'application/json' }
+            headers: { 'X-Requested-With': 'XMLHttpRequest' }
         })
-            .then(function (response) {
-                if (!response.ok) {
-                    throw new Error('The booking service could not start (HTTP ' + response.status + '). Please try again later or call the clinic.');
-                }
-                return response.json();
-            })
+            .then(function (response) { return response.json(); })
             .then(function (data) {
-                if (!data || data.ok !== true || !data.token) {
-                    throw new Error('The booking security check could not be completed. Please reload the page and try again.');
+                if (data && data.token) {
+                    setCsrfToken(form, data.token);
+                    return data.token;
                 }
-                setCsrfToken(form, data.token);
-                return data.token;
+                return csrfToken(form);
             })
+            .catch(function () { return csrfToken(form); });
     }
 
     function fieldWrap(input) {
@@ -767,13 +515,7 @@
                     });
                 })
                 .then(function (response) {
-                    return response.text().then(function (body) {
-                        var data;
-                        try {
-                            data = JSON.parse(body);
-                        } catch (error) {
-                            throw new Error('The booking service returned an invalid response (HTTP ' + response.status + '). Please call the clinic to arrange your appointment.');
-                        }
+                    return response.json().then(function (data) {
                         return { status: response.status, data: data };
                     });
                 })
@@ -798,11 +540,9 @@
                         showFieldErrors(form, result.data.errors);
                     }
                 })
-                .catch(function (error) {
+                .catch(function () {
                     setBusy(form, false);
-                    setStatus(form, error && error.message
-                        ? error.message
-                        : 'We could not reach the booking service. Check your connection and try again, or call the clinic.', 'error');
+                    setStatus(form, 'We could not reach the server. Check your connection and try again, or call the clinic.', 'error');
                 });
         });
 

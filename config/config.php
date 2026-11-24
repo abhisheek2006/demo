@@ -44,6 +44,17 @@ return [
         'public'    => null,
     ],
 
+    'db' => [
+        'host'     => 'localhost',
+        'port'     => 3306,
+        'database' => '',
+        'username' => '',
+        'password' => '',
+        'charset'  => 'utf8mb4',
+        'collation'=> 'utf8mb4_unicode_ci',
+        'socket'   => '',
+    ],
+
     'mail' => [
         'enabled'     => false,   // becomes true as soon as MAIL_HOST is set
         'transport'   => 'smtp',  // smtp
@@ -74,10 +85,10 @@ return [
         'phone'     => '+917980644867',
         'whatsapp'  => '917980644867',
         'email'     => 'info@swastihomeo.com',
-        'facebook'  => 'https://www.facebook.com/profile.php?id=61559770017827',
-        'instagram' => 'https://www.instagram.com/swasti_homoeoclinic/',
+        'facebook'  => '',
+        'instagram' => '',
         'x'         => '',
-        'youtube'   => 'https://www.youtube.com/live/zF70bfgiM64',
+        'youtube'   => '',
     ],
 
     'security' => [

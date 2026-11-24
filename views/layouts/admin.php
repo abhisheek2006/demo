@@ -15,7 +15,6 @@ $pageTitles = [
     'appointments' => 'Appointments',
     'messages'     => 'Messages',
     'faqs'         => 'FAQ management',
-    'maintenance'  => 'Maintenance mode',
 ];
 $pageTitle  = (string) ($pageTitles[$page ?? ''] ?? 'Admin');
 $authUser   = \App\Models\User::user() ?? [];
@@ -30,9 +29,6 @@ $navSections = [
     ],
     'Content' => [
         ['label' => 'FAQs', 'url' => '/admin/faqs', 'icon' => 'list'],
-    ],
-    'Website' => [
-        ['label' => 'Maintenance mode', 'url' => '/admin/maintenance', 'icon' => 'clock'],
     ],
 ];
 $isActive = static function (string $url, string $page): bool {

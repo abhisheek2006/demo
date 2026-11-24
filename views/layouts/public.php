@@ -40,16 +40,13 @@ $currentPath = $currentPath === '/' ? '/' : rtrim($currentPath, '/');
 <meta property="og:title" content="<?= e($seo['title'] ?? '') ?>">
 <meta property="og:description" content="<?= e($seo['description'] ?? '') ?>">
 <meta property="og:url" content="<?= e($seo['canonical'] ?? url('/')) ?>">
-<meta property="og:image" content="<?= e($seo['image'] ?? url('/assets/images/og/og-default.png')) ?>">
-<meta property="og:image:alt" content="Swasti Homoeo Clinic — homoeopathic clinic in Sri Vijaya Puram">
 <?php if (!empty($seo['published_time'])): ?>
 <meta property="article:published_time" content="<?= e($seo['published_time']) ?>">
 <?php endif; ?>
 
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="<?= e($seo['title'] ?? '') ?>">
 <meta name="twitter:description" content="<?= e($seo['description'] ?? '') ?>">
-<meta name="twitter:image" content="<?= e($seo['image'] ?? url('/assets/images/og/og-default.png')) ?>">
 <?php if (!empty($seo['twitter_site'])): ?>
 <meta name="twitter:site" content="<?= e($seo['twitter_site']) ?>">
 <?php endif; ?>
@@ -59,7 +56,6 @@ $currentPath = $currentPath === '/' ? '/' : rtrim($currentPath, '/');
 <link rel="apple-touch-icon" href="<?= e(url('/assets/images/icons/apple-touch-icon.png')) ?>">
 <link rel="manifest" href="<?= e(url('/site.webmanifest')) ?>">
 
-<script src="<?= e(asset('/assets/js/maintenance-gate.js')) ?>"></script>
 <link rel="stylesheet" href="<?= e(asset('/assets/css/main.css')) ?>">
 <link rel="stylesheet" href="<?= e(asset('/assets/css/footer.css')) ?>">
 <link rel="stylesheet" href="<?= e(asset('/assets/css/responsive.css')) ?>">

@@ -25,7 +25,6 @@ final class Seo
         $title       = (string) ($overrides['title'] ?? self::defaultTitle());
         $description = (string) ($overrides['description'] ?? self::defaultDescription());
         $canonical   = (string) ($overrides['canonical'] ?? ($request !== null ? $request->url($request->path()) : url('/')));
-        $image       = (string) ($overrides['image'] ?? url(Config::string('seo.default_image', '/assets/images/og/og-default.png')));
         $type        = (string) ($overrides['type'] ?? 'website');
 
         if ($title !== $appName && !str_contains($title, $appName)) {
@@ -36,7 +35,6 @@ final class Seo
             'title'            => $title,
             'description'      => truncate($description, 300, ''),
             'canonical'        => $canonical,
-            'image'            => $image,
             'type'             => $type,
             'site_name'        => $appName,
             'locale'           => Config::string('app.locale', 'en_IN'),
@@ -81,13 +79,6 @@ final class Seo
             'url'                  => url('/'),
             'telephone'            => $clinic['phone'],
             'email'                => $clinic['email'],
-            'image'                => [
-                url('/assets/images/hero/clinic-room.jpg'),
-                url('/assets/images/hero/clinic-room-2.jpg'),
-                url('/assets/images/hero/clinic-room-3.jpg'),
-                url('/assets/images/hero/clinic-room-4.jpg'),
-                url('/assets/images/hero/clinic-room-5.jpg'),
-            ],
             'logo'                 => url('/assets/images/icons/logo.png'),
             'currenciesAccepted'   => 'INR',
             'address'              => self::postalAddress(),

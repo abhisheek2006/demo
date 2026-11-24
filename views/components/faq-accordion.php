@@ -7,11 +7,13 @@
  * @var string $id
  * @var bool $searchable
  * @var string $intro
+ * @var bool $showGroupTitle
  */
 $grouped    = $grouped    ?? [];
 $id         = $id         ?? 'faq';
 $searchable = $searchable ?? false;
 $intro      = $intro      ?? null;
+$showGroupTitle = $showGroupTitle ?? true;
 $total      = array_sum(array_map('count', $grouped));
 ?>
 <div class="faq" id="<?= e($id) ?>" data-faq>
@@ -38,7 +40,9 @@ $total      = array_sum(array_map('count', $grouped));
 
     <?php foreach ($grouped as $category => $items): ?>
     <section class="faq__group" data-faq-group>
+        <?php if ($showGroupTitle): ?>
         <h3 class="faq__group-title"><?= e((string) $category) ?></h3>
+        <?php endif; ?>
         <div class="accordion">
             <?php foreach ($items as $item):
                 $question = (string) ($item['question'] ?? $item['q'] ?? '');

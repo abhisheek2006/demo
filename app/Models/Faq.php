@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Content\FaqData;
-use App\Services\MongoDatabase;
+use App\Core\Database;
 use Throwable;
 
 /**
@@ -13,29 +13,54 @@ use Throwable;
  */
 final class Faq
 {
+    /** Questions intentionally retired from the public FAQ. */
+    private const HIDDEN_PUBLIC_QUESTIONS = [
+        'How do I book a consultation?',
+        'Do I need a confirmed appointment, or can I walk in?',
+        'How long does homoeopathic treatment take to show results?',
+        'How many medicines will I be given?',
+        'Do you offer home visits?',
+    ];
+
     /**
      * @return array<int,array<string,mixed>>
      */
     public static function published(?string $category = null): array
     {
-        $rows = array_values(array_filter(self::all(), static fn (array $row): bool => (int) ($row['is_published'] ?? 1) === 1));
+        try {
+            $db    = Database::instance();
+            $params = [];
+            $where  = 'is_published = 1';
+
+            if ($category !== null && $category !== '') {
+                $where .= ' AND category = :category';
+                $params['category'] = $category;
+            }
+
+            $rows = $db->select(
+                'SELECT id, question, answer, category, sort_order, is_published, created_at, updated_at
+                 FROM faqs WHERE ' . $where . ' ORDER BY sort_order ASC, id ASC',
+                $params
+            );
+
+            if ($rows !== []) {
+                return array_values(array_filter($rows, static function (array $row): bool {
+                    $question = trim((string) ($row['question'] ?? ''));
+
+                    return strcasecmp($question, 'Do you accept insurance?') !== 0
+                        && !in_array($question, self::HIDDEN_PUBLIC_QUESTIONS, true);
+                }));
+            }
+        } catch (Throwable) {
+            // Fall through to bundled content.
+        }
+
+        $rows = FaqData::all();
         if ($category !== null && $category !== '') {
             $rows = array_values(array_filter($rows, static fn (array $r): bool => $r['category'] === $category));
         }
 
-        $hiddenPublicQuestions = [
-            'How do I book a consultation?',
-            'Do I need a confirmed appointment, or can I walk in?',
-            'How long does homoeopathic treatment take to show results?',
-            'How many medicines will I be given?',
-            'Do you offer home visits?',
-        ];
-
-        return array_values(array_filter(
-            $rows,
-            static fn (array $row): bool => strcasecmp(trim((string) ($row['question'] ?? '')), 'Do you accept insurance?') !== 0
-                && !in_array(trim((string) ($row['question'] ?? '')), $hiddenPublicQuestions, true)
-        ));
+        return $rows;
     }
 
     /**
@@ -79,21 +104,7 @@ final class Faq
     public static function all(): array
     {
         try {
-            $rows = MongoDatabase::list('faqs', [], ['category' => 1, 'sort_order' => 1, 'id' => 1]);
-            if ($rows !== []) {
-                return $rows;
-            }
-
-            if (MongoDatabase::findOne('settings', ['key' => 'faqs_seeded']) === null) {
-                foreach (FaqData::all() as $row) {
-                    self::create($row);
-                }
-                MongoDatabase::insert('settings', ['key' => 'faqs_seeded', 'created_at' => date('Y-m-d H:i:s')]);
-
-                return MongoDatabase::list('faqs', [], ['category' => 1, 'sort_order' => 1, 'id' => 1]);
-            }
-
-            return [];
+            return Database::instance()->select('SELECT * FROM faqs ORDER BY category ASC, sort_order ASC, id ASC');
         } catch (Throwable) {
             return FaqData::all();
         }
@@ -103,7 +114,7 @@ final class Faq
     public static function find(int $id): ?array
     {
         try {
-            return MongoDatabase::findById('faqs', $id);
+            return Database::instance()->first('SELECT * FROM faqs WHERE id = :id', ['id' => $id]);
         } catch (Throwable) {
             return null;
         }
@@ -112,7 +123,7 @@ final class Faq
     /** @param array<string,mixed> $data */
     public static function create(array $data): int
     {
-        return MongoDatabase::insert('faqs', [
+        return Database::instance()->insert('faqs', [
             'question'     => $data['question'],
             'answer'       => $data['answer'],
             'category'     => $data['category'] ?? 'General',
@@ -126,25 +137,25 @@ final class Faq
     /** @param array<string,mixed> $data */
     public static function update(int $id, array $data): int
     {
-        return MongoDatabase::updateOne('faqs', ['id' => $id], [
+        return Database::instance()->update('faqs', [
             'question'     => $data['question'],
             'answer'       => $data['answer'],
             'category'     => $data['category'] ?? 'General',
             'sort_order'   => (int) ($data['sort_order'] ?? 0),
             'is_published' => (int) ($data['is_published'] ?? 1),
             'updated_at'   => date('Y-m-d H:i:s'),
-        ]) ? 1 : 0;
+        ], 'id = :id', ['id' => $id]);
     }
 
     public static function delete(int $id): int
     {
-        return MongoDatabase::deleteOne('faqs', ['id' => $id]) ? 1 : 0;
+        return Database::instance()->delete('faqs', 'id = :id', ['id' => $id]);
     }
 
     public static function countAll(): int
     {
         try {
-            return MongoDatabase::count('faqs');
+            return (int) Database::instance()->value('SELECT COUNT(*) FROM faqs');
         } catch (Throwable) {
             return count(FaqData::all());
         }

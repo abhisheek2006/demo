@@ -7,7 +7,7 @@ use App\Core\Logger;
 use App\Core\Paths;
 
 /**
- * Append-only JSONL writer used as a durable fallback whenever MongoDB is
+ * Append-only JSONL writer used as a durable fallback whenever MySQL is
  * unavailable. Files live in storage/submissions and are grouped by kind and
  * month, e.g. appointments-2026-10.jsonl.
  */
@@ -57,17 +57,16 @@ final class SubmissionStore
     {
         $dir  = Paths::storage() . '/submissions';
         $kind = self::safeKind($kind);
-        if ($month !== null) {
-            $files = [];
-            foreach ([$month, date('Y-m')] as $candidate) {
-                $file = sprintf('%s/%s-%s.jsonl', $dir, $kind, $candidate);
-                if (is_file($file) && !in_array($file, $files, true)) {
-                    $files[] = $file;
-                }
+        $files = [];
+
+        foreach ([$month, date('Y-m')] as $candidate) {
+            if ($candidate === null) {
+                continue;
             }
-        } else {
-            $files = glob($dir . '/' . $kind . '-????-??.jsonl') ?: [];
-            sort($files, SORT_STRING);
+            $file = sprintf('%s/%s-%s.jsonl', $dir, $kind, $candidate);
+            if (is_file($file) && !in_array($file, $files, true)) {
+                $files[] = $file;
+            }
         }
 
         $rows = [];

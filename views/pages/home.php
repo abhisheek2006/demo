@@ -19,18 +19,23 @@ $waBooking = whatsapp_link(
     <div class="hero__bg" aria-hidden="true"></div>
     <div class="container hero__inner">
         <div class="hero__text">
-            <p class="eyebrow eyebrow--light"><?= icon('leaf', 'icon icon--xs', 15) ?> Classical Homoeopathic Treatment</p>
-
             <h1 class="hero__title">Homoeopathy Clinic in <span>Sri Vijaya Puram</span></h1>
 
             <p class="hero__claim">“<?= e($clinic['tagline'] ?? 'We believe in easy, safe and quick recovery') ?>”</p>
 
-            <p class="hero__lead">
-                Led by <strong class="hero__doctor"><?= e($doctor['name'] ?? 'Dr. Smriti Das') ?></strong>,
-                <span class="nowrap"><?= e($doctor['short_qualification'] ?? 'BHMS, MD (WBUHS)') ?></span> — with
-                <?= e($doctor['experience'] ?? '8+ years of clinical experience') ?>. A classical
-                homoeopathy practice in Garacharma, Sri Vijaya Puram.
-            </p>
+            <div class="hero-principles">
+                <p class="hero-principles__eyebrow"><strong>TRUE HOMOEOPATHY</strong></p>
+                <p class="hero-principles__promise"><em>Minimal Medicine.<br><strong>Maximum Results.</strong></em></p>
+                <p class="hero-principles__single">Only Single-Constituent Medicines.</p>
+                <div class="hero-principles__standards" aria-label="Our medicine standards">
+                    <span>No Patent Medicines.</span>
+                    <span>No Combination Medicines.</span>
+                    <span>No Syrups.</span>
+                    <span>No Combination Drops.</span>
+                </div>
+                <p class="hero-principles__authentic"><strong><em>Authentic. Individualised Prescriptions.</em></strong></p>
+                <p class="hero-principles__closing">Following the principles of <em>Classical Homoeopathy.</em></p>
+            </div>
 
             <div class="hero__actions">
                 <a class="btn btn--white btn--lg" href="<?= e(url('/book-consultation')) ?>">
@@ -45,26 +50,8 @@ $waBooking = whatsapp_link(
 
         <div class="hero__media">
             <div class="hero__figure">
-                <?php
-                $clinicPhotos = [
-                    ['file' => 'clinic-room.jpg', 'alt' => 'Consultation room at Swasti Homoeo Clinic in Garacharma'],
-                    ['file' => 'clinic-room-3.jpg', 'alt' => 'Reception area at Swasti Homoeo Clinic'],
-                    ['file' => 'clinic-room-4.jpg', 'alt' => 'Entrance to Swasti Homoeo Clinic in Garacharma'],
-                    ['file' => 'clinic-room-5.jpg', 'alt' => 'Clinic interior and waiting area at Swasti Homoeo Clinic'],
-                ];
-                ?>
-                <div class="hero__slides" data-hero-slides>
-                    <?php foreach ($clinicPhotos as $index => $photo): ?>
-                    <img class="hero__slide<?= $index === 0 ? ' is-active' : '' ?>"
-                         src="<?= e(image_url('/assets/images/hero/' . $photo['file'])) ?>"
-                         alt="<?= e($photo['alt']) ?>" width="1600" height="900" decoding="async"
-                         aria-hidden="<?= $index === 0 ? 'false' : 'true' ?>"<?= $index === 0 ? ' fetchpriority="high"' : '' ?>>
-                    <?php endforeach; ?>
-                </div>
                 <div class="hero__caption">
-                    <p class="hero__caption-kicker">Classical homoeopathy in Sri Vijaya Puram</p>
                     <p class="hero__caption-title">Treatment that respects your body’s own healing</p>
-                    <p class="hero__caption-text">Individualised remedies selected from your own symptoms and history.</p>
                 </div>
             </div>
 
@@ -100,14 +87,11 @@ $waBooking = whatsapp_link(
 <section class="section section--about">
     <div class="container split">
         <div class="split__media" data-reveal>
-            <div class="split__frame">
-                <img src="<?= e(image_url('/assets/images/about/doctor-smriti-das.jpg')) ?>"
-                     alt="<?= e($doctor['image_alt'] ?? 'Dr. Smriti Das') ?>"
-                     width="700" height="1050" loading="lazy" decoding="async">
-            </div>
-            <div class="split__badge">
-                <p class="split__badge-value"><?= e($doctor['short_qualification'] ?? 'BHMS, MD (WBUHS)') ?></p>
-                <p class="split__badge-label">Homoeopathic Physician</p>
+            <div class="doctor-profile-card">
+                <img class="doctor-profile-card__photo" src="<?= e(asset('assets/images/about/dr-smriti-das-portrait.jpg')) ?>" alt="Dr. Smriti Das at Swasti Homoeo Clinic" width="420" height="520" loading="lazy">
+                <p class="doctor-profile-card__name"><?= e((string) ($doctor['name'] ?? 'Dr. Smriti Das')) ?></p>
+                <p class="doctor-profile-card__qualification"><?= e($doctor['short_qualification'] ?? 'BHMS, MD (WBUHS)') ?></p>
+                <p class="doctor-profile-card__role">Principal Homoeopathic Physician</p>
             </div>
         </div>
 
@@ -117,6 +101,18 @@ $waBooking = whatsapp_link(
             <p class="section__lead">
                 <?= e(\App\Content\Clinic::intro()) ?>
             </p>
+
+            <ul class="pillars">
+                <?php foreach ($pillars as $pillar): ?>
+                <li class="pillar">
+                    <span class="pillar__icon"><?= icon($pillar['icon'], 'icon', 22) ?></span>
+                    <div>
+                        <h3 class="pillar__title"><?= e($pillar['title']) ?></h3>
+                        <p class="pillar__text"><?= e($pillar['text']) ?></p>
+                    </div>
+                </li>
+                <?php endforeach; ?>
+            </ul>
 
             <div class="split__actions">
                 <a class="btn btn--primary" href="<?= e(url('/about-us')) ?>">Read about the doctor <?= icon('arrow-right', 'icon icon--xs', 16) ?></a>
@@ -128,7 +124,7 @@ $waBooking = whatsapp_link(
 
 <section class="section section--testimonials">
     <div class="container">
-        <header class="section__head" data-reveal>
+        <header class="section__head">
             <p class="eyebrow">Patient experiences</p>
             <h2 class="section__title">What patients say</h2>
         </header>
@@ -136,7 +132,7 @@ $waBooking = whatsapp_link(
         <div class="testimonials">
             <div class="testimonials__track" data-testimonials>
             <?php foreach ($testimonials as $testimonial): ?>
-            <figure class="testimonial" data-reveal>
+            <figure class="testimonial">
                 <?= icon('quote', 'testimonial__quote-mark', 34) ?>
                 <blockquote class="testimonial__quote"><?= e($testimonial['quote']) ?></blockquote>
                 <figcaption class="testimonial__meta">
@@ -148,7 +144,7 @@ $waBooking = whatsapp_link(
                     <?php endif; ?>
                     <span>
                         <span class="testimonial__name"><?= e($testimonial['name']) ?></span>
-                        <span class="testimonial__meta-line"><?= !empty($testimonial['source']) ? e((string) $testimonial['source']) : 'Verified patient' ?><?= ($testimonial['when'] ?? '') !== '' ? ' · ' . e((string) $testimonial['when']) : '' ?></span>
+                        <span class="testimonial__meta-line">Verified patient<?= ($testimonial['when'] ?? '') !== '' ? ' · ' . e((string) $testimonial['when']) : '' ?></span>
                     </span>
                     <?= stars((int) $testimonial['rating']) ?>
                 </figcaption>
@@ -167,14 +163,14 @@ $waBooking = whatsapp_link(
 <section class="section section--faq section--soft">
     <div class="container container--narrow">
         <header class="section__head" data-reveal>
-            <p class="eyebrow">Straight answers</p>
             <h2 class="section__title">Frequently asked questions</h2>
-            <p class="section__lead section__lead--center">
-                The questions patients ask most, answered without hedging.
-            </p>
         </header>
 
-        <?= component('faq-accordion', ['grouped' => ['Common questions' => $faqs], 'id' => 'home-faq']) ?>
+        <?= component('faq-accordion', [
+            'grouped' => ['Featured questions' => $faqs],
+            'id' => 'home-faq',
+            'showGroupTitle' => false,
+        ]) ?>
 
         <p class="section__more">
             <a class="btn btn--outline" href="<?= e(url('/faq')) ?>">Read all <?= count(\App\Content\FaqData::all()) ?> questions</a>

@@ -15,7 +15,6 @@ final class Clinic
     public const NAME            = 'Swasti Homoeo Clinic';
     public const LEGAL_NAME      = 'Andaman Homoeo Health Care LLP';
     public const TAGLINE         = 'We believe in easy, safe and quick recovery';
-    public const SERVICE_LINE    = 'Classical Homoeopathic Treatment';
     public const HEADLINE        = 'Homoeopathy Clinic in Sri Vijaya Puram';
     public const ESTABLISHED     = '2017';
     public const LOCALITY        = 'Garacharma, Sri Vijaya Puram';
@@ -29,7 +28,6 @@ final class Clinic
             'name'         => self::NAME,
             'legal_name'   => self::LEGAL_NAME,
             'tagline'      => self::TAGLINE,
-            'service_line' => self::SERVICE_LINE,
             'headline'     => self::HEADLINE,
             'established'  => self::ESTABLISHED,
             'locality'     => self::LOCALITY,
@@ -57,13 +55,12 @@ final class Clinic
         return [
             'NH4 main road, Garacharma',
             'Near Susane roses',
-            'Andaman & Nicobar Islands 744105',
         ];
     }
 
     public static function addressOneLine(): string
     {
-        return 'NH4 main road, Garacharma, Near Susane roses, Andaman & Nicobar Islands 744105';
+        return 'NH4 main road, Garacharma, near Susane roses';
     }
 
     /**
@@ -74,20 +71,21 @@ final class Clinic
      */
     public static function mapQuery(): string
     {
-        return '11.6152895, 92.7046332';
+        return 'SWASTI HOMOEO CLINIC | Dr. Smriti Das, BHMS, MD (Hom) | NH4 main road, '
+            . 'Garacharma, near Susane roses';
     }
 
-    /** Location search URL for the clinic's schema.org hasMap property. */
+    /**
+     * Google Maps link for the clinic, used by the footer location icon, the
+     * contact page button and the schema.org hasMap property.
+     *
+     * Searches by place name so Google lands on the clinic listing rather than
+     * a bare lat/lng point.
+     */
     public static function mapUrl(): string
     {
         return 'https://www.google.com/maps/search/?api=1&query='
             . rawurlencode(self::mapQuery());
-    }
-
-    /** Google Maps directions pinned to the clinic entrance coordinates. */
-    public static function directionsUrl(): string
-    {
-        return 'https://www.google.com/maps/dir/?api=1&destination=11.6152895%2C92.7046332';
     }
 
     /**
@@ -182,7 +180,7 @@ final class Clinic
     }
 
     /**
-     * The three "why choose us" pillars.
+     * The clinic's care pillars shown on the homepage.
      *
      * @return array<int,array{title:string,text:string,icon:string}>
      */
@@ -231,12 +229,9 @@ final class Clinic
      */
     public static function intro(): string
     {
-        return 'Swasti Homeo Clinic offers Affordable Homoeopathy Consultation in Port Blair, providing '
-            . 'in-depth case taking, review of previous medical records, and accurate prescriptions '
-            . 'based on classical homeopathic principles. Each consultation includes personalised '
-            . 'guidance on diet and lifestyle, ensuring holistic and long-lasting healing. With '
-            . 'authentic medicines available through the clinic\'s own pharmacy and minimal consultation '
-            . 'fees, patients receive effective, ethical, and budget-friendly care.';
+        return 'Swasti Homoeo Clinic is led by Dr. Smriti Das (BHMS, MD — WBUHS), with over eight '
+            . 'years of clinical experience. We offer careful, individualised care and a clear plan '
+            . 'you can follow.';
     }
 
     /**
@@ -249,8 +244,9 @@ final class Clinic
         return [
             [
                 'title' => 'Who we are',
-                'body'  => 'Swasti Homoeo Clinic ("we", "us") provides the clinic services described in '
-                    . 'this policy. For any question about this policy or your health information, '
+                'body'  => 'Swasti Homoeo Clinic ("we", "us") is operated by ' . self::LEGAL_NAME . ', '
+                    . 'a Limited Liability Partnership registered in Sri Vijaya Puram, Andaman and Nicobar '
+                    . 'Islands, India. For any question about this policy or your health information, '
                     . 'contact us at ' . Config::string('clinic.email', 'info@swastihomeo.com') . '.',
             ],
             [
@@ -274,8 +270,7 @@ final class Clinic
                 'title' => 'How your information is stored',
                 'body'  => 'Consultation details are stored in our own clinic database, on servers '
                     . 'hosted by our web hosting provider in India, protected by access controls and '
-                    . 'encrypted in transit over HTTPS. Paper records, where kept, are stored in a '
-                    . 'locked cabinet at the clinic. We retain enquiry details only as long as needed '
+                    . 'encrypted in transit over HTTPS. We retain enquiry details only as long as needed '
                     . 'for your care and our legal obligations.',
             ],
             [

@@ -21,12 +21,10 @@ final class Doctor
             'short_qualification' => 'BHMS, MD (WBUHS)',
             'experience'  => '8+ years of clinical experience',
             'experience_years' => 8,
-            'role'        => 'Homoeopathic Physician',
-            'image'       => '/assets/images/about/doctor-smriti-das.jpg',
-            'image_alt'   => 'Photograph of Dr. Smriti Das, Homoeopathic Physician at Swasti Homoeo Clinic, Sri Vijaya Puram',
-            'registration_note' => 'Registered with the National Commission for Homoeopathy (NCH), '
-                . 'National Register of Homoeopathy (NRH), registration no. NRH/0030897; also '
-                . 'registered under the Central Council of Homoeopathy (CCH), CRH no. 149349.',
+            'role'        => 'Principal Homoeopathic Physician',
+            'registration_note' => 'Registered homoeopathic practitioner licensed to practise in '
+                . 'Andaman and Nicobar Islands. Registration particulars are available on request and '
+                . 'are displayed in the clinic.',
             'languages'   => self::languages(),
         ];
     }
@@ -46,7 +44,6 @@ final class Doctor
                 . Clinic::NAME . ', ' . Clinic::LOCALITY . '.',
             'medicalSpecialty' => 'Homeopathy',
             'url'         => url('/about-us#doctor'),
-            'image'       => url($profile['image']),
             'telephone'   => Clinic::info()['phone'],
             'email'       => Clinic::info()['email'],
             'worksFor'    => ['@id' => url('/#clinic')],
@@ -62,23 +59,37 @@ final class Doctor
     {
         return [
             [
-                'heading' => '',
-                'body'    => 'Dr. Smriti is a well experienced physician with profound clinical knowledge, '
-                    . 'she is committed and dedicated towards alleviating patients’ illnesses since '
-                    . 'she has started her clinical journey.',
+                'heading' => 'Training in classical homoeopathy',
+                'body'    => 'Dr. Smriti Das completed her BHMS and then her MD in Homeopathy at the '
+                    . 'West Bengal University of Health Sciences. Her postgraduate work focused on '
+                    . 'classical prescribing — repertorised case analysis, individualised remedy '
+                    . 'selection and follow-up of the totality of symptoms — rather than on the '
+                    . 'shortcut of prescribing for a named diagnosis alone.',
             ],
             [
-                'heading' => '',
-                'body'    => 'She pursued her graduation from D.N.De HMC&H under West Bengal University of Health Sciences.',
+                'heading' => 'Eight years of island practice',
+                'body'    => 'Most of her clinical years have been spent in Sri Vijaya Puram, which shapes the '
+                    . 'way the clinic works. Patients here travel for consultations, and many arrive '
+                    . 'after months of interrupted treatment. Practical care means shorter follow-up '
+                    . 'intervals, a written plan that fits a real household routine, and remedies that '
+                    . 'a family can actually store and administer correctly.',
             ],
             [
-                'heading' => '',
-                'body'    => 'She pursued her post-graduation at Mahesh Bhattacharya HMC&H under West Bengal University of Health Sciences.',
+                'heading' => 'Paediatric and women’s health',
+                'body'    => 'A large share of the caseload is children with recurrent respiratory and '
+                    . 'digestive complaints, and women with menstrual, hormonal and pregnancy-related '
+                    . 'concerns. Working with these groups demands caution about potency and dose, and '
+                    . 'a willingness to say clearly when a child or a pregnant patient needs blood '
+                    . 'tests, an ultrasound, antibiotics or specialist referral rather than a remedy.',
             ],
             [
-                'heading' => '',
-                'body'    => 'She received the prestigious academic excellence award, the Dr. Malati Allen Noble Award in 2017, '
-                    . 'world’s largest award ceremony in the field of Homoeopathy.',
+                'heading' => 'Honest about limits',
+                'body'    => 'Not everything can be treated homoeopathically. Dr. Das is explicit about '
+                    . 'that boundary: acute emergencies, fractures, advanced cancer, active tuberculosis, '
+                    . 'severe malnutrition and certain psychiatric emergencies are referred to hospital '
+                    . 'care. Where homoeopathy is appropriate, she will tell you how long to expect it to '
+                    . 'take and what improvement should look like at each review — and if it is not '
+                    . 'happening, the prescription changes.',
             ],
         ];
     }
@@ -125,6 +136,6 @@ final class Doctor
      */
     public static function languages(): array
     {
-        return ['English', 'Hindi', 'Bengali'];
+        return ['English', 'Hindi', 'Bengali', 'Kokborok (basic)'];
     }
 }

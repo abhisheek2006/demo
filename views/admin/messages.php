@@ -76,7 +76,7 @@ $qs = static function (int $page) use ($filters): string {
             $isUnread = ($row['status'] ?? '') === 'unread';
             ?>
             <li class="msg<?= $isUnread ? ' msg--unread' : '' ?>">
-                <?php if ($id > 0): ?><a class="msg__link" href="<?= e(url('/admin/messages/' . $id)) ?>"><?php else: ?><div class="msg__link"><?php endif; ?>
+                <a class="msg__link" href="<?= e(url('/admin/messages/' . $id)) ?>">
                     <span class="msg__avatar" aria-hidden="true"><?= e(initials((string) ($row['name'] ?? '?'))) ?></span>
                     <span class="msg__body">
                         <span class="msg__top">
@@ -89,8 +89,7 @@ $qs = static function (int $page) use ($filters): string {
                     <?php if ($isUnread): ?>
                         <span class="msg__dot" aria-label="Unread"></span>
                     <?php endif; ?>
-                <?php if ($id > 0): ?></a><?php else: ?><details class="msg__details"><summary>Read saved message</summary><p><?= nl2br(e((string) ($row['message'] ?? ''))) ?></p></details></div><?php endif; ?>
-                <?php if ($id > 0): ?>
+                </a>
                 <form class="msg__delete" method="post" action="<?= e(url('/admin/messages/' . $id . '/delete')) ?>"
                       data-confirm="Delete this message from <?= e((string) ($row['name'] ?? 'this sender')) ?> permanently?">
                     <?= csrf_field() ?>
@@ -99,9 +98,6 @@ $qs = static function (int $page) use ($filters): string {
                         <?= icon('trash', 'icon icon--xs', 14) ?>
                     </button>
                 </form>
-                <?php else: ?>
-                    <span class="cell-meta">Saved locally · editing needs MongoDB.</span>
-                <?php endif; ?>
             </li>
         <?php endforeach; ?>
     </ul>

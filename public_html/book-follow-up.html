@@ -20,23 +20,19 @@
 <meta property="og:title" content="Book a Follow-Up Review | Swasti Homoeo Clinic">
 <meta property="og:description" content="Book a follow-up review with Dr. Smriti Das at Swasti Homoeo Clinic in Sri Vijaya Puram. Short, focused review of your current homoeopathic prescription.">
 <meta property="og:url" content="https://swastihomoeo.com/book-follow-up">
-<meta property="og:image" content="https://swastihomoeo.com/assets/images/og/og-default.png">
-<meta property="og:image:alt" content="Swasti Homoeo Clinic — homoeopathic clinic in Sri Vijaya Puram">
 
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Book a Follow-Up Review | Swasti Homoeo Clinic">
 <meta name="twitter:description" content="Book a follow-up review with Dr. Smriti Das at Swasti Homoeo Clinic in Sri Vijaya Puram. Short, focused review of your current homoeopathic prescription.">
-<meta name="twitter:image" content="https://swastihomoeo.com/assets/images/og/og-default.png">
 
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="192x192" href="/assets/images/icons/icon-192.png">
 <link rel="apple-touch-icon" href="/assets/images/icons/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 
-<script src="/assets/js/maintenance-gate.js?v=maintenance-v1"></script>
-<link rel="stylesheet" href="/assets/css/main.css?v=maintenance-mode-20261114">
-<link rel="stylesheet" href="/assets/css/footer.css?v=061730">
-<link rel="stylesheet" href="/assets/css/responsive.css?v=fixed-mobile-header-v2-20261113">
+<link rel="stylesheet" href="/assets/css/main.css?v=423590">
+<link rel="stylesheet" href="/assets/css/footer.css?v=227821">
+<link rel="stylesheet" href="/assets/css/responsive.css?v=371569">
 </head>
 <body class="page page--book-follow-up">
 
@@ -223,7 +219,7 @@
     <label for="website">Website (leave this field empty)</label>
     <input type="text" id="website" name="website" value="" tabindex="-1" autocomplete="off" maxlength="120">
 </div>
-<input type="hidden" name="form_started_at" value="1794570803">
+<input type="hidden" name="form_started_at" value="1795423604">
     <p class="form__status" data-form-status role="status" aria-live="polite"></p>
 
     <div class="form__grid">
@@ -282,8 +278,8 @@
         <div class="field">
             <label class="field__label" for="preferred_date">Preferred date <span class="field__req" aria-hidden="true">*</span></label>
             <input class="field__input" type="date" id="preferred_date" name="preferred_date" required
-                   min="2026-11-13"
-                   max="2027-01-12"
+                   min="2026-11-23"
+                   max="2027-01-22"
                    value=""
                    data-no-sundays data-sunday-message="The clinic is closed on Sundays. Choose a Monday–Saturday date."
                    aria-describedby="preferred_date-help"
@@ -377,36 +373,34 @@
                     </div>
 
         <div class="field field--full">
-            <label class="field__label" for="reason-category">What is the main problem? <span class="field__req" aria-hidden="true">*</span></label>
-                        <select class="field__input field__input--problem" id="reason-category"
-                    data-own-words-select data-reason-hidden="reason-value"
-                    data-reason-details="reason-details" required>
-                <option value="">Choose a problem</option>
-                                    <option value="Fever, cough or cold" >Fever, cough or cold</option>
-                                    <option value="Acidity or stomach trouble" >Acidity or stomach trouble</option>
-                                    <option value="Skin allergy or eczema" >Skin allergy or eczema</option>
-                                    <option value="Back or joint pain" >Back or joint pain</option>
-                                    <option value="Women’s health concern" >Women’s health concern</option>
-                                    <option value="Anxiety or sleep problem" >Anxiety or sleep problem</option>
-                                    <option value="Childhood complaint" >Childhood complaint</option>
-                                    <option value="Weight or lifestyle concern" >Weight or lifestyle concern</option>
-                                <option value="__custom__" >In your own words</option>
-            </select>
-            <input type="hidden" id="reason-value" name="reason"
-                   value=""
-                   >
-            <div class="field field--full" id="reason-details-wrap" hidden>
-                <label class="field__label field__label--sub" for="reason-details">In your own words <span class="field__req" aria-hidden="true">*</span></label>
-                <textarea class="field__input field__textarea" id="reason-details" name="reason" rows="4"
-                          disabled maxlength="1500"
-                          placeholder="Tell us what is troubling you..." data-counter="reason-counter"
-                          aria-describedby="reason-help reason-counter"
-                          ></textarea>
-                <p class="field__meta">
-                    <span class="field__help" id="reason-help">Where is it, how long has it been there, what makes it better or worse?</span>
-                    <span class="field__count" id="reason-counter" data-count-for="reason-details">0 / 1500</span>
-                </p>
-            </div>
+            <span class="field__label" id="reason-label">What is the main problem? <span class="field__req" aria-hidden="true">*</span></span>
+            <div class="chips chips--soft" aria-labelledby="reason-label" data-chips="reason-suggestions">
+                                    <button class="chip chip--button" type="button" data-chip-fill="reason" data-chip-value="Fever, cough or cold">
+                        Fever, cough or cold                    </button>
+                                    <button class="chip chip--button" type="button" data-chip-fill="reason" data-chip-value="Acidity or stomach trouble">
+                        Acidity or stomach trouble                    </button>
+                                    <button class="chip chip--button" type="button" data-chip-fill="reason" data-chip-value="Skin allergy or eczema">
+                        Skin allergy or eczema                    </button>
+                                    <button class="chip chip--button" type="button" data-chip-fill="reason" data-chip-value="Back or joint pain">
+                        Back or joint pain                    </button>
+                                    <button class="chip chip--button" type="button" data-chip-fill="reason" data-chip-value="Women’s health concern">
+                        Women’s health concern                    </button>
+                                    <button class="chip chip--button" type="button" data-chip-fill="reason" data-chip-value="Anxiety or sleep problem">
+                        Anxiety or sleep problem                    </button>
+                                    <button class="chip chip--button" type="button" data-chip-fill="reason" data-chip-value="Childhood complaint">
+                        Childhood complaint                    </button>
+                                    <button class="chip chip--button" type="button" data-chip-fill="reason" data-chip-value="Weight or lifestyle concern">
+                        Weight or lifestyle concern                    </button>
+                            </div>
+            <label class="field__label field__label--sub" for="reason">In your own words <span class="field__req" aria-hidden="true">*</span></label>
+            <textarea class="field__input field__textarea" id="reason" name="reason" rows="4" required
+                      maxlength="1500" data-counter="reason-counter"
+                      aria-describedby="reason-help reason-counter"
+                      ></textarea>
+            <p class="field__meta">
+                <span class="field__help" id="reason-help">Where is it, how long has it been there, what makes it better or worse?</span>
+                <span class="field__count" id="reason-counter" data-count-for="reason">0 / 1500</span>
+            </p>
                     </div>
 
         <div class="field field--full">
@@ -464,10 +458,10 @@
             <div class="panel">
                 <h2 class="panel__title panel__title--sm">After you submit</h2>
                 <ul class="check-list check-list--tight">
-                                                                    <li><svg class="icon icon--xs" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg> We will call you to confirm the exact time, usually the same working day.</li>
-                                                                    <li><svg class="icon icon--xs" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg> If you cannot reach us, message the same number on WhatsApp and we will respond there.</li>
-                                                                    <li><svg class="icon icon--xs" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg> If you are running a fever on the day, inform us so we can decide whether to see you or advise a hospital visit first.</li>
-                                                                    <li><svg class="icon icon--xs" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg> If your condition is an emergency, do not wait for a confirmation — call 112.</li>
+                                            <li><svg class="icon icon--xs" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg> We will call you to confirm the exact time, usually the same working day.</li>
+                                            <li><svg class="icon icon--xs" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg> If you cannot reach us, message the same number on WhatsApp and we will respond there.</li>
+                                            <li><svg class="icon icon--xs" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg> If you are running a fever on the day, inform us so we can decide whether to see you or advise a hospital visit first.</li>
+                                            <li><svg class="icon icon--xs" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg> If your condition is an emergency, do not wait for a confirmation — call 112.</li>
                                     </ul>
             </div>
 
@@ -475,10 +469,10 @@
                 <h2 class="panel__title panel__title--sm">Clinic</h2>
                 <ul class="mini-list">
                     <li><span><svg class="icon icon--xs" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 3v5a4 4 0 0 0 8 0V3"/><path d="M6 3H4.5M14 3h1.5"/><path d="M10 12v3a5 5 0 0 0 5 5h.5"/><circle cx="17" cy="18" r="2.2"/><path d="M10 5h0"/></svg></span> Dr. Smriti Das, BHMS, MD (WBUHS)</li>
-                    <li><span><svg class="icon icon--xs" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg></span> NH4 main road, Garacharma, Near Susane roses, Andaman &amp; Nicobar Islands 744105</li>
+                    <li><span><svg class="icon icon--xs" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg></span> NH4 main road, Garacharma, near Susane roses</li>
                     <li><span><svg class="icon icon--xs" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6.5 3.5h3l1.5 4-2 1.4a11 11 0 0 0 6.1 6.1l1.4-2 4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.5 5.7a2 2 0 0 1 2-2.2Z"/></svg></span> <a href="tel:+917980644867">+91 79806 44867</a></li>
                     <li><span><svg class="icon icon--xs" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l2.6 1.6"/><path d="M17 3.5 19 5.5"/></svg></span> Mon–Sat 9 AM–12:30 PM and 4:30–7:30 PM · Sun closed</li>
-                    <li><span><svg class="icon icon--xs" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17"/><path d="M12 3.5c2.2 2.4 3.4 5.4 3.4 8.5S14.2 18.1 12 20.5c-2.2-2.4-3.4-5.4-3.4-8.5S9.8 5.9 12 3.5Z"/></svg></span> English, Hindi, Bengali</li>
+                    <li><span><svg class="icon icon--xs" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17"/><path d="M12 3.5c2.2 2.4 3.4 5.4 3.4 8.5S14.2 18.1 12 20.5c-2.2-2.4-3.4-5.4-3.4-8.5S9.8 5.9 12 3.5Z"/></svg></span> English, Hindi, Bengali, Kokborok (basic)</li>
                 </ul>
                 <p class="panel__actions">
                     <a class="btn btn--whatsapp btn--sm btn--block" href="https://wa.me/917980644867?text=Hello%2C%20I%20would%20like%20to%20book%20a%20follow-up%20review." rel="noopener nofollow" target="_blank">
@@ -523,28 +517,28 @@
                     <ul class="site-footer__socials">
                                                                                 <li>
                                 <a class="site-footer__social"
-                                   href="https://www.facebook.com/profile.php?id=61559770017827"
+                                   href="#"
                                    aria-label="Facebook"
-                                    target="_blank" rel="noopener noreferrer">
+                                   >
                                     <svg class="site-footer__social-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14.5 8.5h2.2V5.6h-2.4c-2.2 0-3.6 1.4-3.6 3.7v1.6H8.4v2.9h2.3v7.7h3V13.8h2.4l.4-2.9h-2.8V9.6c0-.7.3-1.1 1.3-1.1Z" fill="currentColor" stroke="none"/></svg>                                </a>
                             </li>
                                                                                 <li>
                                 <a class="site-footer__social"
-                                   href="https://www.instagram.com/swasti_homoeoclinic/"
+                                   href="#"
                                    aria-label="Instagram"
-                                    target="_blank" rel="noopener noreferrer">
+                                   >
                                     <svg class="site-footer__social-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3.5" y="3.5" width="17" height="17" rx="4.6"/><circle cx="12" cy="12" r="4"/><circle cx="16.9" cy="7.1" r="1" fill="currentColor" stroke="none"/></svg>                                </a>
                             </li>
                                                                                 <li>
                                 <a class="site-footer__social"
-                                   href="https://www.youtube.com/live/zF70bfgiM64"
+                                   href="#"
                                    aria-label="YouTube"
-                                    target="_blank" rel="noopener noreferrer">
+                                   >
                                     <svg class="site-footer__social-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2.6" y="5.4" width="18.8" height="13.2" rx="4"/><path d="M10.4 9.5v5l4.6-2.5-4.6-2.5Z" fill="currentColor" stroke="none"/></svg>                                </a>
                             </li>
                                                                                 <li>
                                 <a class="site-footer__social"
-                                   href="https://www.google.com/maps/dir/?api=1&amp;destination=11.6152895%2C92.7046332"
+                                   href="https://www.google.com/maps/search/?api=1&amp;query=SWASTI%20HOMOEO%20CLINIC%20%7C%20Dr.%20Smriti%20Das%2C%20BHMS%2C%20MD%20%28Hom%29%20%7C%20NH4%20main%20road%2C%20Garacharma%2C%20near%20Susane%20roses"
                                    aria-label="Location"
                                    target="_blank" rel="noopener nofollow">
                                     <svg class="site-footer__social-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>                                </a>
@@ -560,7 +554,6 @@
                     <address class="site-footer__address">
                                                     <span class="site-footer__address-line">NH4 main road, Garacharma</span>
                                                     <span class="site-footer__address-line">Near Susane roses</span>
-                                                    <span class="site-footer__address-line">Andaman &amp; Nicobar Islands 744105</span>
                                             </address>
 
                     <ul class="site-footer__contact">
@@ -580,7 +573,7 @@
                     </ul>
 
                     <a class="site-footer__directions"
-                       href="https://www.google.com/maps/dir/?api=1&amp;destination=11.6152895%2C92.7046332"
+                       href="https://www.google.com/maps/search/?api=1&amp;query=SWASTI%20HOMOEO%20CLINIC%20%7C%20Dr.%20Smriti%20Das%2C%20BHMS%2C%20MD%20%28Hom%29%20%7C%20NH4%20main%20road%2C%20Garacharma%2C%20near%20Susane%20roses"
                        target="_blank" rel="noopener nofollow">
                         <svg class="site-footer__directions-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>                        <span>Get Directions</span>
                         <svg class="site-footer__directions-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg>                    </a>
@@ -595,7 +588,8 @@
     <div class="site-footer__bottom">
         <div class="site-footer__container site-footer__bottom-inner">
             <p class="site-footer__copy">
-                &copy; 2026 Swasti Homoeo Clinic. All rights reserved.
+                &copy; 2026 Swasti Homoeo Clinic &middot;
+                Andaman Homoeo Health Care LLP. All rights reserved.
             </p>
 
             <ul class="site-footer__legal">
@@ -606,7 +600,7 @@
     </div>
 </footer>
 
-<script src="/assets/js/navigation.js?v=sticky-header-20261113" defer></script>
-<script src="/assets/js/main.js?v=maintenance-mode-20261114" defer></script>
+<script src="/assets/js/navigation.js?v=227821" defer></script>
+<script src="/assets/js/main.js?v=373661" defer></script>
 </body>
 </html>

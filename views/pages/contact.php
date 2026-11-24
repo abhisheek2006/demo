@@ -15,6 +15,11 @@ $dayLabels = [
     'saturday'  => 'Saturday',
     'sunday'    => 'Sunday',
 ];
+$nowMinutes = (int) date('H') * 60 + (int) date('i');
+$todayKey   = strtolower((string) date('l'));
+$isToday    = static function (string $day) use ($todayKey): bool {
+    return $day === $todayKey;
+};
 ?>
 
 <?= component('page-hero', [
@@ -185,7 +190,7 @@ $dayLabels = [
                 </p>
                 <p class="panel__actions">
                     <a class="btn btn--outline btn--sm" target="_blank" rel="noopener nofollow"
-                       href="<?= e(\App\Content\Clinic::directionsUrl()) ?>">
+                       href="<?= e(\App\Content\Clinic::mapUrl()) ?>">
                         <?= icon('pin', 'icon icon--xs', 15) ?> Open in Google Maps
                     </a>
                 </p>
@@ -193,22 +198,26 @@ $dayLabels = [
 
             <div class="panel">
                 <h2 class="panel__title">Opening hours</h2>
-                <table class="hours" data-hours-table>
+                <table class="hours">
                     <caption class="visually-hidden">Weekly opening hours</caption>
                     <tbody>
                     <?php foreach ($hours as $day => $slot): ?>
                         <?php
+                        $isOpen = false;
                         $periodLabels = [];
+                        $nextOpening = null;
                         foreach ($slot['periods'] as $period) {
+                            $openM = ((int) substr($period['open'], 0, 2)) * 60 + (int) substr($period['open'], 3, 2);
+                            $closeM = ((int) substr($period['close'], 0, 2)) * 60 + (int) substr($period['close'], 3, 2);
+                            $isOpen = $isOpen || ($nowMinutes >= $openM && $nowMinutes < $closeM);
+                            if ($openM > $nowMinutes && ($nextOpening === null || $openM < $nextOpening)) {
+                                $nextOpening = $openM;
+                            }
                             $periodLabels[] = minutes_to_label($period['open']) . ' – ' . minutes_to_label($period['close']);
                         }
                         ?>
-                        <tr class="hours__row" data-hours-day="<?= e(strtolower((string) $day)) ?>"
-                            data-hours-closed="<?= !empty($slot['closed']) ? 'true' : 'false' ?>"
-                            data-hours-periods="<?= e((string) json_encode($slot['periods'], JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT)) ?>">
-                            <th scope="row">
-                                <?= e($dayLabels[$day] ?? ucfirst((string) $day)) ?>
-                            </th>
+                        <tr class="hours__row<?= $isToday($day) ? ' hours__row--today' : '' ?>">
+                            <th scope="row"><?= e($dayLabels[$day] ?? ucfirst((string) $day)) ?></th>
                             <td>
                                 <?php if (!empty($slot['closed'])): ?>
                                     <span class="hours__closed">Closed</span>
@@ -216,7 +225,20 @@ $dayLabels = [
                                     <?= e(implode(' · ', $periodLabels)) ?>
                                 <?php endif; ?>
                             </td>
-                            <td class="hours__state" data-hours-state></td>
+                            <td class="hours__state">
+                                <?php if ($isToday($day)): ?>
+                                    <?php if ($isOpen): ?>
+                                        <span class="badge badge--success">Open now</span>
+                                    <?php elseif (!empty($slot['closed'])): ?>
+                                        <span class="badge badge--muted">Closed</span>
+                                    <?php elseif ($nextOpening !== null): ?>
+                                        <?php $nextOpeningTime = sprintf('%02d:%02d', intdiv($nextOpening, 60), $nextOpening % 60); ?>
+                                        <span class="badge badge--muted">Opens at <?= e(minutes_to_label($nextOpeningTime)) ?></span>
+                                    <?php else: ?>
+                                        <span class="badge badge--muted">Closed for today</span>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                     </tbody>
